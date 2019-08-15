@@ -1,0 +1,68 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+                
+    <ui:define name="content">
+        <h:form id="form">
+           
+            <div class="ContainerIndent ui-fluid">
+                <p:panel>
+  					<p:toolbar style="margin-top: 1px">
+	    				<p:toolbarGroup>
+	    				<p:commandButton value="Salvar" id="botaoSalvar" action="#{produtoManMB.entradaProduto}" update="form" ajax="true" 
+	    				global="false" 
+	    				/>
+	    				</p:toolbarGroup>
+
+	    				<p:toolbarGroup align="right">
+						<p:button value="Pesquisa" outcome="produtos"/>
+						</p:toolbarGroup>
+	    			</p:toolbar>
+  					
+  					<div class="ContainerIndent">
+                        <span class="FontBold Fs18 hardblue">Entrada de produto</span>
+                    	<p:messages id="msg"/>
+					</div> 
+  
+                    <div class="Container">
+                    
+                        
+                        <div class="Container50 Responsive50">
+                            <div class="ContainerIndent">
+                                <div class="Container100">
+                                    <p:outputLabel for="id" value="Código"/>
+                                    <p:inputText value="#{produtoManMB.produto.id}" required="true" requiredMessage="Informe código do produto" styleClass="FontBold Fs18 hardblue" id="id"/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="Container50 Responsive50">
+                            <div class="ContainerIndent">
+                                <div class="Container100">
+                                    <p:outputLabel for="quantidade" value="Quantidade"/>
+                                    <p:inputText value="#{produtoManMB.novaQuantidade}" required="true" requiredMessage="Informe a quantidade" styleClass="FontBold Fs18 hardblue" id="quantidade"/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                 <div class="EmptyBox20"></div>
+               </p:panel>   
+            </div>
+            
+            <script type="text/javascript">
+	    		$(document).ready(function(){
+          		$('.number').mask('#');
+          		$('.money').mask('000.000.000.000.000,00', {reverse: true});
+        		});      
+     		</script>
+     		
+        </h:form>
+    </ui:define>
+</ui:composition>

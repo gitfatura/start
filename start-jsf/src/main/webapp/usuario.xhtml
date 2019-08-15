@@ -1,0 +1,148 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/templates/Layout.xhtml">
+	
+	<ui:define name="content">
+		<p:panel  rendered="#{loginMB.valida()}" id="toggleable" header="Manutencao de usuarios"  toggleable="true" closable="false" toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-top: 60px;margin-bottom:20px">
+                                                              
+                                            <p:commandButton value="Novo Usuario" type="button" onclick="PF('dialogusuario').show();"/>
+                                     
+                                                     <h:form id="frmusuario">
+           
+                                                            <p:dataTable var="usuario" id="usuarioTabela"  reflow="true" value="#{loginAdminMB.usuarios}" 
+                                                                        rows="5" paginator="true"
+                                                                        paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                                        rowsPerPageTemplate="5,10,15,50"  emptyMessage="Nenhum usuario encontrado" paginatorPosition="bottom" >
+                                                                    
+                                                                        <p:column style="width: 55px">
+                                                                                 <p:commandButton oncomplete="PF('atualizausuario').show()" icon="ui-icon-pencil" process="@this" update="frmusuario">
+                                                                                        <f:setPropertyActionListener value="#{usuario}" target="#{loginAdminMB.usuario}" />
+                                                                                 </p:commandButton>
+                                                                        </p:column>
+                                                                
+                                                                        <p:column headerText="Nome" sortBy="#{usuario.nome}" filterMatchMode="contains">
+                                                                                <h:outputText value="#{usuario.nome}" />
+                                                                        </p:column>
+                                                
+                                                                        <p:column headerText="Login">
+                                                                                <h:outputText value="#{usuario.login}" />
+                                                                        </p:column>
+                                                                        
+                                                                         <p:column headerText="Tipo de usuario">
+                                                                                <h:outputText value="#{usuario.tipoUsuario}" />
+                                                                        </p:column>
+                                                                        
+                                                                        <p:column style="width: 60px">              
+                                                                                <p:commandButton oncomplete="PF('removerusuario').show()" icon="ui-icon-trash" process="@this" update="frmusuario">
+                                                                                        <f:setPropertyActionListener value="#{usuario}" target="#{loginAdminMB.usuario}" />
+                                                                                </p:commandButton>
+                                                                        </p:column>
+                                                                        
+                                                                        <f:facet name="footer">
+                                                                                Total de usuario cadastrado #{loginAdminMB.usuarios.size()}
+                                                                        </f:facet>
+                                                            </p:dataTable>
+                                                                
+                                                            <!-- Atualiza cliente -->
+                                                            <p:dialog header="Atualizar Usuario" modal="true" draggable="false" toggleable="true" closable="true" width="700" height="185"  resizable="false"
+                                                                        widgetVar="atualizausuario" >
+                                                                    
+                                                                        <div class="row" >
+                                                                                
+                                                                                 <div class="col-50">
+                                                                                        <p:outputLabel for="nome" value="Nome"/>
+                                                                                        <p:inputText   id="nome"  value="#{loginAdminMB.usuario.nome}"  required="true" requiredMessage="Nome obrigatorio"/>
+                                                                                 </div>
+                                                                                 
+                                                                                 <div class="col-50">
+                                                                                        <p:outputLabel for="login" value="Login"/>
+                                                                                        <p:inputText   id="login"  value="#{loginAdminMB.usuario.login}"  required="true" requiredMessage="Login obrigatorio"/>
+                                                                                 </div>
+                                                                                 
+                                                                                 <div class="col-25">
+                                                                                        <p:outputLabel for="senha" value="Senha"/>
+                                                                                        <p:inputText   id="senha"  value="#{loginAdminMB.usuario.senha}"  required="true" requiredMessage="Senha obrigatorio"/>
+                                                                                 </div>
+                                                                        
+                                                                                <div class="col-60">
+                                                                                         <p:outputLabel for="tipo" value="Tipo usuario"/>
+                                                                                           <p:selectOneMenu id="tipo" value="#{loginAdminMB.usuario.tipoUsuario}" rendered="true"  requiredMessage="Tipo de usuario obrigatorio">
+                                                                                                  <f:selectItem itemLabel="Selecione" />
+                                                                                                  <f:selectItems value="#{loginAdminMB.tipoUsuarios}" var="usu"
+                                                                                                    itemValue="#{usu}" itemLabel="#{usu.label}"/>
+                                                                                            </p:selectOneMenu>
+                                                                                    </div>    
+                                                                        
+                                                                        </div><br/>
+                                                                         
+                                                                        <p:commandButton value="Registrar" action="#{loginAdminMB.atualiza}"  update="frmusuario"/>
+                                                            
+                                                                </p:dialog>
+                                                    
+                                                            <!-- Exclui cliente -->
+                                                            <p:dialog header="Deseja realmente excluir o usuario" modal="true"  toggleable="true" closable="true"  widgetVar="removerusuario" width="350" height="70"  resizable="false" >
+                    
+                                                                    <div class="col-70">
+                                                                            <p:outputLabel value="#{loginAdminMB.usuario.nome}"/><hr/>
+                                                                    </div>
+                                                                        
+                                                                    <p:commandButton value="Sim" action="#{loginAdminMB.remover}" update="frmusuario:usuarioTabela"  onclick="PF('removerusuario').hide()"/>
+                                                                     <p:button value="Não" onclick="PF('removerusuario').hide(); return false;" />
+                                                                    
+                                                            </p:dialog>
+                                                    
+                                                    </h:form>
+                                            
+                                                <!-- Novo cliente -->
+                                                <p:dialog header="Novo Usuario" widgetVar="dialogusuario" modal="true"  draggable="true" width="700" height="185"  resizable="false" style="margin-top: 0px;margin-bottom:40px">
+                                                                
+                                                                        <p:growl id="growl"  showDetail="true"  showSummary="false" />
+                                                                        <h:form id="cadastrousuario">
+                                                                        
+                                                                               <div class="row" >
+                                                                                
+                                                                                 <div class="col-50">
+                                                                                        <p:outputLabel for="nome" value="Nome"/>
+                                                                                        <p:inputText   id="nome"  value="#{loginAdminMB.usuario.nome}"  required="true" requiredMessage="Nome obrigatorio"/>
+                                                                                 </div>
+                                                                                 
+                                                                                 <div class="col-50">
+                                                                                        <p:outputLabel for="login" value="Login"/>
+                                                                                        <p:inputText   id="login"  value="#{loginAdminMB.usuario.login}"  required="true" requiredMessage="Login obrigatorio"/>
+                                                                                 </div>
+                                                                                 
+                                                                                 <div class="col-25">
+                                                                                        <p:outputLabel for="senha" value="Senha"/>
+                                                                                        <p:inputText   id="senha"  value="#{loginAdminMB.usuario.senha}"  required="true" requiredMessage="Senha obrigatorio"/>
+                                                                                 </div>
+                                                                                 
+                                                                                 <div class="col-60">
+                                                                                         <p:outputLabel for="tipo" value="Tipo usuario"/>
+                                                                                           <p:selectOneMenu id="tipo" value="#{loginAdminMB.usuario.tipoUsuario}" rendered="true"  requiredMessage="Tipo de usuario obrigatorio">
+                                                                                                  <f:selectItem itemLabel="Selecione" />
+                                                                                                  <f:selectItems value="#{loginAdminMB.tipoUsuarios}" var="usu"
+                                                                                                    itemValue="#{usu}" itemLabel="#{usu.label}"/>
+                                                                                            </p:selectOneMenu>
+                                                                                    </div>  
+                                                                        
+                                                                        </div><br/> 
+                                                                            
+                                                                         <p:commandButton value="Registrar" action="#{loginAdminMB.grava}"  ajax="true"   update="@form" process="@all"/>
+                                                                
+                                                                        </h:form>
+                                                                
+                                                                <p:ajax event="close" update="frmusuario"/>
+                                                    
+                                                    </p:dialog>                         
+                
+                                </p:panel>            
+                    
+		
+		
+		
+	</ui:define>
+	
+</ui:composition>

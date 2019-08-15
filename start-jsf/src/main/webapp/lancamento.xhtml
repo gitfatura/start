@@ -1,0 +1,140 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+                
+	
+    <ui:define name="content">
+        <h:form id="form">
+           
+            <div class="ContainerIndent ui-fluid">
+                <p:panel>
+  					<p:toolbar style="margin-top: 1px">
+	    				<p:toolbarGroup>
+	    				<p:commandButton value="Salvar" id="botaoSalvar" action="#{lancamentoManMB.grava}" update="form" ajax="true" 
+	    				global="false" 
+	    				/>
+	    				</p:toolbarGroup>
+	    				<p:toolbarGroup align="right">
+						<p:button value="Pesquisa" outcome="lancamentos"/>
+						</p:toolbarGroup>
+	    			</p:toolbar>
+  					
+  					<div class="ContainerIndent">
+                        <span class="FontBold Fs18 hardblue">Lançamento</span>
+                    	<p:messages id="msg"/>
+					</div> 
+  
+                    <div class="Container">
+                    
+                        <div class="Container25 Responsive50">
+                            <div class="ContainerIndent">
+                                <div class="Container100">
+                                 <p:outputLabel value="Tipo de Lançamento"/>
+                                <p:selectOneRadio layout="responsive" value="#{lancamentoManMB.tipoLancamentoSelecionado}" required="true" requiredMessage="Selecione tipo de lancamento" columns="2" >
+                                    <f:selectItem itemLabel="Saída" itemValue="1"/>
+                                    <f:selectItem itemLabel="Entrada" itemValue="2" />
+                                </p:selectOneRadio>    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="Container50 Responsive50">
+                            <div class="ContainerIndent">
+                                <div class="Container100">
+                                    <p:outputLabel for="titlo" value="Titulo"/>
+                                    <p:inputText value="#{lancamentoManMB.lancamento.titulo}" required="true" requiredMessage="Informe titulo" styleClass="FontBold Fs18 hardblue" id="titlo"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="Container25 Responsive50">
+                            <div class="ContainerIndent">
+                                <div class="Container100">
+                                    <p:outputLabel for="valprevisto" value="Valor previsto"/>
+                                    <p:inputText value="#{lancamentoManMB.valorPrevisto}" 
+                                      styleClass="money FontBold Fs18 hardblue" id="valprevisto" required="true" requiredMessage="Informe valor previsto"/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="Container">
+                       
+                       <div class="Container25 Responsive50">
+                            <div class="ContainerIndent">
+                                <div class="Container100">
+                                    <p:outputLabel for="valrealizado" value="Valor realizado"/>
+                                    <p:inputText value="#{lancamentoManMB.valorRealizado}" required="true" requiredMessage="Informe valor realizado" 
+                                    styleClass="money FontBold Fs18 hardblue" id="valrealizado"/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                       <div class="Container50 Responsive50">
+                            <div class="ContainerIndent">
+                                <div class="Container100">
+                                    <p:outputLabel for="descricao" value="Descriçao"/>
+                                    <p:inputText value="#{lancamentoManMB.lancamento.descricao}"  styleClass="FontBold Fs18 hardblue" id="descricao"/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="Container25 Responsive50">
+                            <div class="ContainerIndent">
+                                <div class="Container100">
+                                 <p:outputLabel for="inline" value="Data"/>
+                                <p:calendar  id="inline" value="#{lancamentoManMB.lancamento.data}" required="true" requiredMessage="Informe data" locale="pt_BR" pattern="dd/MM/yyyy"/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                      
+                    <div class="EmptyBox20"></div>
+                    <div class="Container">
+                    <p:fieldset legend="Opçoes de Lançamento">
+                     
+                     		<div class="Container40 Responsive50">
+                            <div class="ContainerIndent">
+                                <div class="Container100">
+                                <div class="EmptyBox10"></div>
+                                <p:selectOneRadio layout="responsive" value="#{lancamentoManMB.opcaoLancamentoSelecionado}" converter="javax.faces.Integer" columns="2">
+                                    <f:selectItem itemLabel="Lançamento unico" itemValue="1" itemDescription="O lançamento será realizado somente uma vez na data informada."/>
+                                    <f:selectItem itemLabel="Lançamento Parcelado" itemValue="2" itemDescription="O valor previsto será automaticamente dividido pelo numero de parcelas informado e lançado para os proximos meses."/>
+                                    <p:outputLabel value="Tipo de Lançamento"/>
+                                </p:selectOneRadio>    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="Container25 Responsive50">
+                            <div class="ContainerIndent">
+                                <div class="Container100">
+                                    <p:outputLabel for="numParcela" value="Parcelas"/>
+                                    <p:inputText value="#{lancamentoManMB.lancamento.quantParcela}" styleClass="number FontBold Fs18 hardblue" id="numParcela"/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                      
+                      </p:fieldset>
+                    </div>
+
+                 <div class="EmptyBox20"></div>
+               </p:panel>   
+            </div>
+            
+            <script type="text/javascript">
+	    		$(document).ready(function(){
+          		$('.number').mask('#');
+          		$('.money').mask('000.000.000.000.000,00', {reverse: true});
+        		});      
+     		</script>
+     		
+        </h:form>
+    </ui:define>
+</ui:composition>

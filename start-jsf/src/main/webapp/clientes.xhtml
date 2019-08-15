@@ -1,0 +1,40 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/templates/Layout.xhtml">
+    <ui:define name="content">
+        <style type="text/css">
+ 		.ui-panel {margin-top:70px}
+        </style>
+        <div class="ContainerIndent ui-fluid">
+            <p:panel>
+                <div class="ContainerIndent">
+                    <span class="FontBold Fs18 hardblue">Clientes</span>
+                    <h:form id="form">
+                        <p:dataTable id="singleDT" var="car" value="#{carsView.cars}" 
+	             	selectionMode="single"
+	                rows="10" paginator="true" 
+	                paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                rowsPerPageTemplate="5,10,15" reflow="true" paginatorPosition="bottom">
+                            <p:column headerText="Código">
+                                <h:outputText value="10" />
+                            </p:column>
+                            <p:column headerText="Nome">
+                                <h:outputText value="Derp" />
+                            </p:column>
+                            <p:column headerText="Cpf">
+                                <h:outputText value="000.000.000-00" />
+                            </p:column>
+                            <p:column headerText="Rg">
+                                <h:outputText value="323" />
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </div>
+            </p:panel>
+        </div>
+    </ui:define>
+</ui:composition>

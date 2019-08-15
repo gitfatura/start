@@ -1,0 +1,164 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+	
+		<h:form id="frmos">
+			<div class="ContainerIndent ui-fluid" style="margin-top: 60px;margin-bottom: 30px">
+				<div id="j_idt15" class="ui-panel ui-widget ui-widget-content ui-corner-all" data-widget="widget_j_idt15">
+					<div id="j_idt15_content" class="ui-panel-content ui-widget-content">
+	                	<div class="Container">
+	                	
+	                		<div class="Container30 Responsive50">
+	                        	<div class="ContainerIndent">
+	                        		<div class="Container100">  
+										<p:outputLabel for="ncliente" value="Cliente"/>
+										<p:selectOneMenu  id="ncliente" value="#{ordemServicoMB.ordemServico.cliente}" required="true" requiredMessage="Cliente obrigatorio" style="width:100%">
+											<f:selectItem itemValue="null" itemLabel="Selecione um Cliente" />
+											<f:selectItems value="#{ordemServicoMB.clientes}" var="cliente" itemValue="#{cliente}" itemLabel="#{cliente.nome}" />						
+											<p:ajax listener="#{ordemServicoMB.recuperaCarroPorCliente}"  update="ncarro"/>
+										</p:selectOneMenu>
+									</div>
+	                        	</div>
+	                        	
+	                    	</div>
+	                    	
+	                    	<div class="Container30 Responsive50">
+	                        	<div class="ContainerIndent">
+	                        	<div class="Container100">
+									<p:outputLabel for="ncarro" value="Carro"/>
+									<p:selectOneMenu  id="ncarro" value="#{ordemServicoMB.ordemServico.carro}" required="true" requiredMessage="Carro obrigatorio" style="width:100%">
+										<f:selectItem itemValue="null" itemLabel="Selecione um Carro"/>
+										<f:selectItems value="#{ordemServicoMB.lCarrosPorClientes}" var="umCarro" itemValue="#{umCarro}" itemLabel="#{umCarro.modelo}" />
+									</p:selectOneMenu> 
+	                        	</div>
+	                        	</div>
+	                    	</div>
+	                    	
+	                    	<div class="Container40 Responsive50">
+	                        	<div class="ContainerIndent">
+	                        		<div class="Container100">
+									<p:outputLabel for="nservico" value="Serviços" />
+									<p:selectOneMenu id="nservico" value="#{ordemServicoMB.ordemServico.servico}" required="true" requiredMessage="Serviço obrigatorio" style="width:100%">
+										<f:selectItem itemValue="null" itemLabel="Selecione um Serviço" />
+										<f:selectItems value="#{ordemServicoMB.servicos}" var="servico" itemValue="#{servico}" itemLabel="#{servico.descricao} - #{servico.valor}" />
+									</p:selectOneMenu>
+	                        	</div>
+	                        	</div>
+	                    	</div>
+	    
+	    					<div class="Container20 Responsive50">
+	                        	<div class="ContainerIndent">
+	                        	<div class="Container100">
+					    		<p:outputLabel for="status" value="Status" />
+				    			<p:selectOneMenu id="status" value="#{ordemServicoMB.ordemServico.finalizado}" style="width:100%">
+				    				<f:selectItem itemValue="" itemLabel="Selecione" />
+				    				<f:selectItems value="#{ordemServicoMB.finalizados}"  var="sta" itemValue="#{sta}"  itemLabel="#{sta.label}"/>
+				    			</p:selectOneMenu>
+	                        	</div>
+	                        	</div>
+	                    	</div>
+	    					
+	    					<div class="Container40 Responsive50">
+	                        	<div class="ContainerIndent">
+	                        	<div class="Container100">
+									<p:outputLabel for="avaria" value="Avaria" />
+					    			<p:selectOneMenu  id="avaria" value="#{ordemServicoMB.ordemServico.avaria}" style="width:100%">
+				    					<f:selectItem itemValue="" itemLabel="Selecione"/>
+				    					<f:selectItem itemValue="" itemLabel="ddd"/>
+				    					<f:selectItem itemValue="" itemLabel="ddd"/>
+			    						<f:selectItems value="#{ordemServicoMB.avarias}"  var="ava" itemValue="#{ava}"  itemLabel="#{ava.label}"/>
+			    					</p:selectOneMenu>
+	                        	</div>
+	                        	</div>
+	                    	</div>
+	
+	    					<div class="Container40 Responsive50">
+	                        	<div class="ContainerIndent">
+	                        	<div class="Container100">
+									<p:outputLabel for="observacao" value="Observação"/>
+					    			<p:inputText class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all"  id="observacao"  value="#{ordemServicoMB.ordemServico.observacao}"/>		    
+	                        	</div>
+	                        	</div>
+	                    	</div>
+	                    	    					
+	    					<div class="Container20 Responsive100">
+	                        	<div class="ContainerIndent">
+							    	<div class="Container100">
+							    	<p:commandButton value="Adicionar" action="#{ordemServicoMB.adicionaOs}" update="frmos" />
+	                        	</div>
+	                    	</div>
+	                    	</div>
+	                   		<br/><br/><br/>
+	                
+					        <div class="Container100 Responsive100">
+					        	<div class="ContainerIndent">
+									<div class="Container100">
+										
+										
+								    	<p:dataTable var="os"  id="oslista" value="#{ordemServicoMB.lOrdemServicos}" 
+											rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+											rowsPerPageTemplate="5,10,15,50"  paginatorPosition="bottom" emptyMessage="Nenhum carros encontrado">
+														
+											<p:column headerText="Cliente">
+												<h:outputText value="#{os.cliente.nome}" />
+											 </p:column>
+														
+											<p:column headerText="Carro">
+												<h:outputText value="#{os.carro.modelo}" />
+											</p:column>
+													
+											<p:column headerText="Carro">
+												<h:outputText value="#{os.carro.modelo}" />
+											</p:column>
+														
+											<p:column headerText="Serviço">
+												<h:outputText value="#{os.servico.descricao}" />
+											</p:column>
+														
+											<p:column headerText="Valor">
+												<h:outputText value="#{os.servico.valor}" />
+											</p:column>
+											
+											<p:column style="width: 60px">    			
+												<p:commandButton oncomplete="PF('removerservico').show()" icon="ui-icon-trash" process="@this" update="frmos">
+													<f:setPropertyActionListener value="#{os}" target="#{ordemServicoMB.ordemServico}" />
+												</p:commandButton>
+											</p:column>
+					
+									
+										</p:dataTable>
+										
+										<div class="Container20 Responsive100">
+	                        				<div class="ContainerIndent">
+							    				<div class="Container100">
+			                        	
+													
+										<p:dialog header="Deseja realmente excluir o serviço" modal="true" widgetVar="removerservico" width="400" height="100"  resizable="false" >
+											<div class="col-70">
+												<p:outputLabel value="#{carroMB.carro.marca}"/><hr/>
+											</div>
+																							
+											<p:button value="Não" onclick="PF('removercarro').hide(); return false;"/>
+											<p:commandButton value="Sim" action="#{ordemServicoMB.remove}" update="frmos:oslista"  onclick="PF('removerservico').hide()"/>
+															
+										</p:dialog>
+								        		</div>
+	    	    		            		</div>
+	        	        		    	</div>
+	                   		   
+					           		</div>
+					           	</div>
+					        </div>
+	        			</div>
+			      </div>		            
+	        	</div>
+	        </div>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,62 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+    
+    <ui:define name="content">
+        <div class="ContainerIndent">
+            <p:panel>
+                <div class="ContainerIndent">
+                    
+                    <h:form id="form">
+                    <div class="ContainerIndent">
+                    	<p:messages id="msg"/>
+					</div> 
+	                    <p:dataTable id="consulta" var="consulta"  value="#{consultaConMB.consultas}"
+	                                     rows="5" paginator="true" paginatorTemplate="{CurrentPageReport}  
+	                                     {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                                     rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"  emptyMessage="Nenhuma agenda encontrada">
+								
+								<p:column headerText="Iniciar" style="width: 40px">
+									<p:button outcome="prontuarioman" icon="ui-icon-pencil white">
+									    <f:param name ="id" value="#{consulta.id}"/>
+									</p:button>
+								</p:column>
+								
+								<p:column headerText="Paciente" sortBy="#{consulta.paciente.nome}">
+									<h:outputText value="#{consulta.paciente.nome}" />
+								</p:column>
+								
+								<p:column headerText="Data" sortBy="#{consulta.data}">
+									<h:outputText value="#{consulta.data}">
+										<f:convertDateTime/>
+									</h:outputText>
+								</p:column>
+								
+								<p:column headerText="Hora inicio" sortBy="#{consulta.horaInicio}">
+									<h:outputText value="#{consulta.horaInicio}" />
+								</p:column>
+								
+								<p:column headerText="Hora término" sortBy="#{consulta.horaTermino}">
+									<h:outputText value="#{consulta.horaTermino}" />
+								</p:column>
+								
+
+								<p:column headerText="Situação" sortBy="#{consulta.status}">
+									<h:outputText value="#{consulta.status.label}" />
+								</p:column>	
+
+		    					
+	                     </p:dataTable>
+	                     
+                    </h:form>
+                    
+                    
+                </div>
+            </p:panel>
+        </div>
+    </ui:define>
+</ui:composition>

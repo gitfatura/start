@@ -1,0 +1,277 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    template="/WEB-INF/templates/Layout.xhtml">
+    
+    <ui:define name="content">
+			<p:panel id="toggleable" header="Template de listagem" toggleable="false" closable="false" toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-top: 60px;margin-bottom:20px">
+			<h:form id="frmproduto">
+		 											            	
+				<p:dataTable var="produto" id="produtos" value="" 
+					rows="10" paginator="true"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15,50"  paginatorPosition="bottom" emptyMessage="Nenhum produto encontrado">
+					
+				 					
+					<p:column style="width: 60px">
+							 <p:commandButton oncomplete="PF('atualizaproduto').show()" icon="ui-icon-pencil"  process="@this" update="frmproduto">
+									<f:setPropertyActionListener value="#{produto}" target="#{produtoMB.produto}" />
+							 </p:commandButton>
+					</p:column>
+						
+					<p:column headerText="Codigo">
+						<h:outputText value="#{produto.codigo}" />
+					</p:column>
+					
+					<!-- <p:column headerText="Codigo barra" filterBy="#{produto.codigoBarra}" sortBy="#{produto.codigoBarra}"  filterMatchMode="contains">
+						<h:outputText value="#{produto.codigoBarra}" />
+					</p:column>
+					 -->
+						
+					<p:column headerText="Descrição">
+						<h:outputText value="#{produto.descricao}" />
+					</p:column>
+					
+						
+					<p:column headerText="Estoque" sortBy="#{produto.quantidade}" style="width: 110px">
+						<h:outputText value="#{produto.quantidade}" />
+					</p:column>
+
+				
+					<p:column headerText="Preço venda" sortBy="#{produto.precoVenda}" style="width: 150px">
+						<h:outputText value="#{produto.precoVenda}">
+								<f:convertNumber  type="currency" currencySymbol="R$"/>
+						</h:outputText>
+					</p:column>
+					
+					<p:column headerText="Valor total" style="width: 110px">
+						<h:outputText value="#{produto.precoVenda * produto.quantidade}">
+								<f:convertNumber  type="currency" currencySymbol="R$"/>
+						</h:outputText>
+					</p:column>
+					
+					
+					
+					<p:column style="width: 60px">    			
+							<p:commandButton oncomplete="PF('removerproduto').show()" icon="ui-icon-trash" process="@this" update="frmproduto">
+									<f:setPropertyActionListener value="#{produto}" target="#{produtoMB.produto}" />
+							</p:commandButton>
+					</p:column>
+					
+					<p:column style="width: 60px">    			
+							<p:commandButton oncomplete="PF('produtodetalhe').show()" icon="ui-icon-search" process="@this" update="frmproduto">
+									<f:setPropertyActionListener value="#{produto}" target="#{produtoMB.produto}" />
+							</p:commandButton>
+					</p:column>
+					
+				</p:dataTable>
+				
+				
+				<p:dialog header="Deseja realmente excluir o Produto" modal="true" widgetVar="removerproduto" width="360" height="100"  resizable="false" >
+					
+						<div class="col-70">
+						<p:outputLabel value="#{produtoMB.produto.descricao}"/><hr/>
+							</div>
+																		
+							<p:button value="Não" onclick="PF('removerproduto').hide(); return false;" />
+								<p:commandButton value="Sim" action="#{produtoMB.remove}" update="frmproduto:produtos"  onclick="PF('removerproduto').hide()"/>
+															
+				</p:dialog>
+				
+				
+				
+				<p:dialog header="Atualizar Produto" modal="true" draggable="true" toggleSpeed="700" width="1000" closeSpeed="900" resizable="false" widgetVar="atualizaproduto" style="margin-top: 50px;margin-bottom:40px" >
+						
+							<div class="row" >
+		                    
+		                    	   <div class="col-25">
+		                            	<p:outputLabel for="codigo" value="Codigo"/>
+		                            	<p:inputText   id="codigo"  value="#{produtoMB.produto.codigo}"  required="true" requiredMessage="Codigo Barra obrigatorio"/>
+		                            </div>
+		                    
+		                            <div class="col-25">
+		                            	<p:outputLabel for="codigoBarra" value="Codigo de Barra"/>
+		                            	<p:inputText   id="codigoBarra"  value="#{produtoMB.produto.codigoBarra}"  required="true" requiredMessage="Codigo Barra obrigatorio"/>
+		                            </div>
+									
+									 <div class="col-50">
+		                            	<p:outputLabel for="descricao" value="Descricao"/>
+		                            	<p:inputText id="descricao" maxlength="255" value="#{produtoMB.produto.descricao}" required="true" requiredMessage="Descriçao  obrigatorio"/>
+		                            </div>
+		                         
+		 
+		                        </div>
+		                        
+		                        
+		                        <div class="row">
+		                            
+		                            <div class="col-25">
+		                            	<p:outputLabel for="quantidade" value="Estoque"/>
+		                            	<p:inputText  id="quantidade" value="#{produtoMB.produto.quantidade}"  required="true" requiredMessage="Quantidade  obrigatorio"/>
+		                            </div>
+		                            	
+		                            <div class="col-25">
+		                            	<p:outputLabel for="qtdMinima" value="Estoque Minimo"/>
+		                            	<p:inputText  id="qtdMinima" value="#{produtoMB.produto.quantidadeMinima}" required="true" requiredMessage="Quantidade minima  obrigatorio"/>
+		                            </div>
+		                            	
+		                            	<div class="col-25">
+		                            	<p:outputLabel for="qtdMaxima" value="Estoque Maximo"/>
+		                            	<p:inputText   id="qtdMaxima" value="#{produtoMB.produto.quantidadeMaxima}" required="true" requiredMessage="Quantidade maxima  obrigatorio"/>
+		                            </div>
+		                            	
+		                            	
+		                            	<div class="col-25">
+		                            			<p:outputLabel for="pcompra" value="Preço compra"/>
+		                            			<p:inputNumber id="pcompra" value="#{produtoMB.produto.precoCompra}"  symbol="R$" required="true" requiredMessage="Preço de compra  obrigatorio"/>
+		                            	</div>
+		                            	
+		                            
+		                        </div>
+		                        
+		                        
+		                         <div class="row">
+		                            	<div class="col-25">
+		                            			<p:outputLabel for="pcentual" value="Percentual venda"/>
+		                            			<p:inputNumber id="pcentual" value="#{produtoMB.produto.pctVenda}" symbol="R$" required="true" requiredMessage="Percentual de Venda  obrigatorio" >
+		                            					<p:ajax event="blur"  listener="#{produtoMB.calcularPorcentagem}" update="pvenda" process="@this"/>
+		                            			</p:inputNumber>
+		                            	</div>
+		                            	<div class="col-25">
+		                            			<p:outputLabel for="pvenda" value="Preço venda"/>
+		                            			<h:outputText id="per"></h:outputText>
+		                            			<p:inputNumber  id="pvenda" value="#{produtoMB.produto.precoVenda}" symbol="R$" required="true" requiredMessage="Preço de venda obrigatorio"/>
+		                            	</div>
+		                            	
+		                            	<div class="col-25">
+		                            			<p:outputLabel for="pdata" value="Data"/>
+		                            			<p:calendar id="pdata" value="#{produtoMB.produto.data}"  pattern="dd/MM/yyyy"   locale="pt" required="true" requiredMessage="Data obrigatorio"/>
+		                            	</div>
+		                            	
+		                            <div class="col-25">
+		                             					<p:outputLabel for="categoria" value="Categoria"/>
+		                           						<p:selectOneMenu id="categoria" value="#{produtoMB.produto.categoria}" required="true" requiredMessage="Categoria obrigatorio" style="width: 205px">
+											                <f:selectItem itemValue="null" itemLabel="Selecione uma Categoria"/>
+											                <f:selectItems value="#{produtoMB.categorias}" var="categoria" itemValue="#{categoria}" itemLabel="#{categoria.descricao}"/>
+											            </p:selectOneMenu>
+											                           			
+		                            		</div>
+		                            </div>
+		                            
+		                             <div class="row">
+		                           	  		<div class="col-25">
+		                           				       <p:outputLabel for="forn" value="Fornecedor"/>
+		                           						<p:selectOneMenu id="forn" value="#{produtoMB.produto.fornecedor}" required="true" requiredMessage="Fornecedor obrigatorio" style="width: 205px">
+											                <f:selectItem itemValue="null" itemLabel="Selecione um Fornecedor"/>
+											                <f:selectItems value="#{produtoMB.fornecedores}" var="fornecedor" itemValue="#{fornecedor}" itemLabel="#{fornecedor.nome}"/>
+											            </p:selectOneMenu>
+											                           			
+		                            		</div>
+		                            
+		                             </div><br/>											
+																		
+																		
+						<p:commandButton value="Registrar" action="#{produtoMB.atualizaProduto}" update="frmproduto" />
+															
+				</p:dialog>
+				
+				
+				
+				
+			<p:dialog header="Detalhe do Produto"  modal="true" draggable="true" toggleSpeed="700" width="950" closeSpeed="900" resizable="false" widgetVar="produtodetalhe" >
+					
+					<div class="row"  >
+		                    
+		                    	   <div class="col-25">
+		                            	<p:outputLabel for="dcodigo" value="Codigo"/>
+		                            	<p:inputText   id="dcodigo"  value="#{produtoMB.produto.codigo}" readonly="true"/>
+		                          
+		                            </div>
+		                    
+		                            <div class="col-25">
+		                            	<p:outputLabel for="dcodigoBarra" value="Codigo de Barra"/>
+		                            	<p:inputText   id="dcodigoBarra"  value="#{produtoMB.produto.codigoBarra}" readonly="true"/>
+		                            </div>
+									
+									 <div class="col-50">
+		                            	<p:outputLabel for="ddescricao" value="Descricao"/>
+		                            	<p:inputText id="ddescricao" maxlength="255" value="#{produtoMB.produto.descricao}" readonly="true"/>
+		                            </div>
+		                         
+		 
+		                        </div>
+		                        
+		                        
+		                        <div class="row">
+		                            
+		                            <div class="col-25">
+		                            	<p:outputLabel for="dquantidade" value="Estoque"/>
+		                            	<p:inputText  id="dquantidade" value="#{produtoMB.produto.quantidade}" readonly="true"/>
+		                            </div>
+		                            	
+		                            <div class="col-25">
+		                            	<p:outputLabel for="dqtdMinima" value="Estoque Minimo"/>
+		                            	<p:inputText  id="dqtdMinima" value="#{produtoMB.produto.quantidadeMinima}" readonly="true"/>
+		                            </div>
+		                            	
+		                            	<div class="col-25">
+		                            	<p:outputLabel for="dqtdMaxima" value="Estoque Maximo"/>
+		                            	<p:inputText   id="dqtdMaxima" value="#{produtoMB.produto.quantidadeMaxima}" readonly="true"/>
+		                            </div>
+		                            	
+		                            	
+		                            	<div class="col-25">
+		                            			<p:outputLabel for="dpcompra" value="Preço compra"/>
+		                            			<p:inputNumber id="dpcompra" value="#{produtoMB.produto.precoCompra}"  symbol="R$"  readonly="true"/>
+		                            	</div>
+		                            	
+		                            
+		                        </div>
+		                        
+		                        
+		                         <div class="row">
+		                            	<div class="col-25">
+		                            			<p:outputLabel for="dpcentual" value="Percentual venda"/>
+		                            			<p:inputNumber id="dpcentual" value="#{produtoMB.produto.pctVenda}" symbol="R$" readonly="true" />
+		                            				
+		                            			
+		                            	</div>
+		                            	<div class="col-25">
+		                            			<p:outputLabel for="dpvenda" value="Preço venda"/>
+		                            			<h:outputText id="dper"></h:outputText>
+		                            			<p:inputNumber  id="dpvenda" value="#{produtoMB.produto.precoVenda}" symbol="R$" readonly="true"/>
+		                            	</div>
+		                            	
+		                            	<div class="col-25">
+		                            			<p:outputLabel for="dpdata" value="Data"/>
+		                            			<p:calendar id="dpdata" value="#{produtoMB.produto.data}"  pattern="dd/MM/yyyy"   locale="pt" required="true" readonly="true"/>
+		                            	</div>
+		                            	
+		                            <div class="col-25">
+		                             					<p:outputLabel for="dcategoria" value="Categoria"/>
+		                             					<p:inputText id="dcategoria" maxlength="255" value="#{produtoMB.produto.categoria.descricao}" readonly="true"/>
+		                            		</div>
+		                            </div>
+		                            
+		                             <div class="row">
+		                             		
+		                             		
+		                             		
+		                           	  		<div class="col-25">
+		                           				       <p:outputLabel for="dforn" value="Fornecedor"/>
+		                           				       <p:inputText id="dforn" maxlength="255" value="#{produtoMB.produto.fornecedor.nome}" readonly="true" style="width: 198px"/>
+		                            		</div>
+		                            
+		                             </div><br/>				
+									
+				</p:dialog>
+				
+				
+			</h:form>
+		</p:panel>
+	
+	</ui:define>
+</ui:composition>	

@@ -1,0 +1,80 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+    
+    <ui:define name="content">
+        <div class="ContainerIndent">
+            <p:panel>
+                <div class="ContainerIndent">
+                    
+                    <h:form id="formpesquisa">
+	                    <p:toolbar style="margin-top: 20px">
+			    			<p:toolbarGroup>
+			    				<p:button value="Nova categoria" outcome="categoria"/>
+			    			</p:toolbarGroup>
+			    			
+			    			<p:toolbarGroup align="right">
+			    			<p:inputText title="Entre com a descrição" value="#{categoriaConMB.pesquisa}" size="40"></p:inputText>
+							<p:commandButton value="Pesquisar" action="#{categoriaConMB.selected}" update="formpesquisa,form"/>
+							</p:toolbarGroup>
+							
+			    		</p:toolbar>
+		    		</h:form>
+		    		
+		    		
+		    		
+                    <h:form id="form">
+                    <div class="ContainerIndent">
+                    	<p:messages id="msg"/>
+					</div> 
+	                    <p:dataTable id="categoria" var="categoria" value="#{categoriaConMB.categorias}" multiViewState="true" lazy="true"
+	                                     rows="10" paginator="true" paginatorTemplate="{CurrentPageReport}  
+	                                     {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                                     rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"  emptyMessage="Nenhum categoria encontrado" 
+	                                     paginatorAlwaysVisible="true" reflow="true">
+								
+								<p:column headerText="Descrição" sortBy="#{categoria.descricao}">
+									<h:outputText value="#{categoria.descricao}" />
+								</p:column>
+								
+						       
+								<p:column style="width: 50px"> 
+									<p:button outcome="categoria" icon="ui-icon-pencil" title="Editar">
+			    						 <f:param name="id" value="#{categoria.id}"/>
+			    					</p:button>
+		    					</p:column>
+								
+								<p:column style="width: 50px">              
+		                            <p:commandButton title="Excluir" onclick="PF('removercategoria').show()" icon="ui-icon-trash" process="@this">
+		                                    <f:setPropertyActionListener  value="#{categoria}" target="#{categoriaConMB.categoria}"/>
+		                            </p:commandButton>
+		                    	</p:column>
+		                    
+
+	                     </p:dataTable>
+	                     
+	                     <p:dialog header="Deseja excluir categoria" resizable="false"
+	                      widgetVar="removercategoria" width="250" height="70">
+                    
+                         <div class="col-70">
+                            <p:outputLabel value="#{categoriaConMB.categoria.descricao}"/><hr/>
+                         </div>
+                                                                        
+                         <p:button value="Não" onclick="PF('removercategoria').hide(); return false;" />
+                         <p:commandButton value="Sim" action="#{categoriaConMB.remove}" update="form,categoria"  onclick="PF('removercategoria').hide()"/>
+                                                            
+               			 </p:dialog>
+                   
+                    
+                    </h:form>
+                    
+                    
+                </div>
+            </p:panel>
+        </div>
+    </ui:define>
+</ui:composition>

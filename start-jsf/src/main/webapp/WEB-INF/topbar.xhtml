@@ -1,0 +1,38 @@
+<ui:composition 
+
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    
+    
+    <div id="layout-header" class="Unselectable fontRegular">
+        <a href="dashboard.xhtml" id="layout-logo">
+            <span class="Fs19 FontTitilliumSemiBoldItalic Fleft"><span class="softblue">AGENDA-</span><span class="hardblue">ONLINE</span></span>
+        </a>
+    	<ul id="sm-topmenu" class="layout-header-widgets white Fs14">
+    		<!-- <li class="Fleft BordRadHalf TexAlCenter"><i class="icon-bell"></i><span class="alertBubble BordRad10 Fs9">24</span>
+    			<ul class="layout-header-widgets-submenu BordRad5 shadows white Animated05">
+    				<li class="Animated05"><a href="#" class="white Unselectable TexAlRight"><i class="icon-flag red"></i>New Products</a></li>
+    				<li class="Animated05"><a href="#" class="white Unselectable TexAlRight"><i class="icon-flag yellow"></i>Today Sales Reports</a></li>
+    				<li class="Animated05"><a href="#" class="white Unselectable TexAlRight"><i class="icon-flag red"></i>Visit Reports</a></li>
+    				<li class="Animated05"><a href="#" class="white Unselectable TexAlRight"><i class="icon-flag red"></i>Sales Reports</a></li>
+    				<li class="Animated05"><a href="#" class="white Unselectable TexAlRight"><i class="icon-flag"></i>Task Alerts</a></li>
+    			</ul>
+    		</li> -->
+    		<li class="Fleft BordRadHalf TexAlCenter"><i class="icon-power"></i>
+    			<ul class="layout-header-widgets-submenu BordRad5 shadows white Animated05">
+    				<!-- <li class="Animated05"><a href="login.xhtml" class="white Unselectable"><i class="icon-ccw-1"></i>Restart</a></li> -->
+    				<li class="Animated05">
+    				<p:commandLink action="#{loginMB.logout}" class="white Unselectable"><i class="icon-logout"></i>Log Out</p:commandLink>
+    				</li>
+    			</ul>
+    		</li>
+    	</ul>
+    	<ul id="sm-mobiletopmenu" class="layout-header-widgets white Fs14">
+    		<li class="Fleft BordRadHalf TexAlCenter Animated05 DisplayOnResponsive"><i class="icon-th-1"></i></li>
+    	</ul>
+   	</div>
+    
+</ui:composition>

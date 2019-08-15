@@ -1,0 +1,134 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:p="http://primefaces.org/ui"
+   xmlns:o="http://omnifaces.org/ui"
+   template="/WEB-INF/template.xhtml">
+   <ui:define name="content">
+      <div class="ContainerIndent ui-fluid">
+         <h:form>
+            <p:fieldset legend="Prontuário">
+               <div class="ContainerIndent">
+                  <p:messages id="msg" closable="true"/>
+               </div>
+               <div class="Container">
+                        <p:panelGrid columns="2" layout="grid">
+                            <h:outputText value="Paciente:" />
+                            <h:outputText value="#{prontuarioManMB.consulta.paciente.nome}" />
+
+                            <h:outputText value="Data:" />
+                            <h:outputText value="#{prontuarioManMB.consulta.data}" />
+
+                            <h:outputText value="Início:" />
+                            <h:outputText value="#{prontuarioManMB.consulta.horaInicio}" />
+
+                            <h:outputText value="Término: " />
+                            <h:outputText value="#{prontuarioManMB.consulta.horaTermino}" />
+                            
+                            <h:outputText value="Situação:  " />
+                            <h:outputText value="#{prontuarioManMB.consulta.status.label}" />
+                            
+                            <h:outputText value="Observação:  " />
+                            <h:outputText value="#{prontuarioManMB.consulta.observacao}" />
+                        </p:panelGrid>
+               </div>
+               
+               <div class="EmptyBox20"></div>
+               
+               
+	               <p:panel id="prontuario" rendered="#{prontuarioManMB.iniciaConsulta}">
+	               		
+	               		<div class="Container">
+		                  <div class="Container100 Responsive50">
+			                  <div class="ContainerIndent">
+			                     <div class="Container100">
+			                        <p:outputLabel for="anamnese" value="Anamnese:"/>
+			                        <p:inputText id="anamnese"  value="#{prontuarioManMB.prontuario.anamnese}" required="true" requiredMessage="Informe anamnese" styleClass="FontBold Fs18 hardblue"/>
+			                     </div>
+			                  </div>
+			               </div>
+			            </div>   
+			            
+			            <div class="Container">   
+		                  <div class="Container100 Responsive50">
+			                  <div class="ContainerIndent">
+			                     <div class="Container100">
+			                        <p:outputLabel for="diagnostico" value="Diagnóstico:"/>
+			                        <p:inputText id="diagnostico"  value="#{prontuarioManMB.prontuario.diagnostico}" styleClass="FontBold Fs18 hardblue"/>
+			                     </div>
+			                  </div>
+			               </div>
+			           </div>    
+			               
+			           <div class="Container">    
+		                  <div class="Container100 Responsive50">
+			                  <div class="ContainerIndent">
+			                     <div class="Container100">
+			                        <p:outputLabel for="procerealizado" value="Procedimento realizado:"/>
+			                        <p:inputText id="procerealizado"  value="#{prontuarioManMB.prontuario.procedimentoRealizado}" styleClass="FontBold Fs18 hardblue"/>
+			                     </div>
+			                  </div>
+			               </div>
+			            </div>   
+			             <div class="Container">  
+			               
+			               <div class="Container100 Responsive50">
+			                  <div class="ContainerIndent">
+			                     <div class="Container100">
+			                        <p:outputLabel for="prescricao" value="Prescrição de Remédios:"/>
+			                        <p:inputText id="prescricao"  value="#{prontuarioManMB.prontuario.prescricaoRemedios}" styleClass="FontBold Fs18 hardblue"/>
+			                     </div>
+			                  </div>
+			               </div>
+			            </div>   
+			             <div class="Container">  
+			               <div class="Container100 Responsive50">
+			                  <div class="ContainerIndent">
+			                     <div class="Container100">
+			                        <p:outputLabel for="exame" value="Prescrição de Exames:"/>
+			                        <p:inputText id="exame"  value="#{prontuarioManMB.prontuario.prescricaoExames}" styleClass="FontBold Fs18 hardblue"/>
+			                     </div>
+			                  </div>
+			               </div>
+			               
+			            </div>   
+			             <div class="Container">  
+			               <div class="Container100 Responsive50">
+			                  <div class="ContainerIndent">
+			                     <div class="Container100">
+			                        <p:outputLabel for="resultados" value="Resultados:"/>
+			                        <p:inputText id="resultados"  value="#{prontuarioManMB.prontuario.resultados}" styleClass="FontBold Fs18 hardblue"/>
+			                     </div>
+			                  </div>
+			               </div>
+			            </div>   
+			            <div class="Container">   
+			               <div class="Container100 Responsive50">
+			                  <div class="ContainerIndent">
+			                     <div class="Container100">
+			                        <p:outputLabel for="Obs" value="Observação:"/>
+			                        <p:inputTextarea rows="2" id="Obs"  value="#{prontuarioManMB.prontuario.observacao}" styleClass="FontBold Fs18 hardblue"/>
+			                     </div>
+			                  </div>
+			               </div>
+		               </div>
+	                          
+	                </p:panel>
+              
+               
+               <div class="Container">
+                  <div class="Container20 Responsive50">
+                     <div class="ContainerIndent">
+                        <div class="Container100">
+                         <p:commandButton value="#{prontuarioManMB.iniciaFinaliza}" id="botaoSalvar" action="#{prontuarioManMB.grava}" update="prontuario,@form" process="@form"/>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="EmptyBox20"></div>
+            </p:fieldset>
+         </h:form>
+      </div>
+   </ui:define>
+</ui:composition>

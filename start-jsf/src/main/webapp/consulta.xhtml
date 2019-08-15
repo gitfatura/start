@@ -1,0 +1,166 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:p="http://primefaces.org/ui"
+   template="/WEB-INF/template.xhtml">
+   <ui:define name="content">
+   <h:form>
+   	
+      <div class="ContainerIndent ui-fluid">
+         
+            <p:fieldset legend="Consulta" style="background-color: #e7efe9">
+                  
+                  <div class="Container">
+                     <div class="Container40 Responsive50">
+                        <div class="ContainerIndent">
+                           <p:outputLabel for="paciente" value="Paciente:"/>
+                           <p:inputText id="paciente" value="Fulano da silva junior" styleClass="FontBold Fs18 hardblue"/>
+                        </div>
+                     </div>
+                     <div class="Container20 Responsive50">
+                        <div class="ContainerIndent">
+                           <div class="Container100">
+                              <p:outputLabel for="situacao" value="Situação"/>
+                              <p:inputText id="situacao"  value="Finalizado" styleClass="FontBold Fs18 hardblue"/>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="Container20 Responsive50">
+                        <div class="ContainerIndent">
+                           <div class="Container100">
+                              <p:outputLabel for="data" value="Data:"/>
+                              <p:inputText id="data"  value="13/01/2019"  styleClass="FontBold Fs18 hardblue"/>
+                           </div>
+                        </div>
+                     </div>
+                     
+                     <div class="Container10 Responsive50">
+                        <div class="ContainerIndent">
+                           <div class="Container100">
+                              <p:outputLabel for="horainicio" value="Início:"/>
+                              <p:inputText id="horainicio"  value="10:30" styleClass="FontBold Fs18 hardblue"/>
+                           </div>
+                        </div>
+                     </div>
+                     
+                     <div class="Container10 Responsive50">
+                        <div class="ContainerIndent">
+                           <div class="Container100">
+                              <p:outputLabel for="horafim" value="Termino:"/>
+                              <p:inputText id="horafim"  value="10:30" styleClass="FontBold Fs18 hardblue"/>
+                           </div>
+                        </div>
+                     </div>
+                     
+                  </div>
+                  
+                  <div class="Container">
+                     <div class="Container100 Responsive50">
+                        <div class="ContainerIndent">
+                           <div class="Container100">
+                              <p:outputLabel for="obs" value="Observação:"/>
+                              <p:inputTextarea rows="1" id="obs" value=""/>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  
+                  <div class="Container">
+                  
+                     <div class="Container20 Responsive50">
+                        <div class="ContainerIndent">
+                           <div class="Container100">
+                              <p:selectBooleanButton  value="#{consultaManMB.iniciaConsulta}" offLabel="Iniciar" onLabel="Finalizar"/>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  
+                  <div class="EmptyBox20"></div>
+                  
+                 
+                 <p:fieldset legend="Prontuário" id="grupo" rendered="#{consultaManMB.iniciaConsulta}">
+                        <div class="Container100 Responsive50">
+                           <div class="ContainerIndent">	
+                              <div class="Container100">
+                                 <p:outputLabel for="anamnese" value="Anamnese"/>
+                                 <p:inputText id="anamnese" value="" styleClass="FontBold Fs18 hardblue"/>
+                              </div>
+                           </div>
+                        </div>
+                   <div class="Container">     
+                        <div class="Container100 Responsive50">
+                           <div class="ContainerIndent">
+                              <div class="Container100">
+                                 <p:outputLabel for="diagnostico" value="Diagnóstico"/>
+                                 <p:inputText id="diagnostico" value="" styleClass="FontBold Fs18 hardblue"/>
+                              </div>
+                           </div>
+                        </div>
+                        </div>
+                   <div class="Container">     
+                        <div class="Container100 Responsive50">
+                           <div class="ContainerIndent">
+                              <div class="Container100">
+                                 <p:outputLabel for="realizado" value="Procedimento realizado"/>
+                                 <p:inputText id="realizado" value="" styleClass="FontBold Fs18 hardblue"/>
+                              </div>
+                           </div>
+                        </div>
+                        </div>
+                   <div class="Container">     
+                        
+                        <div class="Container100 Responsive50">
+                           <div class="ContainerIndent">
+                              <div class="Container100">
+                                 <p:outputLabel for="prescricao" value="Prescrição de Remédios"/>
+                                 <p:inputText id="prescricao" value="" styleClass="FontBold Fs18 hardblue"/>
+                              </div>
+                           </div>
+                        </div>
+                    </div>    
+                    <div class="Container">    
+                        <div class="Container100 Responsive50">
+                           <div class="ContainerIndent">
+                              <div class="Container100">
+                                 <p:outputLabel for="exames" value="Prescrição de Exames"/>
+                                 <p:inputText id="exames" value="" styleClass="FontBold Fs18 hardblue"/>
+                              </div>
+                           </div>
+                        </div>
+                      </div>  
+                   
+                   <div class="Container">     
+                        <div class="Container100 Responsive50">
+                           <div class="ContainerIndent">
+                              <div class="Container100">
+                                 <p:outputLabel for="resultados" value="Resultados"/>
+                                 <p:inputText id="resultados" value="" styleClass="FontBold Fs18 hardblue"/>
+                              </div>
+                           </div>
+                        </div>
+                        </div>
+                     <div class="Container">   
+                        <div class="Container100 Responsive50">
+                           <div class="ContainerIndent">
+                              <div class="Container100">
+                                 <p:outputLabel for="observacaop" value="Observação"/>
+                                 <p:inputText id="observacaop" value="" styleClass="FontBold Fs18 hardblue"/>
+                              </div>
+                           </div>
+                        </div>
+                       </div> 
+                        <div class="EmptyBox20"></div>
+                        
+                        
+                     </p:fieldset>
+                     
+                     
+                     
+            </p:fieldset>
+         
+      </div>
+      </h:form>
+   </ui:define>
+</ui:composition>

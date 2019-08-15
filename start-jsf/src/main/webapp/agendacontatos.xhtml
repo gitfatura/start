@@ -1,0 +1,72 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+	
+    <ui:define name="content">
+    
+ 	 <p:panel>   
+ 
+	<h:form>
+	
+        <p:schedule id="schedule" value="#{scheduleView.eventModel}"  timeZone="America/Sao_Paulo">
+        	<p:ajax event="eventSelect" listener="#{scheduleView.selecionado}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+        	<p:ajax event="dateSelect" listener="#{scheduleView.novaAgenda}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+        	<p:ajax event="eventSelect" listener="#{scheduleView.selecionado}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+        	<p:ajax event="dateSelect" listener="#{scheduleView.novaAgenda}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+        </p:schedule>
+     
+	    <p:dialog widgetVar="eventDialog" header="Agenda detalhes" width="350" height="200" resizable="false" modal="true" showEffect="clip" hideEffect="clip">
+	    	<p:messages id="msg" closable="true"/>
+	    	<p:outputPanel id="eventDetails">
+	    		<div class="Container">
+					<div class="Container100 Responsive40">
+                    	<div class="ContainerIndent">
+                    		<div class="Container100">		
+					            <p:outputLabel for="title" value="Título" />
+					            <p:inputText id="title" value="#{scheduleView.agenda.titulo}" rendered="true" requiredMessage="Informe Título" styleClass="FontBold Fs18 hardblue" required="true" />
+					 		</div>
+					 	</div>	
+					 </div>
+				</div>
+				<div class="Container">
+					<div class="Container100 Responsive40">
+                    	<div class="ContainerIndent">
+                    		<div class="Container100">		
+					            <p:outputLabel for="from" value="Data inicio" />
+		            			<p:calendar id="from" value="#{scheduleView.agenda.dataInicio}" rendered="true" requiredMessage="Informe data inicio" styleClass="FontBold Fs18 hardblue"  pattern="dd/MM/yyyy HH:mm"/>
+					 		</div>
+					 	</div>	
+					 </div>
+				</div>
+				<div class="Container">
+					<div class="Container100 Responsive40">
+                    	<div class="ContainerIndent">
+                    		<div class="Container100">		
+					            <p:outputLabel for="to" value="Data fim" />
+		           		 		<p:calendar id="to" value="#{scheduleView.agenda.dataFim}" rendered="true" requiredMessage="Informe data fim" styleClass="FontBold Fs18 hardblue" pattern="dd/MM/yyyy HH:mm"/>
+					 		</div>
+					 	</div>	
+					 </div>
+		        </div>
+		        <div class="Container">
+		        	<div class="Container100 Responsive40">
+                    	<div class="ContainerIndent">
+                    		<div class="Container100">		
+					           <p:commandButton type="reset" value="Reset" />
+	            				<p:commandButton value="Salvar" actionListener="#{scheduleView.save}" update="msg,schedule"/>
+					 		</div>
+					 	</div>	
+					 </div>
+	            </div>
+			</p:outputPanel>	            
+	    </p:dialog>    
+	</h:form>
+  	
+  	</p:panel>
+  	
+    </ui:define>
+</ui:composition>

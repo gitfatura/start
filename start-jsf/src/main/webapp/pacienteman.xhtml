@@ -1,0 +1,154 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:p="http://primefaces.org/ui"
+   template="/WEB-INF/template.xhtml">
+   <ui:define name="content">
+      <div class="ContainerIndent ui-fluid">
+      	<h:form>
+         <p:fieldset legend="Paciente">
+            <div class="Container">
+            	
+               <p:messages id="msg"/>
+            
+               <div class="Container60 Responsive50">
+                  <div class="ContainerIndent">
+                     <p:outputLabel for="cmp1" value="Nome"/>
+                     <p:inputText id="cmp1"  value="#{pacienteManMB.paciente.nome}" required="true" requiredMessage="Informe Nome" styleClass="FontBold Fs18 hardblue"/>
+                  </div>
+               </div>
+               <div class="Container20 Responsive50">
+                  <div class="ContainerIndent">
+                     <div class="Container100">
+                        <p:outputLabel for="cmp2" value="Nascimento"/>
+                        <p:calendar id="cmp2"  value="#{pacienteManMB.paciente.nascimento}" required="true" requiredMessage="Informe data Nascimento" styleClass="FontBold Fs18 hardblue"/>
+                     </div>
+                  </div>
+               </div>
+               <div class="Container20 Responsive50">
+                  <div class="ContainerIndent">
+                     <div class="Container100">
+                        <p:outputLabel for="cmp3" value="Sexo"/>
+                        <p:selectOneMenu id="cmp3" value="#{pacienteManMB.paciente.sexo}" requiredMessage="Informe Sexo" required="true">
+                           <f:selectItem itemLabel="Selecione" itemValue="" />
+                           <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+                           <f:selectItem itemLabel="Feminino" itemValue="Feminino" />
+                        </p:selectOneMenu>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="Container">
+               <div class="Container30 Responsive50">
+                  <div class="ContainerIndent">
+                     <div class="Container100">
+                        <p:outputLabel for="cmp4" value="Convênio"/>
+                        <p:selectOneMenu id="cmp4" value="#{pacienteManMB.paciente.convenio}">
+                           <f:selectItem itemLabel="Selecione" itemValue=""/>
+                           <f:selectItems value="#{pacienteManMB.convenios}" var="convenio" itemValue="#{convenio}"  itemLabel="#{convenio.nomeConvenio}" />
+                        </p:selectOneMenu>
+                     </div>
+                  </div>
+               </div>
+               <div class="Container50 Responsive50">
+                  <div class="ContainerIndent">
+                     <div class="Container100">
+                        <p:outputLabel for="cxmp1" value="Endereço"/>
+                        <p:inputText id="cxmp1"  value="#{pacienteManMB.paciente.endereco}" styleClass="FontBold Fs18 hardblue"/>
+                     </div>
+                  </div>
+               </div>
+               <div class="Container20 Responsive50">
+                  <div class="ContainerIndent">
+                     <div class="Container100">
+                        <p:outputLabel for="cxmp2" value="Número"/>
+                        <p:inputText id="cxmp2"  value="#{pacienteManMB.paciente.numero}" styleClass="FontBold Fs18 hardblue"/>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="Container">
+               <div class="Container40 Responsive50">
+                  <div class="ContainerIndent">
+                     <div class="Container100">
+                        <p:outputLabel for="cxmp3" value="Bairro"/>
+                        <p:inputText id="cxmp3"  value="#{pacienteManMB.paciente.bairro}" styleClass="FontBold Fs18 hardblue"/>
+                     </div>
+                  </div>
+               </div>
+               <div class="Container40 Responsive50">
+                  <div class="ContainerIndent">
+                     <div class="Container100">
+                        <p:outputLabel for="cxmp4" value="Cidade"/>
+                        <p:inputText id="cxmp4"  value="#{pacienteManMB.paciente.cidade}" styleClass="FontBold Fs18 hardblue"/>
+                     </div>
+                  </div>
+               </div>
+               <div class="Container20 Responsive50">
+                  <div class="ContainerIndent">
+                     <div class="Container100">
+                        <p:outputLabel for="cxmpx4" value="Cep"/>
+                        <p:inputText id="cxmpx4"  value="#{pacienteManMB.paciente.cep}" styleClass="FontBold Fs18 hardblue"/>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="Container">
+               <div class="Container30 Responsive50">
+                  <div class="ContainerIndent">
+                     <div class="Container100">
+                        <p:outputLabel for="estado" value="Estado" />
+                        <p:selectOneMenu id="estado" value="#{pacienteManMB.paciente.estado}">
+                           <f:selectItem itemLabel="Selecione" itemValue="" />
+                           <f:selectItem itemLabel="Amazonas (AM)" itemValue="AM"/>
+                           <f:selectItem itemLabel="Mato Grosso (MT)" itemValue="MT" />
+                           <f:selectItem itemLabel="Minas Gerais (MG)" itemValue="MG" />
+                           <f:selectItem itemLabel="Santa Catarina (SC)" itemValue="SC" />
+                           <f:selectItem itemLabel="São Paulo (SP)" itemValue="SP" />
+                        </p:selectOneMenu>
+                     </div>
+                  </div>
+               </div>
+               <div class="Container20 Responsive50">
+                  <div class="ContainerIndent">
+                     <div class="Container100">
+                        <p:outputLabel for="tel" value="Telefone"/>
+                        <p:inputMask mask="(99) 99999-9999" id="tel"  value="#{pacienteManMB.paciente.telefone}" styleClass="FontBold Fs18 hardblue"/>
+                     </div>
+                  </div>
+               </div>
+               <div class="Container50 Responsive50">
+                  <div class="ContainerIndent">
+                     <div class="Container100">
+                        <p:outputLabel for="email" value="Email"/>
+                        <p:inputText id="email"  value="#{pacienteManMB.paciente.email}" styleClass="FontBold Fs18 hardblue"/>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="Container">
+               <div class="Container100 Responsive50">
+                  <div class="ContainerIndent">
+                     <div class="Container100">
+                        <p:outputLabel for="obs" value="Observação"/>
+                        <p:inputTextarea id="obs" rows="10" placeholder="Observação" value="#{pacienteManMB.paciente.observacao}" styleClass="FontBold Fs18 hardblue"/>
+                     </div>
+                  </div>
+               </div>
+               <div class="EmptyBox20"></div>
+            </div>
+            <div class="Container">
+            	<div class="Container20 Responsive50">
+               <div class="ContainerIndent">
+                  <div class="Container100">
+                     <p:commandButton value="Salvar" id="botaoSalvar" action="#{pacienteManMB.grava}" update="@form" ajax="true"/>
+                  </div>
+                   </div>
+               </div>
+            </div>
+         </p:fieldset>
+         </h:form>
+      </div>
+   </ui:define>
+</ui:composition>

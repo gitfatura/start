@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Home</title>
+		<link rel="stylesheet" type="text/css" href="css/estilo.css"/>
+		<script type="text/javascript" src="js/conversorData.js"/>
+    </h:head>
+    <h:body>
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north" size="0" header=":: MORAES E MORAES DISTRIBUIDORA DE PEÇAS ELETRICAS LTDA - ME - 7284876000156 ::" resizable="false" closable="false" collapsible="true" style="font-size: 20px; font-family: Vedana">
+            </p:layoutUnit>
+ 
+            <p:layoutUnit position="west" size="250" header="Menu" resizable="false"
+                            closable="false" collapsible="true" style="width:200px">  
+ 			
+                <p:menu style="width: 96%">
+ 
+                    <p:submenu label="Inicial">
+                        <p:menuitem value="index" url="index.xhtml" ajax="true"/>
+                    </p:submenu>
+                    <p:submenu label="Cadastros...">
+                        <p:menuitem value="Clientes..." url="clientes.xhtml" ajax="true"/>
+                    </p:submenu>
+                    <p:submenu label="Movimentos">
+                        <p:menuitem value="Conta corrente" url="#" />
+                    </p:submenu>
+ 
+                </p:menu>
+ 
+            </p:layoutUnit>
+ 
+            <p:layoutUnit position="center" header="Sistema">
+ 
+                    <ui:insert name="content">
+ 
+                    </ui:insert>          
+ 
+            </p:layoutUnit>
+ 
+            <p:layoutUnit position="south" size="40" header="Desenvolvido por: Tiago Santos de Lima Tel: (47) 99658-5972"
+                            resizable="false" closable="false" collapsible="false">          
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
+</html>

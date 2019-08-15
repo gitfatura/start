@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+	<f:facet name="first">
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+	</f:facet>
+
+	<title>Projetos</title>
+
+	<h:outputStylesheet library="primefaces-sentinel" name="theme.css" />
+	<h:outputStylesheet library="sentinel-layout" name="css/components.css" />
+	<h:outputStylesheet library="sentinel-layout" name="css/core-layout.css" />
+	<h:outputStylesheet library="sentinel-layout" name="css/custom.css" />
+	<h:outputStylesheet library="sentinel-layout" name="css/font-ico-layout.css" />
+	<h:outputStylesheet library="sentinel-layout" name="css/layout.css" />
+	<h:outputStylesheet library="sentinel-layout" name="css/sentinel-layout.css" />
+	<h:outputStylesheet library="sentinel-layout" name="css/main.css" />
+		
+	
+	
+	
+	<h:outputScript target="body" library="sentinel-layout" name="js/app.js" />
+	<h:outputScript target="body" library="sentinel-layout" name="js/conversorData.js" />
+	<h:outputScript target="body" library="sentinel-layout" name="js/jquery.mask.js" />
+    <h:outputScript target="body" library="sentinel-layout" name="js/jquery.mask.min.js" />
+	<h:outputScript target="body" library="sentinel-layout" name="js/layout.js" />
+	<h:outputScript target="body" library="sentinel-layout" name="js/login.js" />
+    
+    
+    <h:outputScript target="body" library="sentinel-layout" name="js/jquery.min.js" />
+    <h:outputScript target="body" library="sentinel-layout" name="js/browser.min.js" />
+    <h:outputScript target="body" library="sentinel-layout" name="js/breakpoints.min.js" />
+    <h:outputScript target="body" library="sentinel-layout" name="js/util.js" />
+    <h:outputScript target="body" library="sentinel-layout" name="js/jquery.min.js" />
+    <h:outputScript target="body" library="sentinel-layout" name="js/main.js" />
+    
+	 <script>
+    $(document).ready(function(){
+          $('.date').mask('00/00/0000');
+          $('.number').mask('#');
+          $('.time').mask('00:00:00');
+          $('.date_time').mask('00/00/0000 00:00:00');
+          $('.cep').mask('00000-000');
+          $('.celular').mask('(000) 00000-0000');
+          $('.telefone').mask('(000) 0000-0000');
+          $('.placa').mask('AAA-0000');
+          $('.phone_with_ddd').mask('(00) 0000-0000');
+          $('.phone_us').mask('(000) 000-0000');
+          $('.mixed').mask('AAA 000-S0S');
+          $('.cpf').mask('000.000.000-00', {reverse: true});
+          $('.cnpj').mask('00.000.000/0000-00', {reverse: true});
+          $('.money').mask('000.000.000.000.000,00', {reverse: true});
+          $('.money2').mask("#.##0,00", {reverse: true});
+          $('.ip_address').mask('0ZZ.0ZZ.0ZZ.0ZZ', {
+            translation: {
+              'Z': {
+                pattern: /[0-9]/, optional: true
+              }
+            }
+          });
+          $('.ip_address').mask('099.099.099.099');
+          $('.percent').mask('##0,00%', {reverse: true});
+          $('.clear-if-not-match').mask("00/00/0000", {clearIfNotMatch: true});
+          $('.placeholder').mask("00/00/0000", {placeholder: "__/__/____"});
+          $('.fallback').mask("00r00r0000", {
+              translation: {
+                'r': {
+                  pattern: /[\/]/,
+                  fallback: '/'
+                },
+                placeholder: "__/__/____"
+              }
+            });
+          $('.selectonfocus').mask("00/00/0000", {selectOnFocus: true});
+        });      
+     </script>
+	
+</h:head>
+
+
+<h:body style="background-color: #E8E8DC">
+ 
+ <h:form>  
+    <p:growl id="messages"/>
+    
+    <p:menubar>
+        <p:submenu label="Estoque">
+            <p:menuitem value="Novo produto" url="#" />
+            <p:separator />
+            <p:menuitem value="Entrada / Saida" url="#" />
+            <p:separator />
+            <p:menuitem value="Listagem produto" url="#" />
+            <p:separator />
+            <p:menuitem value="Produtos" url="#" />
+            <p:separator />
+            <p:menuitem value="Listagem produto por data" url="#" />
+        </p:submenu>
+ 
+        <p:submenu label="Clientes">
+            <p:menuitem value="Novo cliente" url="cliente.xhtml" />
+            <p:separator />
+            <p:menuitem value="Listagem cliente" url="#" />
+            <p:separator />
+            <p:menuitem value="Listagem cliente por data" url="#" />
+        </p:submenu>
+        
+        <p:submenu label="Agenda">
+            <p:menuitem value="Nova agenda" url="agenda.xhtml" />
+            <p:separator />
+            <p:menuitem value="Agendas" url="agendas.xhtml" />
+            <p:separator />
+            <p:menuitem value="Listagem cliente por data" url="#" />
+        </p:submenu>
+ 
+        <p:submenu label="Administracao">
+            <p:menuitem value="Contents" url="#" />
+            <p:submenu label="Search" icon="ui-icon-search">
+                <p:submenu label="Text">
+                    <p:menuitem value="Workspace" url="#" />
+                </p:submenu>
+                <p:menuitem value="File" url="#" />
+            </p:submenu>
+        </p:submenu>
+        
+        <p:submenu label="Transportadores">
+            <p:menuitem value="Novo transportador" url="#" />
+            <p:separator />
+            <p:menuitem value="Listagem transportadores" url="#" />
+        </p:submenu>
+        
+         <p:submenu label="Help">
+            <p:menuitem value="Contents" url="#" />
+            <p:submenu label="Search" icon="ui-icon-search">
+                <p:submenu label="Text">
+                    <p:menuitem value="Workspace" url="#" />
+                </p:submenu>
+                <p:menuitem value="File" url="#" />
+            </p:submenu>
+        </p:submenu>
+ 
+ 
+    </p:menubar>
+</h:form>
+         
+<div id="content">
+        <ui:insert name="content"></ui:insert>
+</div>         
+</h:body>
+</html>

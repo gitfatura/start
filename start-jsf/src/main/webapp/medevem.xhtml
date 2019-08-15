@@ -1,0 +1,119 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+	
+    <ui:define name="content">
+        <h:form id="form">
+           
+            <div class="ContainerIndent ui-fluid">
+                <p:panel>
+  					<p:toolbar style="margin-top: 1px">
+	    				<p:toolbarGroup>
+	    				<p:commandButton value="Salvar" id="botaoSalvar" action="#{produtoManMB.grava}" update="form" ajax="true" 
+	    				global="false" 
+	    				/>
+	    				</p:toolbarGroup>
+	    				<p:toolbarGroup align="right">
+						<p:button value="Pesquisa" outcome="produtos"/>
+						</p:toolbarGroup>
+	    			</p:toolbar>
+  					
+  					<div class="ContainerIndent">
+                        <span class="FontBold Fs18 hardblue">Me Devem</span>
+                    	<p:messages id="msg"/>
+					</div> 
+  
+                    <div class="Container">
+                    
+                        
+                        <div class="Container25 Responsive50">
+                            <div class="ContainerIndent">
+                                <div class="Container100">
+                                <p:outputLabel for="pessoa" value="Pessoa"/>
+                                 <p:selectOneMenu id="pessoa" value="#{produtoManMB.produto.estoque}" required="false" requiredMessage="Informe estoque" style="width:100%">
+		                            <f:selectItem itemValue="null" itemLabel="Selecione uma pessoa" />
+		                			<f:selectItems value="#{produtoManMB.estoques}" var="estoque" itemValue="#{estoque}" itemLabel="#{estoque.descricao}"  />
+		                        </p:selectOneMenu>
+                                </div>
+                            </div>
+                            
+                            
+                            
+                     </div>
+                        
+                        <div class="Container75 Responsive50">
+                            <div class="ContainerIndent">
+                                <div class="Container100">
+                                    <p:outputLabel for="descricao" value="Descricão"/>
+                                    <p:inputText value="#{produtoManMB.produto.descricao}" required="false" requiredMessage="Informe descrição" styleClass="FontBold Fs18 hardblue" id="descricao"/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                    
+                    <div class="Container">
+                    
+                    <div class="Container25 Responsive50">
+                            <div class="ContainerIndent">
+                                <div class="Container100">
+                                    <p:outputLabel for="valor" value="Valor"/>
+                                    <p:inputText value="#{produtoManMB.valorStr}" 
+                                      styleClass="money FontBold Fs18 hardblue" id="valor" required="false" requiredMessage="Informe valor"/>
+                                </div>
+                            </div>
+                        </div>
+                    
+                     <div class="Container25 Responsive50">
+                            <div class="ContainerIndent">
+                                <div class="Container100">
+                                 <p:outputLabel for="inline" value="Data"/>
+                                <p:calendar  id="inline" value="#{produtoManMB.produto.data}" required="false" requiredMessage="Informe data" locale="pt_BR" pattern="dd/MM/yyyy"/>
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <div class="Container50 Responsive50">
+                            <div class="ContainerIndent">
+                                <div class="Container100">
+                                 <p:outputLabel value="Situação"/>
+                                <p:selectOneRadio layout="responsive" value="#{lancamentoManMB.tipoLancamentoSelecionado}" required="true" 
+                                requiredMessage="Selecione tipo de lancamento" columns="2" >
+                                    <f:selectItem itemLabel="Me Deve / Eu Paguei" itemValue="1"/>
+                                    <f:selectItem itemLabel="Eu Devo / Me Pagou" itemValue="2" />
+                                </p:selectOneRadio>    
+                                </div>
+                            </div>
+                        </div>
+			                       
+                        
+                    </div>
+                    
+                    <div class="Container">
+                    
+                    
+                    
+                    </div>
+
+                 <div class="EmptyBox20"></div>
+               </p:panel>   
+            </div>
+            
+            <script type="text/javascript">
+	    		$(document).ready(function(){
+          		$('.number').mask('#');
+          		$('.money').mask('000.000.000.000.000,00', {reverse: true});
+        		});      
+     		</script>
+     		
+        </h:form>
+    </ui:define>
+</ui:composition>

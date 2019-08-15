@@ -1,0 +1,204 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    template="/WEB-INF/templates/Layout.xhtml">
+    
+    <ui:define name="content">
+			<p:panel id="toggleable" header="Serviços" toggleable="false" closable="false" toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-top: 40px;margin-bottom:10px">
+				
+			<p:commandButton value="Novo Serviço" type="button" onclick="PF('dialogservico').show();"/>
+			
+			<h:form id="frmservico">
+		 											            	
+				<p:dataTable var="servico" id="servicos" value="#{servicoMB.servicos}" 
+					rows="10" paginator="true"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15,50"  paginatorPosition="bottom" emptyMessage="Nenhum serviço encontrado">
+					
+				 					
+					<p:column style="width: 60px">
+							 <p:commandButton oncomplete="PF('atualizaservico').show()" icon="ui-icon-pencil"  process="@this" update="frmservico">
+									<f:setPropertyActionListener value="#{servico}" target="#{servicoMB.servico}"/>
+							 </p:commandButton>
+					</p:column>
+						
+					<p:column headerText="Codigo">
+						<h:outputText value="#{servico.codigo}" />
+					</p:column>
+					
+						
+					<p:column headerText="Descricao">
+						<h:outputText value="#{servico.descricao}" />
+					</p:column>
+					
+					
+					<p:column headerText="Valor">
+						<h:outputText value="#{servico.valor}">
+							<f:convertNumber  type="currency" currencySymbol="R$"/>
+						</h:outputText>
+					</p:column>
+					
+					
+					<p:column headerText="Carro">
+						<h:outputText value="#{servico.carro.modelo}" />
+					</p:column>
+					
+					<p:column headerText="Cliente" style="width: 110px">
+						<h:outputText value="#{servico.carro.cliente.nome}" />
+					</p:column>
+										
+					
+					<p:column style="width: 60px">    			
+							<p:commandButton oncomplete="PF('removerservico').show()" icon="ui-icon-trash" process="@this" update="frmservico">
+									<f:setPropertyActionListener value="#{servico}" target="#{servicoMB.servico}" />
+							</p:commandButton>
+					</p:column>
+					
+					<p:column style="width: 60px">    			
+							<p:commandButton oncomplete="PF('servicodetalhe').show()" icon="ui-icon-search" process="@this" update="frmservico">
+									<f:setPropertyActionListener value="#{servico}" target="#{servicoMB.servico}" />
+							</p:commandButton>
+					</p:column>
+					
+				</p:dataTable>
+				
+				<p:dialog header="Deseja realmente excluir o servico" modal="true" widgetVar="removerservico" width="360" height="100"  resizable="false" >
+					
+						<div class="col-70">
+							<p:outputLabel value="#{servicoMB.servico.descricao}"/><hr/>
+						</div>
+																		
+						<p:button value="Não" onclick="PF('removerservico').hide(); return false;" />
+						<p:commandButton value="Sim" action="#{servicoMB.remove}" update="frmservico:servicos"  onclick="PF('removerservico').hide()"/>
+															
+				</p:dialog>
+				
+				<p:dialog header="Atualizar serviço" modal="true" draggable="true" toggleSpeed="700" width="700" height="250" closeSpeed="900" resizable="false" widgetVar="atualizaservico" style="margin-top: 50px;margin-bottom:40px">
+					
+					<div class="row" >
+		            	<div class="col-50">
+		                	<p:outputLabel for="adescricao" value="Descrição"/>
+		                    <p:inputText id="adescricao"  value="#{servicoMB.servico.descricao}"  required="true" requiredMessage="Descrição obrigatorio"/>
+		                </div>
+		                <div class="col-50">
+			            	<p:outputLabel for="avalor" value="Valor"/>
+			                <p:inputText   id="avalor"  value="#{servicoMB.servico.valor}"  required="true" requiredMessage="Valor obrigatorio"/>
+		                </div>
+									                
+		            </div>
+						
+						
+					<div class="row" >
+						<div class="col-50">
+		                	<p:outputLabel for="acarro" value="Carro" />
+		                        <p:selectOneMenu id="acarro" value="#{servicoMB.servico.carro}" required="true" requiredMessage="Carro obrigatorio" style="width:100%">
+		                            <f:selectItem itemValue="null" itemLabel="Selecione um Carro" />
+		                			<f:selectItems value="#{servicoMB.carros}" var="carro" itemValue="#{carro}" itemLabel="#{carro.modelo}"  />
+		                        </p:selectOneMenu>
+		                 </div>
+		                 
+		            </div>
+		            <br/>
+		            													
+				<p:commandButton value="Registrar" action="#{servicoMB.update}" update="frmservico" />
+															
+				</p:dialog>
+				
+				<p:dialog header="Detalhe dos serviços"  modal="true" draggable="true" toggleSpeed="700" width="700" height="300"  closeSpeed="500" resizable="false" widgetVar="servicodetalhe" style="margin-top: 50px;margin-bottom:40px">
+					
+					<div class="row">
+		                    
+		                  <div class="col-50">		                  
+		                  		<p:outputLabel for="dcodigo" value="Codigo"/>
+		                        <p:inputText   id="dcodigo"  value="#{servicoMB.servico.codigo}" readonly="true"/>
+		                  </div>
+		                    
+		                  <div class="col-50">		                  
+		                  		<p:outputLabel for="ddescricao" value="Descrição"/>
+		                        <p:inputText   id="ddescricao"  value="#{servicoMB.servico.descricao}" readonly="true"/>
+		                  </div>
+		                    
+					</div>
+		            
+		            <div class="row">
+		             	
+		             	<div class="col-50">		                  
+		                  		<p:outputLabel for="dvalor" value="Valor"/>
+		                        <p:inputText   id="dvalor"  value="#{servicoMB.servico.valor}" readonly="true"/>
+		                  </div>		
+		             				
+		                  <div class="col-50">		                  
+		                  		<p:outputLabel for="dcarro" value="Carro"/>
+		                        <p:inputText   id="dcarro"  value="#{servicoMB.servico.carro.modelo}" readonly="true"/>
+		                  </div>
+		 					
+		 							
+		                  <div class="col-50">		                  
+		                  		<p:outputLabel for="dcliente" value="Cliente"/>
+		                        <p:inputText   id="dcliente"  value="#{servicoMB.servico.carro.cliente.nome}" readonly="true"/>
+		                  </div>
+		 					
+		 					
+		 				              </div>
+		            
+		              <div class="row">
+		                
+		                  <div class="col-50">
+		                  		<p:outputLabel for="dusuario" value="Usuario ultima alteração"/>
+		                        <p:inputText  id="dusuario" value="#{servicoMB.servico.usuarioUltimaAlteracao}" readonly="true"/>
+		                  </div>
+		                	
+		                <div class="col-50">
+		                  		<p:outputLabel for="ddata" value="Data ultima alteração"/>
+		                        <p:calendar  id="ddata" value="#{servicoMB.servico.dataUltimaAlteracao}" pattern="dd/MM/yyyy" locale="pt" readonly="true"/>
+		                  </div>
+		 	 			 	
+		             </div>
+		                  									
+				</p:dialog>
+				
+			</h:form>
+				
+			<p:dialog header="Novo serviço" widgetVar="dialogservico" modal="true"  draggable="true" width="700" height="230"  resizable="false" >
+							
+				<h:form id="cadastroservico">
+
+					<div class="row" >
+		            	<div class="col-50">
+		                	<p:outputLabel for="ndescricao" value="Descrição"/>
+		                    <p:inputText id="ndescricao"  value="#{servicoMB.servico.descricao}"  required="true" requiredMessage="Descrição obrigatorio"/>
+		                </div>
+		                
+		                <div class="col-50">
+			            	<p:outputLabel for="nvalor" value="Valor"/>
+			                <p:inputNumber   id="nvalor"  value="#{servicoMB.servico.valor}"  required="true" requiredMessage="Valor obrigatorio"/>
+		                </div>
+									                
+		            </div>
+						
+					<div class="row" >
+						<div class="col-50">
+		                	<p:outputLabel for="ncarro" value="Carro" />
+		                        <p:selectOneMenu id="ncarro" value="#{servicoMB.servico.carro}" required="true" requiredMessage="Carro obrigatorio" style="width:100%">
+		                            <f:selectItem itemValue="null" itemLabel="Selecione um Carro" />
+		                			<f:selectItems value="#{servicoMB.carros}" var="carros" itemValue="#{carros}" itemLabel="#{carros.cliente.nome} #{carros.modelo}"/>
+		                        </p:selectOneMenu>
+		                 </div>
+		                 
+		            </div>
+		            <br/>
+						
+					<p:commandButton value="Registrar" action="#{servicoMB.grava}" ajax="true" update="@form" process="@all"/>
+                									
+					</h:form>
+															 	
+					<p:ajax event="close" update="frmservico"/>
+													
+					</p:dialog>		 					
+				
+		</p:panel>
+	
+	</ui:define>
+</ui:composition>	

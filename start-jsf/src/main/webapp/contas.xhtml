@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/templates/Layout.xhtml">
+	
+	
+	<ui:define name="content">
+	
+	<h:form id="frmproduto">
+	       
+            <p:panel id="toggleable" header="Cadastro de Produtos" toggleable="true" closable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panel"   style="margin-top: 60px;margin-bottom:10px">
+                    <p:messages id="msg" closable="true" />
+                    
+                            
+                            <div class="row"  >
+                                                                         
+                                     <div class="col-50">
+                                        <p:outputLabel for="ddescricao" value="Descrição"/>
+                                        <p:inputText id="ddescricao" maxlength="255" value="" required="true" requiredMessage="Descriçao  obrigatorio"/>
+                                    </div>
+                                    
+                                    <div class="col-25">
+                                        <p:outputLabel  for="dquantidade" value="Estoque"/>
+                                        <p:inputText styleClass="number"  id="dquantidade" value=""  required="true" requiredMessage="Quantidade  obrigatorio"/>
+                                    </div>
+         
+                                </div>
+                                
+                                <div class="row">
+                                                                             
+                                        <div class="col-25">
+                                                <p:outputLabel for="dpcompra" value="Preço"/>
+                                                <p:inputText   styleClass="money"   id="dpcompra" value=""  symbol="R$"  required="true" requiredMessage="Preço obrigatorio"/>
+                                        </div>
+                                        
+                                        <div class="col-25">
+                                                <p:outputLabel for="dpdata" value="Data"/>
+                                                <p:calendar id="dpdata" value=""  pattern="dd/MM/yyyy"   locale="pt" required="true" requiredMessage="Data obrigatorio"/>
+                                        </div>
+                                </div>
+                                   
+                                <p:commandButton value="Registrar"/>
+                    
+            </p:panel>               
+        </h:form>
+	</ui:define>
+	
+</ui:composition>

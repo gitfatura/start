@@ -1,0 +1,267 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+<ui:define name="content">
+
+<style type="text/css">
+	.ui-panel {margin-top:20px}
+    .inlineCalendarDemo > .hasDatepicker {padding-left: 50px;}
+</style>
+
+<div class="ContainerIndent ui-fluid">
+	<p:panel>
+    	<p:fieldset legend="Cadastro simples" collapsed="false" toggleable="true">
+			<div class="Container">
+				    <div class="Container20 Responsive50">
+					    <div class="ContainerIndent">
+							<div class="Container100">
+							    <p:outputLabel for="cmp1" value="Value"/>
+							    <p:inputText id="cmp1"  value="" styleClass="FontBold Fs18 hardblue"/>
+						    </div>
+					    </div>
+				    </div>
+				    <div class="Container40 Responsive50">
+					    <div class="ContainerIndent">
+						    <div class="Container100">
+							    <p:outputLabel for="cmp2" value="Value"/>
+							    <p:inputText id="cmp2"  value="" styleClass="FontBold Fs18 hardblue"/>
+						    </div>
+					    </div>
+				    </div>
+				    <div class="Container20 Responsive50">
+					    <div class="ContainerIndent">
+						    <div class="Container100">
+							    <p:outputLabel for="cmp3" value="Value"/>
+							    <p:inputText id="cmp3"  value="" styleClass="FontBold Fs18 hardblue"/>
+						    </div>
+					    </div>
+				    </div>
+				                      
+				    <div class="Container20 Responsive50">
+					    <div class="ContainerIndent">
+						    <div class="Container100">
+							    <p:outputLabel for="cmp4" value="Value"/>
+							    <p:inputText id="cmp4"  value="" styleClass="FontBold Fs18 hardblue"/>
+						    </div>
+					    </div>
+				    </div>
+			   </div> 
+	        <div class="Container">
+			    <div class="Container20 Responsive50">
+				    <div class="ContainerIndent">
+						<div class="Container100">
+						    <p:outputLabel for="cxmp1" value="Value"/>
+						    <p:inputText id="cxmp1"  value="" styleClass="FontBold Fs18 hardblue"/>
+					    </div>
+				    </div>
+			    </div>
+			    <div class="Container40 Responsive50">
+				    <div class="ContainerIndent">
+					    <div class="Container100">
+						    <p:outputLabel for="cxmp2" value="Value"/>
+						    <p:inputText id="cxmp2"  value="" styleClass="FontBold Fs18 hardblue"/>
+					    </div>
+				    </div>
+			    </div>
+			    <div class="Container20 Responsive50">
+				    <div class="ContainerIndent">
+					    <div class="Container100">
+						    <p:outputLabel for="cxmp3" value="Value"/>
+						    <p:inputText id="cxmp3"  value="" styleClass="FontBold Fs18 hardblue"/>
+					    </div>
+				    </div>
+			    </div>
+			                      
+			    <div class="Container20 Responsive50">
+				    <div class="ContainerIndent">
+					    <div class="Container100">
+						    <p:outputLabel for="cxmp4" value="Value"/>
+						    <p:inputText id="cxmp4"  value="" styleClass="FontBold Fs18 hardblue"/>
+					    </div>
+				    </div>
+			    </div>
+		   </div>
+			<div class="Container">
+			    <div class="Container20 Responsive50">
+				    <div class="ContainerIndent">
+						<div class="Container100">
+						    <p:selectOneRadio id="sor" layout="responsive" columns="3">
+						    	<f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+						    	<f:selectItem itemLabel="PS4" itemValue="PS+" />
+						    	<f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+				        	</p:selectOneRadio>
+					    </div>
+				    </div>
+			    </div>
+			    <div class="Container40 Responsive50">
+				    <div class="ContainerIndent">
+					    <div class="Container100">
+						    <p:outputLabel for="console" value="Basic:" />
+					        <p:selectOneMenu id="console" value="#{selectOneMenuView.console}">
+								<f:selectItem itemLabel="Select One" itemValue="" />
+								<f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+								<f:selectItem itemLabel="PS4" itemValue="PS4" />
+								<f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+					        </p:selectOneMenu>
+					    </div>
+				    </div>
+			    </div>
+			    <div class="Container20 Responsive50">
+				    <div class="ContainerIndent">
+					    <div class="Container100">
+						    <div class="ContainerIndent">
+		                     	<p:inputTextarea rows="1" placeholder="Textarea"/>
+		                     </div>
+					    </div>
+				    </div>
+			    </div>
+			                      
+			    <div class="Container20 Responsive50">
+				    <div class="ContainerIndent">
+					    <div class="Container100">
+						    <div class="ContainerIndent">
+                                <p:selectOneRadio layout="responsive" columns="3">
+                                    <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+                                    <f:selectItem itemLabel="PS4" itemValue="PS+" />
+                                    <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+                                </p:selectOneRadio>
+                            </div>
+					    </div>
+				    </div>
+			    </div>
+			<div class="EmptyBox20"></div>
+		   </div>
+			<div class="Container">
+			    <div class="Container20 Responsive50">
+				    <div class="ContainerIndent">
+						<div class="Container100">
+						    <div class="ContainerIndent">
+                                <p:inputSwitch />
+                            </div>
+					    </div>
+				    </div>
+			    </div>
+			    <div class="Container40 Responsive50">
+				    <div class="ContainerIndent">
+					    <div class="Container100">
+					    	<div class="ContainerIndent">
+                                <p:spinner />
+                            </div>
+					    </div>
+				    </div>
+			    </div>
+			    <div class="Container20 Responsive50">
+				    <div class="ContainerIndent">
+					    <div class="Container100">
+					    	<h:panelGrid columns="2" cellpadding="5">
+                                    <h:outputText value="Basic:" />
+                                    <p:rating />
+
+                                    <h:outputText value="Callback:" />
+                                    <p:rating stars="5" cancel="false" onRate="alert('You rated ' + value)" />
+
+                                    <h:outputText value="Disabled"/>
+                                    <p:rating disabled="true" />
+                                </h:panelGrid>
+					    </div>
+				    </div>
+			    </div>
+			                      
+			    <div class="Container20 Responsive50">
+				    <div class="ContainerIndent">
+					    <div class="Container100">
+						    <div class="ContainerIndent">
+						    	<p:panelGrid columns="1" style="margin-bottom: 10px" layout="grid" styleClass="ui-panelgrid-blank">
+                                    <p:inputText id="slider" />
+                                    <p:slider for="slider"/>
+                                </p:panelGrid>
+                            </div>
+					    </div>
+				    </div>
+			    </div>
+				<div class="EmptyBox20"></div>
+			   </div>
+			<div class="Container">
+				    <div class="Container20 Responsive50">
+					    <div class="ContainerIndent">
+							<div class="Container100">
+							    <div class="ContainerIndent">
+							    	<p:outputLabel for="datetime" value="Datetime:" />
+	                                <p:calendar id="datetime" pattern="MM/dd/yyyy HH:mm:ss" />
+	                            </div>
+						    </div>
+					    </div>
+				    </div>
+				    <div class="Container40 Responsive50">
+					    <div class="ContainerIndent">
+						    <div class="Container100">
+						    	<div class="ContainerIndent">
+						    		<p:outputLabel for="time" value="Time:" />
+	                                <p:calendar id="time" pattern="HH:mm a" timeOnly="true"  />
+	                            </div>
+						    </div>
+					    </div>
+				    </div>
+				    <div class="Container20 Responsive50">
+					    <div class="ContainerIndent">
+						    <div class="Container100">
+						    </div>
+					    </div>
+				    </div>
+				                      
+				    <div class="Container20 Responsive50">
+					    <div class="ContainerIndent">
+						    <div class="Container100">
+							    <div class="ContainerIndent">
+							    	
+	                            </div>
+						    </div>
+					    </div>
+				    </div>
+				<div class="EmptyBox20"></div>
+			   </div>
+			<div class="Container">
+			    <div class="Container20 Responsive50">
+				    <div class="ContainerIndent">
+						<div class="Container100">
+						    <div class="ContainerIndent">
+                                <p:selectBooleanButton onLabel="Yes" offLabel="No"/>
+                            </div>
+					    </div>
+				    </div>
+			    </div>
+			    <div class="Container40 Responsive50">
+				    <div class="ContainerIndent">
+					    <div class="Container100">
+					    	<div class="ContainerIndent">
+					    		<p:button value="Default Theme Button"/>
+                            </div>
+					    </div>
+				    </div>
+			    </div>
+			    <div class="Container20 Responsive50">
+				    <div class="ContainerIndent">
+					    <div class="Container100">
+					    </div>
+				    </div>
+			    </div>
+			                      
+			    <div class="Container20 Responsive50">
+				    <div class="ContainerIndent">
+					    <div class="Container100">
+						    <div class="ContainerIndent">
+						    	
+                            </div>
+					    </div>
+				    </div>
+			    </div>
+			<div class="EmptyBox20"></div>
+		   </div>
+        </p:fieldset>
+    </p:panel>
+</div>
+</ui:define>
+</ui:composition>

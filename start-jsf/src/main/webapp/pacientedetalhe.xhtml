@@ -1,0 +1,68 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:p="http://primefaces.org/ui"
+   xmlns:o="http://omnifaces.org/ui"
+   template="/WEB-INF/template.xhtml">
+   <ui:define name="content">
+      <div class="ContainerIndent ui-fluid">
+         <h:form>
+            <p:fieldset legend="Prontuário">
+               <div class="ContainerIndent">
+                  <p:messages id="msg" closable="true"/>
+               </div>
+               <div class="Container">
+                        <p:panelGrid columns="2" layout="grid">
+                            <h:outputText value="Paciente:" />
+                            <h:outputText value="#{pacienteConMB.paciente.nome}" />
+
+                            <h:outputText value="Data:" />
+                            <h:outputText value="#{pacienteConMB.paciente.nascimento}" />
+
+                        </p:panelGrid>
+               </div>
+               
+               <div class="EmptyBox20"></div>
+               
+	               		<div class="Container">
+	               		
+	               		
+	               		
+	               		
+		                   <p:repeat value="#{pacienteConMB.prontuarios}" var="prontuario">
+		                   
+		                   
+		                   
+					           
+					     <p:accordionPanel onTabChange="false" onTabShow="false" expanded="true" multiple="false">
+                            <p:tab  closable="false" title="Prontuário">
+                                <h:panelGrid  columns="2" cellpadding="2">
+                                    <h:outputText value="Anamnese" />
+					                    <h:outputText value="#{prontuario.anamnese}" style="font-weight: bold"/>
+					                    
+					                    <h:outputText value="Diagnóstico" />
+					                    <h:outputText value="#{prontuario.diagnostico}" style="font-weight: bold"/>
+					                    
+					                    <h:outputText value="Procedimento realizado" />
+					                    <h:outputText value="#{prontuario.procedimentoRealizado}" style="font-weight: bold"/>
+                                </h:panelGrid>
+                            </p:tab>
+                        </p:accordionPanel>
+					            
+					           
+					         
+					        <hr />
+					   		 </p:repeat>
+					 
+			            </div>   
+			            
+	                          
+              
+               
+               <div class="EmptyBox20"></div>
+            </p:fieldset>
+         </h:form>
+      </div>
+   </ui:define>
+</ui:composition>

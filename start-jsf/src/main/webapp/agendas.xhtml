@@ -1,0 +1,94 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+    
+    <ui:define name="content">
+        <div class="ContainerIndent">
+            <p:panel style="margin-top: 60px">
+                <div class="ContainerIndent">
+                    
+                    <h:form id="formpesquisa">
+	                    <p:toolbar style="margin-top: 20px">
+			    			<p:toolbarGroup>
+			    				<p:button value="Nova agenda" outcome="agenda"/>
+			    			</p:toolbarGroup>
+			    			
+			    			<p:toolbarGroup align="right">
+			    			<p:inputText title="Entre com nome" value="#{agendaConMB.pesquisa}" size="40"></p:inputText>
+							<p:commandButton value="Pesquisar" action="#{agendaConMB.recuperaAgendasSelecionada}" update="formpesquisa,form"/>
+							</p:toolbarGroup>
+							
+			    		</p:toolbar>
+		    		</h:form>
+		    		
+                    <h:form id="form">
+                    
+                    
+  					                  
+	                    <p:dataTable id="agenda" var="agenda" value="#{agendaConMB.agendas}"
+	                                     rows="10" paginator="true" paginatorTemplate="{CurrentPageReport}  
+	                                     {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                                     rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"  emptyMessage="Nenhuma agenda encontrada" 
+	                                     paginatorAlwaysVisible="true" reflow="true">
+								
+								<p:column headerText="Nome" sortBy="#{agenda.nome}">
+									<h:outputText value="#{agenda.nome}" />
+								</p:column>
+								<p:column headerText="Telefone" sortBy="#{agenda.telefone}">
+									<h:outputText value="#{agenda.telefone}" />
+								</p:column>
+						        
+						        <p:column headerText="Celular" sortBy="#{agenda.celular}">
+									<h:outputText value="#{agenda.celular}" />
+								</p:column>
+						        
+						        <p:column headerText="Email" sortBy="#{agenda.email}">
+									<h:outputText value="#{agenda.email}" />
+								</p:column>
+						        
+						        <p:column headerText="Site" sortBy="#{agenda.site}">
+									<h:outputText value="#{agenda.site}" />
+								</p:column>
+								
+								<p:column style="width: 50px"> 
+									<p:button outcome="agenda" icon="ui-icon-pencil" title="Editar">
+			    						 <f:param name="id" value="#{agenda.id}"/>
+			    					</p:button>
+		    					</p:column>
+								
+								<p:column style="width: 50px">              
+		                            <p:commandButton title="Excluir" onclick="PF('removeragenda').show()" icon="ui-icon-trash" process="@this">
+		                                    <f:setPropertyActionListener  value="#{agenda}" target="#{agendaConMB.agenda}"/>
+		                            </p:commandButton>
+		                    	</p:column>
+		                    	
+		                    	
+		                    
+
+	                     </p:dataTable>
+	                     
+	                     <p:dialog header="Deseja excluir agenda" 
+	                      widgetVar="removeragenda" width="350" height="100">
+                    
+                        <div class="col-70">
+                            <p:outputLabel value="#{agendaConMB.agenda.nome}"/><hr/>
+                         </div>
+                                                                        
+                         <p:button value="Não" onclick="PF('removeragenda').hide(); return false;" />
+                         <p:commandButton value="Sim" action="#{agendaConMB.remove}" update="form,agenda"  onclick="PF('removerproduto').hide()"/>
+                                                            
+               			 </p:dialog>
+                   
+                    
+                    </h:form>
+                    
+                    
+                </div>
+            </p:panel>
+        </div>
+    </ui:define>
+</ui:composition>

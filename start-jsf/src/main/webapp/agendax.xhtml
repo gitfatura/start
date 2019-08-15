@@ -1,0 +1,84 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+	
+    <ui:define name="content">
+           
+        <h:form id="form">
+           
+            <div class="ContainerIndent ui-fluid">
+            
+                <p:panel>
+  					<p:toolbar style="margin-top: 1px">
+	    				<p:toolbarGroup>
+	    				<p:commandButton value="Salvar" id="botaoSalvar" action="#{agendaManMB.grava}" update="form"/>
+	    				</p:toolbarGroup>
+	    				<p:toolbarGroup align="right">
+						<p:button value="Pesquisa" outcome="agendas"/>
+						</p:toolbarGroup>
+	    			</p:toolbar>
+  
+                    <div class="ContainerIndent">
+                        <span class="FontBold Fs18 hardblue">Agenda</span>
+                    	<p:messages id="msg" closable="true"/>
+					</div>
+  
+                    <div class="Container">
+                    
+                        <div class="Container60 Responsive40">
+                            <div class="ContainerIndent">
+                                <div class="Container100">
+                                    <p:outputLabel for="nome" value="Nome"/>
+                                    <p:inputText value="#{agendaManMB.agenda.nome}" styleClass="FontBold Fs18 hardblue" id="nome" required="true" requiredMessage="Nome obrigatorio"/>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="EmptyBox20"></div>
+                        <div class="Container20 Responsive50">
+                            <div class="ContainerIndent">
+                                <div class="Container100">
+                                    <p:outputLabel for="telefone" value="Telefone"/>
+                                    <p:inputMask mask="(99) 99999-9999" value="#{agendaManMB.agenda.telefone}" styleClass="FontBold Fs18 hardblue" id="telefone"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="Container20 Responsive50">
+                            <div class="ContainerIndent">
+                                <div class="Container100">
+                                    <p:outputLabel for="celular" value="Celular"/>
+                                    <p:inputMask mask="(99) 99999-9999" value="#{agendaManMB.agenda.celular}" styleClass="FontBold Fs18 hardblue" id="celular"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="Container">
+                        <div class="Container40 Responsive50">
+                            <div class="ContainerIndent">
+                                <div class="Container100">
+                                    <p:outputLabel for="email" value="Email"/>
+                                    <p:inputText value="#{agendaManMB.agenda.email}" styleClass="FontBold Fs18 hardblue" id="email"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="Container60 Responsive50">
+                            <div class="ContainerIndent">
+                                <div class="Container100">
+                                    <p:outputLabel for="endereco" value="Site"/>
+                                    <p:inputText value="#{agendaManMB.agenda.site}" styleClass="FontBold Fs18 hardblue" id="endereco"/>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                       <div class="EmptyBox20"></div>
+                      
+                  </p:panel>
+            </div>
+        </h:form>
+    
+    </ui:define>
+</ui:composition>

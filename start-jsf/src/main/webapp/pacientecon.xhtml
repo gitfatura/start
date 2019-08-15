@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+    
+    <ui:define name="content">
+        <div class="ContainerIndent">
+            <p:panel>
+                <div class="ContainerIndent">
+                    
+                    <h:form id="form">
+                    <div class="ContainerIndent">
+                    	<p:messages id="msg"/>
+					</div> 
+	                    <p:dataTable id="paciente" var="paciente"  value="#{pacienteConMB.pacientes}"
+	                                     rows="5" paginator="true" paginatorTemplate="{CurrentPageReport}  
+	                                     {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                                     rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"  emptyMessage="Nenhum paciente encontrado">
+								
+								<p:column headerText="Iniciar" style="width: 40px">
+									<p:button outcome="pacientedetalhe" icon="ui-icon-pencil white">
+									    <f:param name="id" value="#{paciente.id}"/>
+									</p:button>
+								</p:column> 
+								
+								<p:column headerText="Paciente" sortBy="#{paciente.nome}">
+									<h:outputText value="#{paciente.nome}" />
+								</p:column>
+								
+								<p:column headerText="Data" sortBy="#{paciente.nascimento}">
+									<h:outputText value="#{paciente.nascimento}">
+										<f:convertDateTime/>
+									</h:outputText>
+								</p:column>
+								
+		    					
+	                     </p:dataTable>
+	                     
+                    </h:form>
+                    
+                    
+                </div>
+            </p:panel>
+        </div>
+    </ui:define>
+</ui:composition>

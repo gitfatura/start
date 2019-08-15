@@ -1,0 +1,91 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	template="/WEB-INF/templates/Layout.xhtml">
+
+    <ui:define name="content">
+        <h:form id="frmproduto">
+
+            <p:panel id="toggleable" header="Cadastro de Produtos" toggleable="false" closable="false" toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-top: 60px;margin-bottom:40px">
+
+                <p:messages id="msg" closable="true" />
+
+                <div class="ui-g">
+
+                    <div class="ui-g-12 ui-md-6 ui-lg-2">
+                        <p:outputLabel for="codigo" value="Código do produto" />
+                        <p:inputText id="codigo" value="" required="true" requiredMessage="Codigo  obrigatorio" />
+                    </div>
+                    
+                    <div class="ui-g-12 ui-md-6 ui-lg-5">
+                        <p:outputLabel for="codigob" value="Código de barras" />
+                        <p:inputText id="codigob" value="" required="true" requiredMessage="Codigo Barra obrigatorio" />
+                    </div>
+                    
+                    <div class="ui-g-12 ui-md-6 ui-lg-5">
+                        <p:outputLabel for="descricao" value="Descricao" />
+                        <p:inputText id="descricao" maxlength="255" value="" required="true" requiredMessage="Descriçao  obrigatorio" />
+                    </div>
+                    
+                      <div class="ui-g-12 ui-md-6 ui-lg-3">
+                        <p:outputLabel for="fornuni" value="Unidade de medida de estoque" />
+                        <p:selectOneMenu id="fornuni" value="" required="true" requiredMessage="Unidade obrigatoria" style="width:100%">
+                            <f:selectItem itemValue="null" itemLabel="Selecione" />
+                            <f:selectItems value="" var="unidade" itemValue="" itemLabel=""  />
+                        </p:selectOneMenu>
+                    </div>
+                      
+                      
+
+
+                    <div class="ui-g-12 ui-md-6 ui-lg-3">
+                        <p:outputLabel for="quantidade" value="Estoque" />
+                        <p:inputText id="quantidade" value="" required="true" requiredMessage="Quantidade  obrigatorio" />
+                    </div>
+ 
+                    <div class="ui-g-12 ui-md-6 ui-lg-3">
+                        <p:outputLabel for="qtdMinima" value="Estoque Minimo" />
+                        <p:inputText id="qtdMinima" value="" required="true" requiredMessage="Quantidade minima  obrigatorio" />
+                    </div>
+                    
+                    <div class="ui-g-12 ui-md-6 ui-lg-3">
+                        <p:outputLabel for="qtdMaxima" value="Estoque Maximo" />
+                        <p:inputText id="qtdMaxima" value="" required="true" requiredMessage="Quantidade maxima  obrigatorio" />
+                    </div>
+                    
+                    <div class="ui-g-12 ui-md-6 ui-lg-3">
+                        <p:outputLabel for="pcompra" value="Preço compra" />
+                        <p:inputText id="pcompra" value=""  required="true" requiredMessage="Preço de compra  obrigatorio" />
+                    </div>
+                    
+                    <div class="ui-g-12 ui-md-6 ui-lg-3">
+                        <p:outputLabel for="pvenda" value="Preço venda" />
+                        <h:outputText id="per"></h:outputText>
+                        <p:inputText id="pvenda" value=""  required="true" requiredMessage="Preço de venda obrigatorio" />
+                    
+                    </div>
+                    
+                     <div class="ui-g-12 ui-md-6 ui-lg-3">
+                        <p:outputLabel for="pdata" value="Data" />
+                        <p:calendar id="pdata" value="" pattern="dd/MM/yyyy" locale="pt" required="true" requiredMessage="Data obrigatorio" />
+                    </div>
+                    
+                    
+                                        
+                    
+                </div>
+                
+                <div class="ui-g">
+                <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <p:commandButton value="Registrar"/>
+                    </div>
+                
+                </div>
+
+                
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>

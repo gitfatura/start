@@ -1,0 +1,57 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+    
+    <ui:define name="content">
+        <div class="ContainerIndent">
+            <p:panel>
+                <div class="ContainerIndent">
+                    
+                    <h:form id="formpesquisa">
+	                    <p:toolbar style="margin-top: 20px">
+			    			<p:toolbarGroup>
+			    				<p:button value="Novo convênio" outcome="convenioman"/>
+			    			</p:toolbarGroup>
+			    			
+			    			<p:toolbarGroup align="right">
+			    			<p:inputText title="Entre com a nome do convênio" value="#{convenioConMB.pesquisa}" size="40"></p:inputText>
+							<p:commandButton value="Pesquisar" action="#{convenioConMB.selected}" update="formpesquisa,form"/>
+							</p:toolbarGroup>
+							
+			    		</p:toolbar>
+		    		</h:form>
+		    		
+                    <h:form id="form">
+                    <div class="ContainerIndent">
+                    	<p:messages id="msg"/>
+					</div> 
+	                    <p:dataTable id="convenio" var="convenio" value="#{convenioConMB.convenios}" lazy="true"
+	                                     rows="10" paginator="true" paginatorTemplate="{CurrentPageReport}  
+	                                     {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                                     rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"  emptyMessage="Nenhum convenio encontrado">
+								
+								
+								<p:column headerText="Convênio" sortBy="#{convenio.nomeConvenio}">
+									<h:outputText value="#{convenio.nomeConvenio}" />
+								</p:column>
+						       
+								<p:column style="width: 50px"> 
+									<p:button outcome="convenioman" icon="ui-icon-pencil" title="Editar">
+			    						 <f:param name="id" value="#{convenio.id}"/>
+			    					</p:button>
+		    					</p:column>
+
+	                     </p:dataTable>
+	                     
+                    </h:form>
+                    
+                    
+                </div>
+            </p:panel>
+        </div>
+    </ui:define>
+</ui:composition>

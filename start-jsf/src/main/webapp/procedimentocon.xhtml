@@ -1,0 +1,81 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+    
+    <ui:define name="content">
+        <div class="ContainerIndent">
+            <p:panel>
+                <div class="ContainerIndent">
+                    
+                    <h:form id="formpesquisa">
+	                    <p:toolbar style="margin-top: 1px">
+			    			<p:toolbarGroup>
+			    				<p:button value="Novo procedimento" outcome="procedimentoman"/>
+			    			</p:toolbarGroup>
+			    			
+			    			<p:toolbarGroup align="right">
+			    			<p:inputText title="Entre com o tipo de procedimento" value="#{procedimentoConMB.pesquisa}" size="40"></p:inputText>
+							<p:commandButton value="Pesquisar" action="#{procedimentoConMB.selected}" update="formpesquisa,form"/>
+							</p:toolbarGroup>
+							
+			    		</p:toolbar>
+		    		</h:form>
+		    		
+                    <h:form id="form">
+                    <div class="ContainerIndent">
+                    	<p:messages id="msg"/>
+					</div> 
+	                    <p:dataTable id="procedimento" var="procedimento" value="#{procedimentoConMB.procedimentos}" multiViewState="true" lazy="true"
+	                                     rows="5" paginator="true" paginatorTemplate="{CurrentPageReport}  
+	                                     {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                                     rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"  emptyMessage="Nenhum procedimento encontrado" 
+	                                     paginatorAlwaysVisible="true" reflow="true">
+								
+								<p:column headerText="Id" width="80" sortBy="#{procedimento.id}">
+									<h:outputText value="#{procedimento.id}" />
+								</p:column>
+								
+								<p:column headerText="Procedimento" sortBy="#{procedimento.tipoProcedimento}">
+									<h:outputText value="#{procedimento.tipoProcedimento}"/>
+								</p:column>
+						       
+								<p:column style="width: 50px"> 
+									<p:button outcome="procedimentoman" icon="ui-icon-pencil" title="Editar">
+			    						 <f:param name="id" value="#{procedimento.id}"/>
+			    					</p:button>
+		    					</p:column>
+								
+								<p:column style="width: 50px">              
+		                            <p:commandButton title="Excluir" styleClass="RedButton" onclick="PF('removerprocedimento').show()" icon="ui-icon-trash" process="@this">
+		                                    <f:setPropertyActionListener  value="#{procedimento}" target="#{procedimentoConMB.procedimento}"/>
+		                            </p:commandButton>
+		                    	</p:column>
+		                    
+
+	                     </p:dataTable>
+	                     
+	                     <p:dialog header="Deseja excluir procedimento" resizable="false"
+	                      widgetVar="removerprocedimento" width="250" height="70">
+                    
+                         <div class="col-70">
+                            <p:outputLabel value="#{procedimentoConMB.procedimento.tipoProcedimento}"/><hr/>
+                         </div>
+                                                                        
+                         <p:button value="Não" onclick="PF('removerprocedimento').hide(); return false;" />
+                         <p:commandButton value="Sim" action="#{procedimentoConMB.remove}" update="form,procedimento"  onclick="PF('removerprocedimento').hide()"/>
+                                                            
+               			 </p:dialog>
+                   
+                    
+                    </h:form>
+                    
+                    
+                </div>
+            </p:panel>
+        </div>
+    </ui:define>
+</ui:composition>

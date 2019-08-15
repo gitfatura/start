@@ -1,0 +1,101 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+                
+    <ui:define name="content">
+        <div class="ContainerIndent">
+            <p:panel style="margin-top: 60px">
+                <div class="ContainerIndent">
+                    
+                    <h:form id="formpesquisa">
+	                    <p:toolbar style="margin-top: 20px">
+			    			<p:toolbarGroup>
+			    				<p:button value="Novo Lançamento" outcome="lancamento"/>
+			    			</p:toolbarGroup>
+			    			
+			    			<p:toolbarGroup align="right">
+			    			<p:inputText title="Entre com titulo" value="#{lancamentoConMB.pesquisa}" size="40"></p:inputText>
+							<p:commandButton value="Pesquisar" action="#{lancamentoConMB.recuperaLancamentoSelecionado}" update="formpesquisa,form"/>
+							</p:toolbarGroup>
+							
+			    		</p:toolbar>
+		    		</h:form>
+		    		
+                    <h:form id="form">
+                    
+                    
+  					                  
+	                    <p:dataTable id="lancamento" var="lancamento" value="#{lancamentoConMB.lancamentos}"
+	                                     rows="10" paginator="true" paginatorTemplate="{CurrentPageReport}  
+	                                     {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                                     rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"  emptyMessage="Nenhum lançamento encontrado" 
+	                                     paginatorAlwaysVisible="true" reflow="true">
+								
+								<p:column headerText="Titulo" sortBy="#{lancamento.titulo}">
+									<h:outputText value="#{lancamento.titulo}" />
+								</p:column>
+								
+								<p:column headerText="Valor previsto" sortBy="#{lancamento.valorPrevisto}">
+									<h:outputText value="#{lancamento.valorPrevisto}">
+									<f:convertNumber  type="currency" currencySymbol="R$"/>
+									</h:outputText>
+								</p:column>
+								
+								<p:column headerText="Valor realizado" sortBy="#{lancamento.valorRealizado}">
+									<h:outputText value="#{lancamento.valorRealizado}">
+									 <f:convertNumber  type="currency" currencySymbol="R$"/>	
+									</h:outputText>
+								</p:column>
+								
+								<p:column headerText="Descriçao" sortBy="#{lancamento.descricao}">
+									<h:outputText value="#{lancamento.descricao}" />
+								</p:column>
+								
+								<p:column headerText="Data" sortBy="#{lancamento.data}">
+									<h:outputText value="#{lancamento.data}">
+									<f:convertDateTime/>	
+									</h:outputText>
+								</p:column>
+						       
+								<p:column style="width: 50px"> 
+									<p:button outcome="lancamento" icon="ui-icon-pencil" title="Editar">
+			    						 <f:param name="id" value="#{lancamento.id}"/>
+			    					</p:button>
+		    					</p:column>
+								
+								<p:column style="width: 50px">              
+		                            <p:commandButton title="Excluir" onclick="PF('removerlancamento').show()" icon="ui-icon-trash" process="@this">
+		                                    <f:setPropertyActionListener  value="#{lancamento}" target="#{lancamentoConMB.lancamento}"/>
+		                            </p:commandButton>
+		                    	</p:column>
+		                    	
+		                    	
+		                    
+
+	                     </p:dataTable>
+	                     
+	                     <p:dialog header="Deseja excluir lançamanto" 
+	                      widgetVar="removeragenda" width="350" height="100">
+                    
+                        <div class="col-70">
+                            <p:outputLabel value="#{lancamentoConMB.lancamento.titulo}"/><hr/>
+                         </div>
+                                                                        
+                         <p:button value="Não" onclick="PF('removerlancamento').hide(); return false;" />
+                         <p:commandButton value="Sim" action="#{lancamentoConMB.remove}" update="form,lancamento"  onclick="PF('removerlancamento').hide()"/>
+                                                            
+               			 </p:dialog>
+                   
+                    
+                    </h:form>
+                    
+                    
+                </div>
+            </p:panel>
+        </div>
+    </ui:define>
+</ui:composition>
