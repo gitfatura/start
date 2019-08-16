@@ -1,0 +1,71 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+    template="/WEB-INF/template.xhtml">
+	<ui:define name="content">
+		<div class="ContainerIndent">
+			<p:fieldset legend="Clientes">
+				<p:panel>
+					<div class="ContainerIndent">
+						<h:form id="frmpesquisa">
+							<p:toolbar>
+								<p:toolbarGroup>
+									<p:button value="Novo Cliente" outcome="clienteman"/>
+								</p:toolbarGroup>
+								<p:toolbarGroup align="right">
+									<p:inputText title="Entre com nome" value="#{clienteConMB.pesquisa}" size="40"/>
+									<p:commandButton value="Pesquisar" action="#{clienteConMB.carregaClientes}" update="frmpesquisa,frm"/>
+								</p:toolbarGroup>
+							</p:toolbar>
+						</h:form>
+						<h:form id="frm">
+							<p:dataTable id="cliente" var="cliente" value="#{clienteConMB.clientes}"
+	                                     rows="5" paginator="true" paginatorTemplate="{CurrentPageReport}  
+	                                     {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                                     rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"  emptyMessage="Nenhum cliente encontrado" 
+	                                     paginatorAlwaysVisible="true" reflow="true">
+								<p:column headerText="Nome" sortBy="#{cliente.nome}">
+									<h:outputText value="#{cliente.nome}" />
+								</p:column>
+								<p:column headerText="Cpf" sortBy="#{cliente.cpf}">
+									<h:outputText value="#{cliente.cpf}" />
+								</p:column>
+								<p:column headerText="Telefone" sortBy="#{cliente.telefone}">
+									<h:outputText value="#{cliente.telefone}" />
+								</p:column>
+								<p:column headerText="Celular" sortBy="#{cliente.celular}">
+									<h:outputText value="#{cliente.celular}" />
+								</p:column>
+								<p:column headerText="Email" sortBy="#{cliente.email}">
+									<h:outputText value="#{cliente.email}" />
+								</p:column>
+								<p:column style="width: 50px">
+									<p:button outcome="clienteman" icon="ui-icon-pencil" title="Editar">
+										<f:param name="id" value="#{cliente.id}"/>
+									</p:button>
+								</p:column>
+								<p:column style="width: 50px">
+									<p:commandButton title="Excluir" oncomplete="PF('removercliente').show()" process="@this" update="frm" icon="ui-icon-trash">
+										<f:setPropertyActionListener   value="#{cliente}" target="#{clienteConMB.cliente}"/>
+									</p:commandButton>
+								</p:column>
+							</p:dataTable>
+							<p:dialog header="Deseja excluir cliente" id="removercliente" widgetVar="removercliente" width="350" height="100">
+								<div class="col-70">
+									<p:outputLabel id="idNome" value="#{clienteConMB.cliente.nome}"/>
+									<hr/>
+								</div>
+								<p:button value="Não" onclick="PF('removercliente').hide(); return false;" />
+								<p:commandButton value="Sim" action="#{clienteConMB.remove}" update="frm,cliente"  onclick="PF('removercliente').hide()"/>
+							</p:dialog>
+						</h:form>
+					</div>
+				</p:panel>
+			</p:fieldset>
+		</div>
+	</ui:define>
+</ui:composition>

@@ -14,16 +14,24 @@
         
         <div class="layout-menubarinner-box" id="searchArea">
             <i class="icon-search floatLeft gray"></i>
-            <input type="text" class="layout-menubar-search floatLeft Animated05" placeholder="Search Here"/>
+            <input type="text" class="layout-menubar-search floatLeft Animated05" placeholder="Search"/>
         </div>
         
         <h:form id="menuform" >
             <ps:menu id="sm_leftmenu">
                 <p:menuitem id="sm_dashboard" value="Dashboard" delay="true" global="false" icon="icon-home-outline" outcome="dashboard" containerStyleClass="layout-menubar-active"/>
                 
-                	<p:menuitem id="sm_cliente"  value="Cliente" icon="icon-plus" global="false" outcome="clienteman"/>
-                	<p:menuitem id="sm_consulta"  value="Servico" icon="icon-plus" global="false"/>
+                	<p:menuitem id="sm_cliente"  value="Cliente" icon="icon-user-2" global="false" outcome="clienteman"/>
+                	<p:menuitem id="sm_clientes"  value="Clientes" icon="icon-users-2" global="false" outcome="clientecon"/>
+                	
+                	<p:menuitem id="sm_carro"  value="Carro" icon="icon-th" global="false"/>
+                	<p:menuitem id="sm_carros"  value="Carro" icon="icon-cab" global="false"/>
+                	
+                	
+                	<p:menuitem id="sm_consulta"  value="Servico" icon="icon-cog-alt" global="false"/>
+                	
                 	<p:menuitem id="sm_consultas"  value="Ordem de serviço" icon="icon-list" global="false"/>
+                
                 
                		<p:menuitem id="sm_paciente"  value="Produto" icon=" icon-user" global="false"/>
                		<p:menuitem id="sm_pacientes"  value="Categoria" icon="icon-users" global="false"/>
