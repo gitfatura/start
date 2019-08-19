@@ -60,22 +60,26 @@ public class Pessoa extends AppBase implements Serializable {
 	@OneToMany(targetEntity = Veiculo.class, fetch = FetchType.LAZY, mappedBy = "pessoa")
 	private List<Veiculo> veiculos;
 
+	@OneToMany(targetEntity = OrdemServico.class, fetch = FetchType.LAZY, mappedBy = "pessoa")
+	private List<OrdemServico> ordemServicos;
+
 	public Pessoa() {
 	}
 
-	public Pessoa(Long id, String nome, String telefone, String celular, String email, String cpf, String cnpj,
-			String rg, Sexo sexo, TipoPessoa tipoPessoa, List<Veiculo> veiculos) {
+	public Pessoa(Long id, String nome, String cpf, String cnpj, String rg, Sexo sexo, String telefone, String celular,
+			String email, TipoPessoa tipoPessoa, List<Veiculo> veiculos, List<OrdemServico> ordemServicos) {
 		this.id = id;
 		this.nome = nome;
-		this.telefone = telefone;
-		this.celular = celular;
-		this.email = email;
 		this.cpf = cpf;
 		this.cnpj = cnpj;
 		this.rg = rg;
 		this.sexo = sexo;
+		this.telefone = telefone;
+		this.celular = celular;
+		this.email = email;
 		this.tipoPessoa = tipoPessoa;
 		this.veiculos = veiculos;
+		this.ordemServicos = ordemServicos;
 	}
 
 	@Override
@@ -165,6 +169,14 @@ public class Pessoa extends AppBase implements Serializable {
 
 	public void setSexo(Sexo sexo) {
 		this.sexo = sexo;
+	}
+
+	public List<OrdemServico> getOrdemServicos() {
+		return ordemServicos;
+	}
+
+	public void setOrdemServicos(List<OrdemServico> ordemServicos) {
+		this.ordemServicos = ordemServicos;
 	}
 
 	@Override

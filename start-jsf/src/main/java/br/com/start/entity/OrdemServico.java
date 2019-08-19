@@ -40,17 +40,23 @@ public class OrdemServico extends AppBase implements Serializable {
 	@OneToMany(targetEntity = Servico.class, fetch = FetchType.LAZY, mappedBy = "servico")
 	private List<Servico> servicos;
 
+	@ManyToOne(targetEntity = Pessoa.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "ORD_PESID")
+	private Pessoa pessoa;
+
 	@Column(name = "ORD_OBSERVACAO")
 	private String observacao;
 
 	public OrdemServico() {
 	}
 
-	public OrdemServico(Long id, Finalizado finalizado, Veiculo veiculo, List<Servico> servicos, String observacao) {
+	public OrdemServico(Long id, Finalizado finalizado, Veiculo veiculo, List<Servico> servicos, Pessoa pessoa,
+			String observacao) {
 		this.id = id;
 		this.finalizado = finalizado;
 		this.veiculo = veiculo;
 		this.servicos = servicos;
+		this.pessoa = pessoa;
 		this.observacao = observacao;
 	}
 
@@ -93,6 +99,14 @@ public class OrdemServico extends AppBase implements Serializable {
 
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
+	}
+
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 
 	@Override
