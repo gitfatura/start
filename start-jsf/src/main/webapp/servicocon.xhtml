@@ -1,0 +1,75 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+    template="/WEB-INF/template.xhtml">
+	<ui:define name="content">
+		<div class="ContainerIndent">
+			<p:fieldset legend="Serviços">
+				<p:panel>
+					<div class="ContainerIndent">
+						<h:form id="frmpesquisa">
+							<p:toolbar>
+								<p:toolbarGroup>
+									<p:button value="Novo Servico" outcome="servicoman"/>
+								</p:toolbarGroup>
+								<p:toolbarGroup align="right">
+									<p:inputText title="Entre com a descricão" placeholder="Entre com a descricão" value="#{servicoConMB.pesquisa}" size="40"/>
+									<p:commandButton value="Pesquisar" action="#{servicoConMB.recuperaServicos}" update="frmpesquisa,frm"/>
+								</p:toolbarGroup>
+							</p:toolbar>
+						</h:form>
+						<h:form id="frm">
+							<p:dataTable id="servico" var="servico" value="#{servicoConMB.servicos}"
+	                                     rows="5" paginator="true" paginatorTemplate="{CurrentPageReport}  
+	                                     {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                                     rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"  emptyMessage="Nenhum serviço encontrado" 
+	                                     paginatorAlwaysVisible="true" reflow="true">
+								
+								<p:column headerText="Código" sortBy="#{servico.codigo}">
+									<h:outputText value="#{servico.codigo}" />
+								</p:column>
+								
+								
+								<p:column headerText="Descrição" sortBy="#{servico.descricao}">
+									<h:outputText value="#{servico.descricao}" />
+								</p:column>
+								
+								
+								<p:column headerText="Valor" sortBy="#{servico.valor}">
+									<h:outputText value="#{servico.valor}">
+										 <f:convertNumber  type="currency" currencySymbol="R$"/>	
+									</h:outputText> 
+								</p:column>
+								
+								<p:column style="width: 50px">
+									<p:button outcome="servicoman" icon="ui-icon-pencil" title="Editar">
+										<f:param name="id" value="#{servico.id}"/>
+									</p:button>
+								</p:column>
+								
+								<p:column style="width: 50px">
+									<p:commandButton title="Excluir" oncomplete="PF('removerservico').show()" process="@this" update="frm" icon="ui-icon-trash">
+										<f:setPropertyActionListener   value="#{servico}" target="#{servicoConMB.servico}"/>
+									</p:commandButton>
+								</p:column>
+								
+							</p:dataTable>
+							<p:dialog header="Deseja excluir serviço" id="removerservico" widgetVar="removerservico" width="350" height="100">
+								<div class="col-70">
+									<p:outputLabel id="idNome" value="#{servicoConMB.servico.descricao}"/>
+									<hr/>
+								</div>
+								<p:button value="Não" onclick="PF('removerservico').hide(); return false;" />
+								<p:commandButton value="Sim" action="#{servicoConMB.remove}" update="frm,servico"  onclick="PF('removerservico').hide()"/>
+							</p:dialog>
+						</h:form>
+					</div>
+				</p:panel>
+			</p:fieldset>
+		</div>
+	</ui:define>
+</ui:composition>

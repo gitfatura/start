@@ -18,19 +18,15 @@ import org.apache.commons.lang3.StringUtils;
 
 import br.com.start.comum.DataUtil;
 import br.com.start.comum.FacesUtil;
-import br.com.start.entity.ClienteEntity;
-import br.com.start.entity.DespesaEntity;
-import br.com.start.facade.ClienteFacade;
-import br.com.start.facade.DespesaFacade;
 import br.com.start.facade.ICrudMB;
 
 
 @ViewScoped
 @Named
-public class DespesaManMB implements Serializable, ICrudMB {
+public class DespesaManMB implements Serializable {
 
 	private static final long serialVersionUID = 3819230534860340809L;
-
+	/**
 	@Inject
 	private DespesaFacade despesaFacade;
 
@@ -179,6 +175,6 @@ public class DespesaManMB implements Serializable, ICrudMB {
 		this.despesas = despesas;
 	}
 	
-	
+	*/
 
 }

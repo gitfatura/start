@@ -1,21 +1,9 @@
 package br.com.start.mb;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
-import javax.annotation.PostConstruct;
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
-
-import org.apache.commons.lang3.StringUtils;
-
-import br.com.start.comum.FacesUtil;
-import br.com.start.entity.LancamentoEntity;
-import br.com.start.facade.LancamentoFacade;
-import br.com.start.types.OpcaoLancamento;
-import br.com.start.types.TipoLancamento;
 
 @ViewScoped
 @Named
@@ -23,6 +11,7 @@ public class LancamentoManMB implements Serializable {
 
 	private static final long serialVersionUID = 3819230534860340809L;
 
+	/**
 	@Inject
 	private LancamentoFacade lancamentoFacade;
 
@@ -141,5 +130,5 @@ public class LancamentoManMB implements Serializable {
 	public void setOpcaoLancamentoSelecionado(String opcaoLancamentoSelecionado) {
 		this.opcaoLancamentoSelecionado = opcaoLancamentoSelecionado;
 	}
-
+*/
 }

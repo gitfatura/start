@@ -1,0 +1,79 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+    template="/WEB-INF/template.xhtml">
+	<ui:define name="content">
+		<div class="ContainerIndent">
+			<p:fieldset legend="Pessoas">
+				<p:panel>
+					<div class="ContainerIndent">
+						
+						<h:form id="frmpesquisa">
+							<p:toolbar>
+								<p:toolbarGroup>
+									<p:button value="Novo pessoa" outcome="pessoaman"/>
+									<p:selectOneMenu  style="margin-left: 10px" id="tipoPessoa" value="#{pessoaConMB.tipoPessoaStr}" styleClass="FontBold Fs18 hardblue">
+			    						<f:selectItem itemValue="" itemLabel="Selecione o tipo de pessoa" />
+			    						<f:selectItems value="#{pessoaConMB.tipoPessoas}"  var="tipo" itemValue="#{tipo}"  itemLabel="#{tipo.label}"/>
+			    					</p:selectOneMenu>
+								</p:toolbarGroup>
+								
+								<p:toolbarGroup align="right">
+									<p:inputText title="Entre com nome" value="#{pessoaConMB.pesquisa}" size="40"/>
+									<p:commandButton value="Pesquisar" action="#{pessoaConMB.carregaPessoas}" update="frmpesquisa,frm"/>
+								</p:toolbarGroup>
+							</p:toolbar>
+						</h:form>
+						
+						<h:form id="frm">
+							<p:dataTable id="pessoa" var="pessoa" value="#{pessoaConMB.pessoas}"
+	                                     rows="5" paginator="true" paginatorTemplate="{CurrentPageReport}  
+	                                     {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                                     rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"  emptyMessage="Nenhuma pessoa encontrada" 
+	                                     paginatorAlwaysVisible="true" reflow="true">
+	                                     
+								<p:column headerText="Nome" sortBy="#{pessoa.nome}">
+									<h:outputText value="#{pessoa.nome}" />
+								</p:column>
+								<p:column headerText="Cpf" sortBy="#{pessoa.cpf}">
+									<h:outputText value="#{pessoa.cpf}" />
+								</p:column>
+								<p:column headerText="Telefone" sortBy="#{pessoa.telefone}">
+									<h:outputText value="#{pessoa.telefone}" />
+								</p:column>
+								<p:column headerText="Celular" sortBy="#{pessoa.celular}">
+									<h:outputText value="#{pessoa.celular}" />
+								</p:column>
+								<p:column headerText="Email" sortBy="#{pessoa.email}">
+									<h:outputText value="#{pessoa.email}" />
+								</p:column>
+								<p:column style="width: 50px">
+									<p:button outcome="pessoaman" icon="ui-icon-pencil" title="Editar">
+										<f:param name="id" value="#{pessoa.id}"/>
+									</p:button>
+								</p:column>
+								<p:column style="width: 50px">
+									<p:commandButton title="Excluir" oncomplete="PF('removerpessoa').show()" process="@this" update="frm" icon="ui-icon-trash">
+										<f:setPropertyActionListener   value="#{pessoa}" target="#{pessoaConMB.pessoa}"/>
+									</p:commandButton>
+								</p:column>
+							</p:dataTable>
+							<p:dialog header="Deseja excluir pessoa" id="removerpessoa" widgetVar="removerpessoa" width="350" height="100">
+								<div class="col-70">
+									<p:outputLabel id="idNome" value="#{pessoaConMB.pessoa.nome}"/>
+									<hr/>
+								</div>
+								<p:button value="Não" onclick="PF('removerpessoa').hide(); return false;" />
+								<p:commandButton value="Sim" action="#{pessoaConMB.remove}" update="frm,pessoa"  onclick="PF('removerpessoa').hide()"/>
+							</p:dialog>
+						</h:form>
+					</div>
+				</p:panel>
+			</p:fieldset>
+		</div>
+	</ui:define>
+</ui:composition>

@@ -9,25 +9,18 @@
 
 		<!-- Implementação do JPA, no nosso caso Hibernate -->
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<class>br.com.start.entity.AppBase</class>
+		<class>br.com.start.entity.Categoria</class>
+		<class>br.com.start.entity.OrdemServico</class>
+		<class>br.com.start.entity.Produto</class>
+		<class>br.com.start.entity.Servico</class>
+		<class>br.com.start.entity.Usuario</class>
+		<class>br.com.start.entity.Veiculo</class>
+		<class>br.com.start.entity.Avaria</class>
+		<class>br.com.start.entity.ContaPagarReceber</class>
+		<class>br.com.start.entity.Pessoa</class>
 
 		<!-- Aqui são listadas todas as entidades -->
-		<class>br.com.start.comum.AppBaseEntity</class>
-		<class>br.com.start.entity.AgendaContadoEntity</class>
-		<class>br.com.start.entity.LancamentoEntity</class>
-		<class>br.com.start.entity.ProdutoEntity</class>
-		<class>br.com.start.entity.CategoriaEntity</class>
-		<class>br.com.start.entity.EstoqueEntity</class>
-		<class>br.com.start.entity.AgendaxpEntity</class>
-		<class>br.com.start.entity.FiadoEntity</class>
-		<class>br.com.start.entity.ClienteEntity</class>
-		<class>br.com.start.entity.DespesaEntity</class>
-		<class>br.com.start.entity.UsuarioEntity</class>
-		<class>br.com.start.entity.CarroEntity</class>
-		<class>br.com.start.entity.OrcamentoEntity</class>
-		<class>br.com.start.entity.ServicoEntity</class>
-		<class>br.com.start.entity.OrdemServicoEntity</class>
-		<class>br.com.start.entity.ContaAPagarEntity</class>
-		<class>br.com.start.entity.FornecedorEntity</class>
 		
 		
 		<properties>

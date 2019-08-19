@@ -2,53 +2,51 @@ package br.com.start.bo;
 
 import java.io.Serializable;
 import java.util.List;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-
 import br.com.start.dao.PersistenceUtils;
 import br.com.start.dao.QueryUtils;
-import br.com.start.entity.ProdutoEntity;
+import br.com.start.entity.Produto;
 import br.com.start.facade.AppBO;
 
 @ApplicationScoped
-public class ProdutoBO implements Serializable, AppBO<ProdutoEntity> {
+public class ProdutoBO implements Serializable, AppBO<Produto> {
 
 	private static final long serialVersionUID = 3609128568971127754L;
 
 	@Inject
-	private PersistenceUtils<ProdutoEntity> dao;
+	private PersistenceUtils<Produto> dao;
 
 	@Inject
-	private QueryUtils<ProdutoEntity> query;
+	private QueryUtils<Produto> query;
 
 	@Override
-	public void save(ProdutoEntity produto) {
+	public void grava(Produto produto) {
 		dao.save(produto);
 	}
 
 	@Override
-	public void remove(ProdutoEntity produto) {
+	public void remove(Produto produto) {
 		dao.remove(produto);
 	}
 
 	@Override
-	public ProdutoEntity get(Long id) {
-		return query.get(ProdutoEntity.class, id);
+	public Produto get(Long id) {
+		return query.get(Produto.class, id);
 	}
 
 	@Override
-	public List<ProdutoEntity> all() {
-		return query.all(ProdutoEntity.class);
+	public List<Produto> all() {
+		return query.all(Produto.class);
 	}
 
 	@Override
-	public List<ProdutoEntity> selected(String value) {
-		return query.recuperaItem(ProdutoEntity.class, value, "nome");
+	public List<Produto> selected(String value) {
+		return query.recuperaItem(Produto.class, value, "nome");
 	}
 
-	public ProdutoEntity recuperaProduto(Long id) {
-		return query.get(ProdutoEntity.class, id);
+	public Produto recuperaProduto(Long id) {
+		return query.get(Produto.class, id);
 	}
 
 }

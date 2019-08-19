@@ -2,25 +2,16 @@ package br.com.start.mb;
 
 import java.io.Serializable;
 
-import javax.annotation.PostConstruct;
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
-
-import org.apache.commons.lang3.StringUtils;
-
-import br.com.start.comum.FacesUtil;
-import br.com.start.entity.AgendaContadoEntity;
-import br.com.start.facade.AgendaFacade;
-import br.com.start.facade.ICrudMB;
 
 @ViewScoped
 @Named
-public class AgendaManMB implements Serializable, ICrudMB {
+public class AgendaManMB implements Serializable {
 
 	private static final long serialVersionUID = 3819230534860340809L;
 
+	/**
 	@Inject
 	private AgendaFacade agendaFacade;
 
@@ -62,5 +53,5 @@ public class AgendaManMB implements Serializable, ICrudMB {
 	public void setAgenda(AgendaContadoEntity agenda) {
 		this.agenda = agenda;
 	}
-
+*/
 }

@@ -7,7 +7,10 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import br.com.start.entity.UsuarioEntity;
+import org.apache.commons.lang3.StringUtils;
+
+import br.com.start.entity.Pessoa;
+import br.com.start.types.TipoPessoa;
 
 public class QueryUtils<T> {
 
@@ -29,36 +32,36 @@ public class QueryUtils<T> {
 		return manager.createQuery("select p.id from " + classe.getName() + " p").getResultList();
 	}
 
-	public UsuarioEntity logar(UsuarioEntity usuario) {
-		UsuarioEntity usuarioEntity = null;
-		try {
-			usuarioEntity = (UsuarioEntity) manager
-					.createQuery("from UsuarioEntity p where p.login =:login and p.senha =:senha")
-					.setParameter("login", usuario.getLogin()).setParameter("senha", usuario.getSenha())
-					.getSingleResult();
-		} catch (Exception e) {
-			return null;
-		}
-		return usuarioEntity;
-	}
+//	public UsuarioEntity logar(UsuarioEntity usuario) {
+//		UsuarioEntity usuarioEntity = null;
+//		try {
+//			usuarioEntity = (UsuarioEntity) manager
+//					.createQuery("from UsuarioEntity p where p.login =:login and p.senha =:senha")
+//					.setParameter("login", usuario.getLogin()).setParameter("senha", usuario.getSenha())
+//					.getSingleResult();
+//		} catch (Exception e) {
+//			return null;
+//		}
+//		return usuarioEntity;
+//	}
 
-	public boolean validarUsuarioESenha(UsuarioEntity usuario) {
-		try {
-
-			UsuarioEntity usuarioAutenticado = new UsuarioEntity();
-			usuarioAutenticado = (UsuarioEntity) manager
-					.createQuery("select p from UsuarioEntity p where p.login =:login and p.senha =:senha")
-					.setParameter("login", usuario.getLogin()).setParameter("senha", usuario.getSenha())
-					.getSingleResult();
-			if (usuarioAutenticado == null) {
-				return false;
-			}
-		} catch (Exception e) {
-			return false;
-		}
-		return true;
-
-	}
+//	public boolean validarUsuarioESenha(UsuarioEntity usuario) {
+//		try {
+//
+//			UsuarioEntity usuarioAutenticado = new UsuarioEntity();
+//			usuarioAutenticado = (UsuarioEntity) manager
+//					.createQuery("select p from UsuarioEntity p where p.login =:login and p.senha =:senha")
+//					.setParameter("login", usuario.getLogin()).setParameter("senha", usuario.getSenha())
+//					.getSingleResult();
+//			if (usuarioAutenticado == null) {
+//				return false;
+//			}
+//		} catch (Exception e) {
+//			return false;
+//		}
+//		return true;
+//
+//	}
 
 	@SuppressWarnings("unchecked")
 	public List<T> recuperaItensOrdenado(Class<T> classe, String parametroOrdenado) {
@@ -80,6 +83,41 @@ public class QueryUtils<T> {
 				.append(") like :param");
 		return manager.createQuery(sql.toString()).setParameter("param", "%" + valorARecuperar.toUpperCase() + "%")
 				.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Pessoa> recuperaPessoa(String nome, TipoPessoa tipoPessoa) {
+		StringBuilder sql = new StringBuilder();
+		
+		sql.append("select p from Pessoa p ");
+		
+		if(StringUtils.isNotBlank(nome) || tipoPessoa !=null) {
+			sql.append(" where ");
+		}
+		
+		if (StringUtils.isNotBlank(nome)) {
+			sql.append(" upper (p.nome) like :nome");
+		}
+		
+		if (StringUtils.isBlank(nome) && tipoPessoa !=null) {
+			sql.append(" p.tipoPessoa = :tipoPessoa ");
+		}
+		
+		if (StringUtils.isNotBlank(nome) && tipoPessoa !=null) {
+			sql.append(" and p.tipoPessoa = :tipoPessoa ");
+		}
+		
+		Query query = manager.createQuery(sql.toString());
+		
+		if (StringUtils.isNotBlank(nome)) {
+			query.setParameter("nome", "%"+ nome.toUpperCase() +"%");
+		}
+		
+		if (tipoPessoa !=null) {
+			query.setParameter("tipoPessoa", tipoPessoa);
+		}
+		 
+		return (List<Pessoa>) query.getResultList();
 	}
 
 	@SuppressWarnings("unchecked")

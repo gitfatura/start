@@ -1,19 +1,9 @@
 package br.com.start.mb;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
-
-import org.apache.commons.lang3.StringUtils;
-
-import br.com.start.comum.FacesUtil;
-import br.com.start.entity.EstoqueEntity;
-import br.com.start.facade.EstoqueFacade;
 
 @ViewScoped
 @Named
@@ -21,6 +11,7 @@ public class EstoqueConMB implements Serializable {
 
 	private static final long serialVersionUID = 3819230534860340809L;
 
+	/**
 	@Inject
 	private EstoqueFacade estoqueFacade;
 
@@ -76,5 +67,5 @@ public class EstoqueConMB implements Serializable {
 	public void setEstoques(List<EstoqueEntity> estoques) {
 		this.estoques = estoques;
 	}
-
+*/
 }

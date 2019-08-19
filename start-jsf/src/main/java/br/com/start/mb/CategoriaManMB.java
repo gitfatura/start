@@ -2,25 +2,16 @@ package br.com.start.mb;
 
 import java.io.Serializable;
 
-import javax.annotation.PostConstruct;
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
-
-import org.apache.commons.lang3.StringUtils;
-
-import br.com.start.comum.FacesUtil;
-import br.com.start.entity.CategoriaEntity;
-import br.com.start.facade.CategoriaFacade;
-import br.com.start.facade.ICrudMB;
 
 @ViewScoped
 @Named
-public class CategoriaManMB implements Serializable, ICrudMB {
+public class CategoriaManMB implements Serializable {
 
 	private static final long serialVersionUID = 3819230534860340809L;
 
+	/**
 	@Inject
 	private CategoriaFacade categoriaFacade;
 
@@ -70,5 +61,5 @@ public class CategoriaManMB implements Serializable, ICrudMB {
 	public void setCategoria(CategoriaEntity categoria) {
 		this.categoria = categoria;
 	}
-
+*/
 }

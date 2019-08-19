@@ -20,30 +20,27 @@
         <h:form id="menuform" >
             <ps:menu id="sm_leftmenu">
                 <p:menuitem id="sm_dashboard" value="Dashboard" delay="true" global="false" icon="icon-home-outline" outcome="dashboard" containerStyleClass="layout-menubar-active"/>
-                
-                	<p:menuitem id="sm_cliente"  value="Cliente" icon="icon-user-2" global="false" outcome="clienteman"/>
-                	<p:menuitem id="sm_clientes"  value="Clientes" icon="icon-users-2" global="false" outcome="clientecon"/>
                 	
-                	<p:menuitem id="sm_carro"  value="Carro" icon="icon-th" global="false"/>
-                	<p:menuitem id="sm_carros"  value="Carro" icon="icon-cab" global="false"/>
+                	<p:submenu label="Pessoas" icon="icon-users">
+                		<p:menuitem id="sm_pessoa"  value="Cadastro de Pessoas" global="false" outcome="pessoaman"/>
+		                <p:menuitem id="sm_pessoas"  value="Lista de Pessoas" global="false" outcome="pessoacon"/>
+            		</p:submenu>
+            		
+                	<p:submenu label="Veiculos" icon=" icon-th">
+                		<p:menuitem id="sm_veiculo"  value="Cadastro de veiculos" global="false" outcome="carroman"/>
+                		<p:menuitem id="sm_veiculos"  value="Lista de veiculos" global="false"/>
+            		</p:submenu>
                 	
-                	
-                	<p:menuitem id="sm_consulta"  value="Servico" icon="icon-cog-alt" global="false"/>
-                	
-                	<p:menuitem id="sm_consultas"  value="Ordem de serviço" icon="icon-list" global="false"/>
-                
-                
-               		<p:menuitem id="sm_paciente"  value="Produto" icon=" icon-user" global="false"/>
-               		<p:menuitem id="sm_pacientes"  value="Categoria" icon="icon-users" global="false"/>
-                
-	
-					<p:menuitem id="sm_convenioitem"  value="Fornecedor" icon="icon-right-open" global="true"/>
-					<p:menuitem id="sm_conveniositem"  value="Despesas" icon="icon-eq" global="true"/>
-                
-               
+                	<p:submenu label="Servicos" icon="icon-cog-alt">
+                		<p:menuitem id="sm_servico"  value="Cadastro de serviço" global="false" outcome="servicoman"/>
+                		<p:menuitem id="sm_servicos"  value="Lista de serviços" global="false" outcome="servicocon"/>
+            		</p:submenu>
+            		
+            		<p:submenu label="Ordem de serviço" icon="icon-tags">
+                		<p:menuitem id="sm_os"  value="Ordem de serviço" global="false"/>
+            		</p:submenu>
+               	
             </ps:menu>
-            
         </h:form>
     </div>
-
 </ui:composition>

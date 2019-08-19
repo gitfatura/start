@@ -8,43 +8,43 @@ import javax.inject.Inject;
 
 import br.com.start.dao.PersistenceUtils;
 import br.com.start.dao.QueryUtils;
-import br.com.start.entity.CategoriaEntity;
+import br.com.start.entity.Categoria;
 import br.com.start.facade.AppBO;
 
 @ApplicationScoped
-public class CategoriaBO implements Serializable, AppBO<CategoriaEntity> {
+public class CategoriaBO implements Serializable, AppBO<Categoria> {
 
 	private static final long serialVersionUID = 3609128568971127754L;
 
 	@Inject
-	private QueryUtils<CategoriaEntity> query;
-		
+	private QueryUtils<Categoria> query;
+
 	@Inject
-	private PersistenceUtils<CategoriaEntity> dao;
+	private PersistenceUtils<Categoria> dao;
 
 	@Override
-	public void save(CategoriaEntity categoria) {
+	public void grava(Categoria categoria) {
 		dao.save(categoria);
 	}
 
 	@Override
-	public void remove(CategoriaEntity categoria) {
+	public void remove(Categoria categoria) {
 		dao.remove(categoria);
 	}
 
 	@Override
-	public List<CategoriaEntity> all() {
-		return query.all(CategoriaEntity.class);
+	public List<Categoria> all() {
+		return query.all(Categoria.class);
 	}
 
 	@Override
-	public List<CategoriaEntity> selected(String value) {
-		return query.recuperaItem(CategoriaEntity.class, value, "descricao");
+	public List<Categoria> selected(String value) {
+		return query.recuperaItem(Categoria.class, value, "descricao");
 	}
 
 	@Override
-	public CategoriaEntity get(Long id) {
-		return query.get(CategoriaEntity.class, id);
+	public Categoria get(Long id) {
+		return query.get(Categoria.class, id);
 	}
 
 }

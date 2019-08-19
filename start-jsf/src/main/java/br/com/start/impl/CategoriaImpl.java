@@ -5,9 +5,8 @@ import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-
 import br.com.start.bo.CategoriaBO;
-import br.com.start.entity.CategoriaEntity;
+import br.com.start.entity.Categoria;
 import br.com.start.facade.CategoriaFacade;
 import br.com.start.jpa.Transactional;
 
@@ -21,28 +20,28 @@ public class CategoriaImpl implements Serializable, CategoriaFacade {
 
 	@Transactional
 	@Override
-	public void save(CategoriaEntity categoria) {
-		categoriaBO.save(categoria);
+	public void grava(Categoria categoria) {
+		categoriaBO.grava(categoria);
 	}
 
 	@Transactional
 	@Override
-	public void remove(CategoriaEntity categoria) {
+	public void remove(Categoria categoria) {
 		categoriaBO.remove(categoria);
 	}
 
 	@Override
-	public List<CategoriaEntity> all() {
+	public List<Categoria> all() {
 		return categoriaBO.all();
 	}
 
 	@Override
-	public List<CategoriaEntity> selected(String value) {
+	public List<Categoria> selected(String value) {
 		return categoriaBO.selected(value);
 	}
 
 	@Override
-	public CategoriaEntity get(Long id) {
+	public Categoria get(Long id) {
 		return categoriaBO.get(id);
 	}
 

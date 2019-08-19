@@ -1,32 +1,17 @@
 package br.com.start.mb;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
-
-import org.apache.commons.lang3.StringUtils;
-
-import br.com.start.comum.FacesUtil;
-import br.com.start.entity.CategoriaEntity;
-import br.com.start.entity.EstoqueEntity;
-import br.com.start.entity.ProdutoEntity;
-import br.com.start.facade.CategoriaFacade;
-import br.com.start.facade.EstoqueFacade;
-import br.com.start.facade.ICrudMB;
-import br.com.start.facade.ProdutoFacade;
 
 @ViewScoped
 @Named
-public class ProdutoManMB implements Serializable, ICrudMB {
+public class ProdutoManMB implements Serializable {
 
 	private static final long serialVersionUID = 3819230534860340809L;
 
+	/**
 	@Inject
 	private ProdutoFacade produtoFacade;
 
@@ -144,7 +129,7 @@ public class ProdutoManMB implements Serializable, ICrudMB {
 		this.novaQuantidade = novaQuantidade;
 	}
 	
-	
+	*/
 
 
 }

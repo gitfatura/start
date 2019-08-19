@@ -3,14 +3,7 @@ package br.com.start.mb;
 import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpSession;
-
-import br.com.start.comum.FacesUtil;
-import br.com.start.comum.SessionUtil;
-import br.com.start.entity.UsuarioEntity;
-import br.com.start.facade.UsuarioFacade;
 
 @SessionScoped
 @Named
@@ -18,6 +11,7 @@ public class LoginMB implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	/**
 	@Inject
 	private UsuarioFacade usuarioFacade;
 	
@@ -51,7 +45,6 @@ public class LoginMB implements Serializable {
 		this.usuario = usuario;
 	}
 	
-	
-	
+	*/
 
 }

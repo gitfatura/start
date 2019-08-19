@@ -2,12 +2,10 @@ package br.com.start.impl;
 
 import java.io.Serializable;
 import java.util.List;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-
 import br.com.start.bo.ProdutoBO;
-import br.com.start.entity.ProdutoEntity;
+import br.com.start.entity.Produto;
 import br.com.start.facade.ProdutoFacade;
 import br.com.start.jpa.Transactional;
 
@@ -21,45 +19,43 @@ public class ProdutoImpl implements Serializable, ProdutoFacade {
 
 	@Transactional
 	@Override
-	public void save(ProdutoEntity produto) {
-		produtoBO.save(produto);
+	public void grava(Produto produto) {
+		produtoBO.grava(produto);
 	}
 
 	@Transactional
 	@Override
-	public void remove(ProdutoEntity produto) {
+	public void remove(Produto produto) {
 		produtoBO.remove(produto);
 	}
-	
+
 	@Transactional
 	@Override
-	public void entradaProduto(ProdutoEntity produto) {
-		produtoBO.entradaProduto(produto);
+	public void entradaProduto(Produto produto) {
 	}
-	
+
 	@Transactional
 	@Override
-	public void saidaProduto(ProdutoEntity produto) {
-		produtoBO.saidaProduto(produto);
+	public void saidaProduto(Produto produto) {
 	}
-	
+
 	@Override
-	public ProdutoEntity get(Long id) {
+	public Produto get(Long id) {
 		return produtoBO.get(id);
 	}
 
 	@Override
-	public List<ProdutoEntity> all() {
+	public List<Produto> all() {
 		return produtoBO.all();
 	}
 
 	@Override
-	public List<ProdutoEntity> selected(String value) {
+	public List<Produto> selected(String value) {
 		return produtoBO.selected(value);
 	}
 
 	@Override
-	public ProdutoEntity recuperaProduto(Long id) {
+	public Produto recuperaProduto(Long id) {
 		return produtoBO.recuperaProduto(id);
 	}
 

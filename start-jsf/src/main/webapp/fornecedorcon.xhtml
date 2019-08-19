@@ -1,0 +1,87 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+    template="/WEB-INF/template.xhtml">
+	<ui:define name="content">
+		<div class="ContainerIndent">
+			<p:fieldset legend="fornecedors">
+				<p:panel>
+					<div class="ContainerIndent">
+						<h:form id="frmpesquisa">
+							<p:toolbar>
+								<p:toolbarGroup>
+									<p:button value="Novo Fornecedor" outcome="fornecedorman"/>
+								</p:toolbarGroup>
+								<p:toolbarGroup align="right">
+									<p:inputText title="Entre com razão social" value="#{fornecedorConMB.pesquisa}" size="40"/>
+									<p:commandButton value="Pesquisar" action="#{fornecedorConMB.recuperaAgendasSelecionada}" update="frmpesquisa,frm"/>
+								</p:toolbarGroup>
+							</p:toolbar>
+						</h:form>
+						<h:form id="frm">
+							<p:dataTable id="fornecedor" var="fornecedor" value="#{fornecedorConMB.fornecedores}"
+	                                     rows="5" paginator="true" paginatorTemplate="{CurrentPageReport}  
+	                                     {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                                     rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"  emptyMessage="Nenhum fornecedor encontrado" 
+	                                     paginatorAlwaysVisible="true" reflow="true">
+								
+								<p:column headerText="Razão social" sortBy="#{fornecedor.razaoSocial}">
+									<h:outputText value="#{fornecedor.razaoSocial}" />
+								</p:column>
+								
+								<!-- <p:column headerText="Fantazia" sortBy="#{fornecedor.fantazia}">
+									<h:outputText value="#{fornecedor.fantazia}" />
+								</p:column> -->
+								
+								<p:column headerText="CNPJ" sortBy="#{fornecedor.cnpj}">
+									<h:outputText value="#{fornecedor.cnpj}" />
+								</p:column>
+								
+								
+								<p:column headerText="Telefone" sortBy="#{fornecedor.telefone}">
+									<h:outputText value="#{fornecedor.telefone}" />
+								</p:column>
+								
+								<p:column headerText="Celular" sortBy="#{fornecedor.celular}">
+									<h:outputText value="#{fornecedor.celular}" />
+								</p:column>
+								
+								<p:column headerText="Email" sortBy="#{fornecedor.email}">
+									<h:outputText value="#{fornecedor.email}" />
+								</p:column>
+								
+								<p:column headerText="Endereco" sortBy="#{fornecedor.endereco}">
+									<h:outputText value="#{fornecedor.endereco}" />
+								</p:column>
+								
+								<p:column style="width: 50px">
+									<p:button outcome="fornecedorman" icon="ui-icon-pencil" title="Editar">
+										<f:param name="id" value="#{fornecedor.id}"/>
+									</p:button>
+								</p:column>
+								
+								<p:column style="width: 50px">
+									<p:commandButton title="Excluir" oncomplete="PF('removerfornecedor').show()" process="@this" update="frm" icon="ui-icon-trash">
+										<f:setPropertyActionListener   value="#{fornecedor}" target="#{fornecedorConMB.fornecedor}"/>
+									</p:commandButton>
+								</p:column>
+							</p:dataTable>
+							<p:dialog header="Deseja excluir fornecedor" id="removerfornecedor" widgetVar="removerfornecedor" width="350" height="100">
+								<div class="col-70">
+									<p:outputLabel id="idNome" value="#{fornecedorConMB.fornecedor.razaoSocial}"/>
+									<hr/>
+								</div>
+								<p:button value="Não" onclick="PF('removerfornecedor').hide(); return false;" />
+								<p:commandButton value="Sim" action="#{fornecedorConMB.remove}" update="frm,fornecedor"  onclick="PF('removerfornecedor').hide()"/>
+							</p:dialog>
+						</h:form>
+					</div>
+				</p:panel>
+			</p:fieldset>
+		</div>
+	</ui:define>
+</ui:composition>
