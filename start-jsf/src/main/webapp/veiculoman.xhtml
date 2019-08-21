@@ -41,9 +41,11 @@
 							</div>
 						</div>
 						<div class="Container">
+							
 							<div class="Container50 Responsive50">
 	                            <div class="ContainerIndent">
 	                                <div class="Container100">
+	                                
 	                                <p:outputLabel for="cliente" value="Cliente"/>
 	                                 <p:selectOneMenu id="cliente" value="#{veiculoManMB.veiculo.pessoa}">
 			                            <f:selectItem itemLabel="Selecione um cliente" />
@@ -54,9 +56,10 @@
 	                        </div>
 	                        
 	                        <div class="Container20 Responsive50">
-								<div class="ContainerIndent">
-									<div class="Container100">
-										<p:commandButton value="Avarias" oncomplete="PF('addavaria').show()" update="frm,frmavaria" process="@this"/>
+	                            <div class="ContainerIndent">
+	                                <div class="Container100">
+	                                	<div class="EmptyBox20"></div>
+										<p:commandButton value="Avarias" oncomplete="PF('addavaria').show()" process="@this" update="frm,frmavaria"/>
 									</div>
 								</div>
 							</div>
@@ -77,11 +80,12 @@
 						
 					</p:panel>
 				</div>
+			
 			</h:form>
 			
 			<h:form id="frmavaria">
 			
-					<p:dialog header="Deseja excluir pessoa" id="addavaria" widgetVar="addavaria" width="500" height="150" modal="true">
+					<p:dialog header="Cadastro de avaria" id="addavaria" widgetVar="addavaria" width="500" height="150" modal="true">
 						
 							<div class="Container">
 							
@@ -89,7 +93,7 @@
 									<div class="ContainerIndent">
 										<div class="Container100">
 											<p:outputLabel for="descricao" value="Descrição"/>
-											<p:inputText  id="descricao" title="Descrição" value="#{veiculoManMB.avaria.descricao}" styleClass="FontBold Fs18 hardblue" required="true" requiredMessage="Marca obrigatória"/>
+											<p:inputText  id="descricao" title="Descrição" style="width: 100%" value="#{veiculoManMB.avaria.descricao}" styleClass="FontBold Fs18 hardblue" required="true" requiredMessage="Descrição obrigatória"/>
 										</div>
 									</div>
 								</div>
@@ -101,13 +105,42 @@
 								 <div class="Container50 Responsive50">
 									<div class="ContainerIndent">
 										<div class="Container100">
-											<p:commandButton title="Registrar" value="Registrar" update="frm,frmavaria" action="#{veiculoManMB.adicionaAvaria}" />
+											<p:commandButton title="Registrar" value="Registrar" update="frmavaria,avaria" action="#{veiculoManMB.adicionaAvaria}" />
 										</div>
 									</div>
 								</div>
 							</div>
 							
 						</p:dialog>
+						
+						<p:dataTable id="avaria" var="avaria" value="#{veiculoManMB.avarias}"
+	                                     rows="5" paginator="true" paginatorTemplate="{CurrentPageReport}  
+	                                     {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                                     rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"  emptyMessage="Nenhuma pessoa encontrada" 
+	                                     paginatorAlwaysVisible="true" reflow="true">
+	                                     
+								<p:column headerText="Avaria" sortBy="#{avaria.descricao}">
+									<h:outputText value="#{avaria.descricao}" />
+								</p:column>
+								
+								
+								<p:column style="width: 50px">
+									<p:commandButton title="Excluir" oncomplete="PF('remover').show()" process="@this" update="frmavaria" icon="ui-icon-trash">
+										<f:setPropertyActionListener   value="#{avaria}" target="#{veiculoManMB.avaria}"/>
+									</p:commandButton>
+								</p:column>
+								 
+							</p:dataTable>
+							
+							
+							<p:dialog header="Deseja excluir a avaria" id="remover" widgetVar="remover" width="350" height="100">
+								<div class="col-70">
+									<p:outputLabel id="idNome" value="#{veiculoManMB.avaria.descricao}"/>
+									<hr/>
+								</div>
+								<p:button value="Não" onclick="PF('remover').hide(); return false;" />
+								<p:commandButton value="Sim" action="#{veiculoManMB.removeAvaria}" update="frm,avaria,frmavaria"  onclick="PF('remover').hide()"/>
+							</p:dialog>
 						
 			</h:form>			
 			

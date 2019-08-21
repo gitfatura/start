@@ -10,7 +10,9 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.primefaces.util.CollectionUtils;
 
 import br.com.start.comum.FacesUtil;
 import br.com.start.entity.Avaria;
@@ -49,8 +51,7 @@ public class VeiculoManMB implements Serializable {
 	}
 
 	public void grava() {
-		veiculo.setAvarias(avarias);
-		veiculoFacade.grava(veiculo);
+		veiculoFacade.gravaVeiculo(veiculo, avarias);
 		novaInstancia();
 		FacesUtil.addInfoMessage("Registro gravado com sucesso!");
 	}
@@ -63,8 +64,24 @@ public class VeiculoManMB implements Serializable {
 		veiculo = new Veiculo();
 	}
 
+	public void removeAvaria() {
+		
+		avarias.remove(avaria);
+		for (int i = 0; i < avarias.size(); i++) {
+			boolean equals = avarias.get(i).getDescricao().equals(avaria.getDescricao());
+			if (equals) {
+				avarias.remove(i);
+			}
+		}
+		
+		System.out.println(avaria);
+	}
+	
 	public void adicionaAvaria() {
-		avarias.add(avaria);
+		if (avaria !=null) {
+			avarias.add(avaria);
+		}
+		
 		avaria = new Avaria();
 	}
 

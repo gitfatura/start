@@ -2,6 +2,7 @@ package br.com.start.facade;
 
 import java.util.List;
 
+import br.com.start.entity.Avaria;
 import br.com.start.entity.Veiculo;
 
 public interface VeiculoFacade {
@@ -10,4 +11,5 @@ public interface VeiculoFacade {
 	public void remove(Veiculo veiculo);
 	public List<Veiculo> selected(String value);
 	public Veiculo get(Long id);
+	public void gravaVeiculo(Veiculo veiculo, List<Avaria> avarias);
 }

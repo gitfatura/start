@@ -6,8 +6,10 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import br.com.start.as.VeiculoAS;
 import br.com.start.dao.PersistenceUtils;
 import br.com.start.dao.QueryUtils;
+import br.com.start.entity.Avaria;
 import br.com.start.entity.Veiculo;
 import br.com.start.facade.AppBO;
 
@@ -22,12 +24,19 @@ public class VeiculoBO implements Serializable, AppBO<Veiculo> {
 	@Inject
 	private PersistenceUtils<Veiculo> dao;
 	
+	@Inject
+	private VeiculoAS veiculoAS;
+	
 	
 	@Override
 	public void grava(Veiculo veiculo) {
 		dao.save(veiculo);
 	}
 
+	public void gravaVeiculo(Veiculo veiculo, List<Avaria> avarias) {
+		veiculoAS.gravaVeiculo(veiculo, avarias);
+	}
+	
 	@Override
 	public void remove(Veiculo veiculo) {
 		dao.remove(veiculo);
