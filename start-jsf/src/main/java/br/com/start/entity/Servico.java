@@ -2,6 +2,8 @@ package br.com.start.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -34,17 +37,19 @@ public class Servico extends AppBase implements Serializable {
 
 	@ManyToOne(targetEntity = OrdemServico.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "SER_ORDERSERVICOID")
-	private OrdemServico servico;
+
+	@OneToMany(targetEntity = OrdemServico.class, fetch = FetchType.LAZY, mappedBy = "servico")
+	private List<OrdemServico> servicos;
 
 	public Servico() {
 	}
 
-	public Servico(Long id, String codigo, String descricao, BigDecimal valor, OrdemServico servico) {
+	public Servico(Long id, String codigo, String descricao, BigDecimal valor, List<OrdemServico> servicos) {
 		this.id = id;
 		this.codigo = codigo;
 		this.descricao = descricao;
 		this.valor = valor;
-		this.servico = servico;
+		this.servicos = servicos;
 	}
 
 	@Override
@@ -78,6 +83,14 @@ public class Servico extends AppBase implements Serializable {
 
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
+	}
+
+	public List<OrdemServico> getServicos() {
+		return servicos;
+	}
+
+	public void setServicos(List<OrdemServico> servicos) {
+		this.servicos = servicos;
 	}
 
 	@Override

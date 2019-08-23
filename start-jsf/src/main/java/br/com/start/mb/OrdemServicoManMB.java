@@ -30,50 +30,51 @@ public class OrdemServicoManMB implements Serializable {
 
 	@Inject
 	private OrdemServicoFacade ordemServicoFacade;
+	
 	@Inject
 	private OrdemServico ordemServico;
-	
-	
+
 	@Inject
 	private VeiculoFacade veiculoFacade;
+	
 	@Inject
 	private Veiculo veiculo;
+	
 	private List<Veiculo> veiculos;
-	
-	
-	
+
 	@Inject
 	private ServicoFacade servicoFacade;
+
 	@Inject
 	private Servico servico;
 
-	
-	
+	private List<Servico> servicos;
+
 	@Inject
 	private PessoaFacade pessoaFacade;
+	
 	@Inject
 	private Pessoa pessoa;
+	
 	private List<Pessoa> pessoas;
 
-	
-	
-	
 	private String valorStr;
 
 	@PostConstruct
 	public void start() {
 		recuperaVeiculos();
 		recuperaPessoa();
+		carregaServicos();
 	}
 
 	public void grava() {
-		servicoFacade.grava(servico);
+		ordemServicoFacade.grava(ordemServico);
 		novaInstancia();
 		FacesUtil.addInfoMessage("Registro gravado com sucesso!");
 	}
 
 	public void novaInstancia() {
-		servico = new Servico();
+		ordemServico = new OrdemServico();
 		valorStr = null;
 	}
 
@@ -81,14 +82,17 @@ public class OrdemServicoManMB implements Serializable {
 		pessoas = pessoaFacade.all();
 	}
 	
+	private void carregaServicos(){
+		servicos = servicoFacade.all();
+	}
 	private void recuperaVeiculos() {
 		veiculos = veiculoFacade.all();
 	}
-	
+
 	public Finalizado[] getFinalizado() {
 		return Finalizado.values();
 	}
-	
+
 	private void recuperaServico() {
 		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
 		if (StringUtils.isNotEmpty(id) && StringUtils.isNotBlank(id)) {
@@ -152,6 +156,12 @@ public class OrdemServicoManMB implements Serializable {
 		this.valorStr = valorStr;
 	}
 
-	 
+	public List<Servico> getServicos() {
+		return servicos;
+	}
+
+	public void setServicos(List<Servico> servicos) {
+		this.servicos = servicos;
+	}
 
 }
