@@ -127,7 +127,7 @@ body{background-color: #F6F8F8; margin:0px;}
 						.layout-header-widgets-submenu li a{padding:10px; display:block; text-align:left; overflow:hidden;}
 	
 	/* MENU BAR */
-	#layout-menubar{float:left; padding-top:55px; background-color: #5569a7; position:relative; z-index: 998;}
+	#layout-menubar{float:left; padding-top:55px; background-color: #7a8299; position:relative; z-index: 998;}
 	.bigmenu{width:260px; border-right: solid 1px #272727;}
 		.layout-menubarinner-box{width:230px; display:table; padding:10px 15px; overflow: hidden;}
 			#layout-menubar-resize{display:inline-block; padding:5px; background-color:#2B2B2B; color:#FFD100; float:right;}

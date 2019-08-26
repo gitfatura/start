@@ -14,8 +14,42 @@
 						<div class="ContainerIndent">
 							<p:messages id="msg" autoUpdate="false" closable="true"/>
 						</div>
+						
 						<div class="Container">
 							
+							
+							<div class="Container100 Responsive50">
+								<div class="ContainerIndent">
+									<div class="Container100">
+									<div class="Container100 ui-fluid">
+						            <div class="ContainerIndent">
+						                <p:panel>
+						                    <div class="FontBold Fs18 hardblue" style="margin: 15px 10px">Selecione o(s) serviço(s)</div>
+						                    <div class="Separator"></div>
+						                    <p:pickList id="pickList" value="#{ordemServicoManMB.dservicos}" var="servico" itemLabel="#{servico}" itemValue="#{servico}"
+						                                showSourceControls="true" showTargetControls="true" showSourceFilter="true" showTargetFilter="true" responsive="true" style="max-width:800px;">
+						                        <f:facet name="sourceCaption">Serviços</f:facet>
+						                        <f:facet name="targetCaption">Serviços selecionados</f:facet>
+						                        <p:ajax event="transfer" listener="#{ordemServicoManMB.caculaServico}" update="frm,frm:valorServico"/>
+						                    </p:pickList>
+						                </p:panel>
+						            </div>
+						        </div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="Container40 Responsive50">
+								<div class="ContainerIndent">
+									<div class="Container100">
+										<p:outputLabel id="valorServico" value="#{ordemServicoManMB.valorServicos}">
+											<f:convertNumber pattern="#,##0.00"/>
+										</p:outputLabel>
+									</div>
+								</div>
+							</div>
+							
+							<!-- 
 							<div class="Container40 Responsive50">
 								<div class="ContainerIndent">
 									<div class="Container100">
@@ -52,8 +86,12 @@
 									</div>
 								</div>
 							</div>
+							 -->
+							
 						</div> 
-						<div class="Container">	
+						
+						
+						<!-- <div class="Container">	
 							<div class="Container40 Responsive50">
 								<div class="ContainerIndent">
 									<div class="Container100">
@@ -75,7 +113,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						
 				    			
 						<div class="EmptyBox20"></div>
@@ -83,7 +121,7 @@
 							<div class="Container20 Responsive50">
 								<div class="ContainerIndent">
 									<div class="Container100">
-										<p:commandButton title="Registrar" value="Registrar" id="botaoSalvar" update="frm,frm:panel,frm:pessoa" action="#{ordemServicoManMB.grava}" />
+										<p:commandButton title="Registrar" value="Registrar" id="botaoSalvar" update="frm" action="#{ordemServicoManMB.grava}" />
 									</div>
 								</div>
 							</div>
