@@ -1,7 +1,22 @@
 package br.com.start.types;
 
 public enum Role {
-	
-	ADMIN,USER;
-	
+
+	ADMIN("Administrador"), 
+	FUNCIONARIO("Funcionario");
+
+	private String label;
+
+	private Role(String label) {
+		this.label = label;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
 }

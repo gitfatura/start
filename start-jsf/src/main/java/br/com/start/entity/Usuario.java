@@ -1,14 +1,18 @@
 package br.com.start.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.com.start.types.Role;
@@ -33,15 +37,16 @@ public class Usuario extends AppBase implements Serializable {
 	@Column(name = "USU_ROLE", nullable = false, length = 255)
 	@Enumerated(EnumType.STRING)
 	private Role role;
-
-	 
-
+	
+	@OneToMany(targetEntity=Permissoes.class, fetch=FetchType.LAZY,cascade=CascadeType.ALL, mappedBy = "usuario")
+	private List<Permissoes> paginas;
+	
 	public boolean isAdmin() {
 		return Role.ADMIN.equals(role);
 	}
-
-	public boolean isUser() {
-		return Role.USER.equals(role);
+	
+	public boolean isFuncionario() {
+		return Role.FUNCIONARIO.equals(role);
 	}
 
 	public Long getId() {

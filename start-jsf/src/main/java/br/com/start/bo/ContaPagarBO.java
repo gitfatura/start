@@ -4,9 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+
+import br.com.start.backup.ContaPagarReceber;
 import br.com.start.dao.PersistenceUtils;
 import br.com.start.dao.QueryUtils;
-import br.com.start.entity.ContaPagarReceber;
 import br.com.start.facade.AppBO;
 
 @ApplicationScoped
