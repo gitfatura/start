@@ -3,8 +3,7 @@ package br.com.start.types;
 public enum TipoPessoa {
 
 	PESSOAFISICA("Pessoa fisica"),
-	PESSOAJURIDICA("Pessoa juridca"),
-	FUNCIONARIO("Funcionario");
+	PESSOAJURIDICA("Pessoa juridca");
 
 	private String label;
 

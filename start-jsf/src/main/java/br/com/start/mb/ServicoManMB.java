@@ -34,9 +34,16 @@ public class ServicoManMB implements Serializable {
 	}
 
 	public void grava() {
-		servicoFacade.grava(servico);
-		novaInstancia();
-		FacesUtil.addInfoMessage("Registro gravado com sucesso!");
+		try {
+			servicoFacade.grava(servico);
+			novaInstancia();
+			FacesUtil.addInfoMessage("Registro gravado com sucesso!");
+		} catch (Exception e) {
+			if(e.getCause().getMessage().contains("ConstraintViolationException:")) {
+				FacesUtil.addErrorMessageFatal("Código "+servico.getCodigo()+" já cadastrado");
+			}
+		}
+		
 	}
 
 	public void novaInstancia() {

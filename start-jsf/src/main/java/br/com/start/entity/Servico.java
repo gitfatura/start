@@ -26,7 +26,7 @@ public class Servico extends AppBase implements Serializable {
 	@Column(name = "SER_ID")
 	private Long id;
 
-	@Column(name = "SER_CODIGOD")
+	@Column(name = "SER_CODIGOD", unique=true)
 	private String codigo;
 
 	@Column(name = "SER_DESCRICAO", length = 100, nullable = false)

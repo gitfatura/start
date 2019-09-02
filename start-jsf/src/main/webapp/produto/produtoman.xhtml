@@ -7,42 +7,50 @@
 	xmlns:o="http://omnifaces.org/ui"
     template="/WEB-INF/template.xhtml">
 	<ui:define name="content">
-		<p:fieldset legend="Cadastro de serviços" style="margin-top: 10px">
+		<p:fieldset legend="Cadastro de produtos" style="margin-top: 10px">
 			<h:form id="frm">
 				<div class="ContainerIndent ui-fluid">
 					<p:panel>
 						<div class="ContainerIndent">
-							<p:messages id="msg" />
+							<p:messages id="msg" autoUpdate="true" closable="true" />
 						</div>
 						<div class="Container">
-							<div class="Container20 Responsive50">
+							<div class="Container40 Responsive50">
 								<div class="ContainerIndent">
 									<div class="Container100">
-										<p:outputLabel for="codigo" value="Código"/>
-										<p:inputText id="codigo" title="Código" value="#{servicoManMB.servico.codigo}" required="true" requiredMessage="Código é obrigatorio" styleClass="FontBold Fs18 hardblue"/>
+										<p:outputLabel for="nome" value="Nome"/>
+										<p:inputText id="nome" title="Nome" value="#{produtoManMB.produto.nome}" required="true" requiredMessage="Nome é obrigatório." styleClass="FontBold Fs18 hardblue"/>
 									</div>
 								</div>
 							</div>
 							
-							<div class="Container60 Responsive50">
+							<div class="Container40 Responsive50">
 								<div class="ContainerIndent">
 									<div class="Container100">
 										<p:outputLabel for="descricao" value="Descrição"/>
-										<p:inputText id="descricao" title="Descrição" value="#{servicoManMB.servico.descricao}" required="true" requiredMessage="Descrição é obrigatorio" styleClass="FontBold Fs18 hardblue"/>
+										<p:inputText id="descricao" title="Descrição" value="#{produtoManMB.produto.descricao}" styleClass="FontBold Fs18 hardblue"/>
 									</div>
 								</div>
 							</div>
+							
+							<div class="Container20 Responsive50">
+								<div class="ContainerIndent">
+									<div class="Container100">
+										<p:outputLabel for="qtd" value="Quantidade"/>
+										<p:inputNumber id="qtd" title="Quantidade" value="#{produtoManMB.produto.quantidade}" required="true" requiredMessage="Quantidade é obrigatório." styleClass="FontBold Fs18 hardblue"/>
+									</div>
+								</div>
+							</div>
+							</div>
+					<div class="Container">
 							
 							<div class="Container20 Responsive50">
 								<div class="ContainerIndent">
 									<div class="Container100">
 										<p:outputLabel for="valor" value="Valor"/>
-
-														
-										<p:inputText id="valor" title="Valor" value="#{servicoManMB.servico.valor}" required="true" requiredMessage="Descrição é obrigatorio" styleClass="FontBold Fs18 hardblue money">
+										<p:inputText id="valor" title="Valor" value="#{produtoManMB.produto.valor}" styleClass="FontBold Fs18 hardblue money">
 											<f:convertNumber pattern="#,##0.00"/>
 										</p:inputText>
-									
 									</div>
 								</div>
 							</div>
@@ -53,7 +61,7 @@
 							<div class="Container20 Responsive50">
 								<div class="ContainerIndent">
 									<div class="Container100">
-										<p:commandButton title="Registrar" value="Registrar" id="botaoSalvar" update="frm,frm:valor" action="#{servicoManMB.grava}" />
+										<p:commandButton title="Registrar" value="Registrar" id="botaoSalvar" update="frm,frm:valor" action="#{produtoManMB.grava}" />
 									</div>
 								</div>
 							</div>

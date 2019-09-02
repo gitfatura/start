@@ -1,9 +1,16 @@
 package br.com.start.mb;
 
 import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
+import org.apache.commons.lang3.StringUtils;
+import br.com.start.comum.FacesUtil;
+import br.com.start.entity.Produto;
+import br.com.start.facade.ProdutoFacade;
 
 @ViewScoped
 @Named
@@ -11,19 +18,16 @@ public class ProdutoConMB implements Serializable {
 
 	private static final long serialVersionUID = 3819230534860340809L;
 
-	/**
 	@Inject
 	private ProdutoFacade produtoFacade;
 
 	@Inject
-	private ProdutoEntity produto;
+	private Produto produto;
 
 	private String pesquisa;
-	
-	private BigDecimal valorTotal;
 
-	private List<ProdutoEntity> produtos;
-	
+	private List<Produto> produtos;
+
 	@PostConstruct
 	public void inicia() {
 		selected();
@@ -33,7 +37,7 @@ public class ProdutoConMB implements Serializable {
 		if (StringUtils.isNotEmpty(pesquisa)) {
 			produtos = new ArrayList<>();
 			produtos = produtoFacade.selected(pesquisa);
-			
+
 		} else {
 			produtos = produtoFacade.all();
 		}
@@ -54,31 +58,20 @@ public class ProdutoConMB implements Serializable {
 		this.pesquisa = pesquisa;
 	}
 
-	public ProdutoEntity getProduto() {
+	public Produto getProduto() {
 		return produto;
 	}
 
-	public void setProduto(ProdutoEntity produto) {
+	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
 
-	public List<ProdutoEntity> getProdutos() {
+	public List<Produto> getProdutos() {
 		return produtos;
 	}
 
-	public void setProdutos(List<ProdutoEntity> produtos) {
+	public void setProdutos(List<Produto> produtos) {
 		this.produtos = produtos;
 	}
-
-	public BigDecimal getValorTotal() {
-		return valorTotal;
-	}
-
-	public void setValorTotal(BigDecimal valorTotal) {
-		this.valorTotal = valorTotal;
-	}
-
-	*/
-	
 
 }

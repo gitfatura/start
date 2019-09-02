@@ -2,6 +2,7 @@ package br.com.start.facade;
 
 import java.util.List;
 import br.com.start.entity.Produto;
+import br.com.start.types.EntradaSaidaProduto;
 
 public interface ProdutoFacade {
 	public void grava(Produto produto);
@@ -10,6 +11,5 @@ public interface ProdutoFacade {
 	public List<Produto> selected(String value);
 	public Produto get(Long id);
 	public Produto recuperaProduto(Long id);
-	default void entradaProduto(Produto produto) {	}
-	default void saidaProduto(Produto produto) {	}
+	default void entradaSaidaProduto(Produto produto, EntradaSaidaProduto entradaSaidaProduto) {	}
 }

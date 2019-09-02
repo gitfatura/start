@@ -10,9 +10,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.primefaces.util.CollectionUtils;
 
 import br.com.start.comum.FacesUtil;
 import br.com.start.entity.Avaria;
@@ -51,9 +49,15 @@ public class VeiculoManMB implements Serializable {
 	}
 
 	public void grava() {
-		veiculoFacade.gravaVeiculo(veiculo, avarias);
-		novaInstancia();
-		FacesUtil.addInfoMessage("Registro gravado com sucesso!");
+		try {
+			veiculoFacade.gravaVeiculo(veiculo, avarias);
+			novaInstancia();
+			FacesUtil.addInfoMessage("Registro gravado com sucesso!");
+		} catch (Exception e) {
+			if(e.getCause().getMessage().contains("ConstraintViolationException:")) {
+				FacesUtil.addErrorMessageFatal("Placa "+veiculo.getPlaca()+" já existe.");
+			}
+		}
 	}
 
 	public void recuperaPessoa() {
@@ -65,8 +69,6 @@ public class VeiculoManMB implements Serializable {
 	}
 
 	public void removeAvaria() {
-		
-		avarias.remove(avaria);
 		for (int i = 0; i < avarias.size(); i++) {
 			boolean equals = avarias.get(i).getDescricao().equals(avaria.getDescricao());
 			if (equals) {

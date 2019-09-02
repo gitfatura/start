@@ -26,14 +26,14 @@ public class Produto extends AppBase implements Serializable {
 	@Column(name = "PRO_ID")
 	private Long id;
 
-	@Column(name = "PRO_VALOR")
-	private BigDecimal valor;
-
 	@Column(name = "PRO_NOME")
 	private String nome;
 
 	@Column(name = "PRO_DESCRICAO")
 	private String descricao;
+
+	@Column(name = "PRO_VALOR")
+	private BigDecimal valor;
 
 	@Column(name = "PRO_DATA")
 	private Date data = Calendar.getInstance().getTime();
