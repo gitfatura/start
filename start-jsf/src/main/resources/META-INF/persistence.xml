@@ -10,15 +10,12 @@
 		<!-- Implementação do JPA, no nosso caso Hibernate -->
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<class>br.com.start.entity.AppBase</class>
-		<class>br.com.start.entity.Categoria</class>
 		<class>br.com.start.entity.OrdemServico</class>
 		<class>br.com.start.entity.Produto</class>
 		<class>br.com.start.entity.Servico</class>
 		<class>br.com.start.entity.Usuario</class>
 		<class>br.com.start.entity.Veiculo</class>
-		<class>br.com.start.entity.Avaria</class>
 		<class>br.com.start.entity.Pessoa</class>
-		<class>br.com.start.entity.Permissoes</class>
 
 		<!-- Aqui são listadas todas as entidades -->
 		
@@ -33,7 +30,7 @@
 
 			<!-- Configurações específicas do Hibernate -->
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
-			<property name="hibernate.hbm2ddl.auto" value=""/>
+			<property name="hibernate.hbm2ddl.auto" value="create"/>
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
 		</properties>

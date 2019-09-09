@@ -10,8 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -34,9 +32,6 @@ public class Servico extends AppBase implements Serializable {
 
 	@Column(name = "SER_VALOR", nullable = true)
 	private BigDecimal valor;
-
-	@ManyToOne(targetEntity = OrdemServico.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "SER_ORDERSERVICOID")
 
 	@OneToMany(targetEntity = OrdemServico.class, fetch = FetchType.LAZY, mappedBy = "servico")
 	private List<OrdemServico> servicos;

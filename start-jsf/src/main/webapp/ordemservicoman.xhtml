@@ -1,0 +1,90 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+    template="/WEB-INF/template.xhtml">
+	<ui:define name="content">
+		<p:fieldset legend="Cadastro de OS" style="margin-top: 10px">
+			<h:form id="frm">
+				<div class="ContainerIndent ui-fluid">
+					<p:panel id="panel">
+						<div class="ContainerIndent">
+							<p:messages id="msg" autoUpdate="false" closable="true"/>
+						</div>
+						<div class="Container">
+							<div class="Container20 Responsive50">
+								<div class="ContainerIndent">
+									<div class="Container100">
+										<p:outputLabel for="placa" value="Placa"/>
+										<p:inputMask mask="aaa-9999" id="placa" title="Placa" required="true" requiredMessage="Placa é obrigatório." value="#{veiculoManMB.veiculo.placa}" styleClass="FontBold Fs15 hardblue"/>
+									</div>
+								</div>
+							</div>
+							<div class="Container60 Responsive50">
+								<div class="ContainerIndent">
+									<div class="Container100">
+										<p:outputLabel for="modelo" value="Veiculo"/>
+										<p:inputText readonly="true"  id="modelo" title="Modelo" value="#{veiculoManMB.veiculo.modelo}" required="true" requiredMessage="Modelo é obrigatório." styleClass="FontBold Fs15 hardblue"/>
+									</div>
+								</div>
+							</div>
+							<div class="Container20 Responsive50">
+								<div class="ContainerIndent">
+									<div class="Container100">
+										<p:outputLabel for="status" value="Status"/>
+										<p:selectOneMenu id="status" value="#{pessoaManMB.pessoa.sexo}" styleClass="FontBold Fs18 hardblue">
+											<f:selectItem itemValue="" itemLabel="Selecione" />
+											<f:selectItems value="#{pessoaManMB.sexos}"  var="sta" itemValue="#{sta}"  itemLabel="#{sta.label}"/>
+										</p:selectOneMenu>
+									</div>
+								</div>
+							</div>
+						</div>
+						<p:fieldset legend="Serviços" style="margin-top: 10px">
+							<div class="Container">
+								<div class="Container100 Responsive50">
+									<div class="ContainerIndent">
+										<div class="Container100">
+											<div class="Container100 ui-fluid">
+												<div class="ContainerIndent">
+													<div class="Separator"></div>
+													<p:pickList id="pickList" value="#{ordemServicoManMB.dservicos}" var="servico" itemLabel="#{servico}" itemValue="#{servico}"
+						                                showSourceControls="true" showTargetControls="true" showSourceFilter="true" showTargetFilter="true" responsive="true" style="max-width:900px;">
+														<f:facet name="sourceCaption">Serviços</f:facet>
+														<f:facet name="targetCaption">Serviços selecionados</f:facet>
+														<p:ajax event="transfer" listener="#{ordemServicoManMB.caculaServico}" update="frm, frm:valorServico"/>
+													</p:pickList>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="EmptyBox20"/>
+						</p:fieldset>
+						<div class="EmptyBox20"/>
+						<p:fieldset style="margin-top: 5px">
+							<p:outputLabel id="valorServico" value="Valor total: R$#{ordemServicoManMB.valorServicos}">
+								<f:convertNumber pattern="#,##0.00"/>
+							</p:outputLabel>
+						</p:fieldset>
+						<div class="EmptyBox20"></div>
+						<div class="Container">
+							<div class="Container20 Responsive50">
+								<div class="ContainerIndent">
+									<div class="Container100">
+										<p:commandButton title="Registrar" value="Registrar" id="botaoSalvar" update="frm" action="#{ordemServicoManMB.grava}" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="EmptyBox20"></div>
+					</p:panel>
+				</div>
+			</h:form>
+		</p:fieldset>
+	</ui:define>
+</ui:composition>

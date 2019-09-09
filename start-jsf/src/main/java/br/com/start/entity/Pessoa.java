@@ -14,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import br.com.start.types.Sexo;
 import br.com.start.types.TipoPessoa;
 
 @Entity
@@ -31,18 +30,11 @@ public class Pessoa extends AppBase implements Serializable {
 	@Column(name = "PES_NOME")
 	private String nome;
 
-	@Column(name = "PES_CPF", length = 14)
+	@Column(name = "PES_CPF", length = 14, unique=true)
 	private String cpf;
 
-	@Column(name = "PES_CNPJ", length = 20)
+	@Column(name = "PES_CNPJ", length = 20, unique=true)
 	private String cnpj;
-
-	@Column(name = "PES_RG", length = 20)
-	private String rg;
-
-	@Enumerated(EnumType.STRING)
-	@Column(name = "PES_SEXO")
-	private Sexo sexo;
 
 	@Column(name = "PES_TELEFONE", length = 20)
 	private String telefone;
@@ -66,14 +58,12 @@ public class Pessoa extends AppBase implements Serializable {
 	public Pessoa() {
 	}
 
-	public Pessoa(Long id, String nome, String cpf, String cnpj, String rg, Sexo sexo, String telefone, String celular,
-			String email, TipoPessoa tipoPessoa, List<Veiculo> veiculos, List<OrdemServico> ordemServicos) {
+	public Pessoa(Long id, String nome, String cpf, String cnpj, String telefone, String celular, String email,
+			TipoPessoa tipoPessoa, List<Veiculo> veiculos, List<OrdemServico> ordemServicos) {
 		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.cnpj = cnpj;
-		this.rg = rg;
-		this.sexo = sexo;
 		this.telefone = telefone;
 		this.celular = celular;
 		this.email = email;
@@ -139,14 +129,6 @@ public class Pessoa extends AppBase implements Serializable {
 		this.cnpj = cnpj;
 	}
 
-	public String getRg() {
-		return rg;
-	}
-
-	public void setRg(String rg) {
-		this.rg = rg;
-	}
-
 	public List<Veiculo> getVeiculos() {
 		return veiculos;
 	}
@@ -161,14 +143,6 @@ public class Pessoa extends AppBase implements Serializable {
 
 	public void setTipoPessoa(TipoPessoa tipoPessoa) {
 		this.tipoPessoa = tipoPessoa;
-	}
-
-	public Sexo getSexo() {
-		return sexo;
-	}
-
-	public void setSexo(Sexo sexo) {
-		this.sexo = sexo;
 	}
 
 	public List<OrdemServico> getOrdemServicos() {

@@ -12,4 +12,5 @@ public interface PessoaFacade {
 	public List<Pessoa> selected(String value);
 	public List<Pessoa> recuperaPeloTipoPessoa(String valor, TipoPessoa tipoPessoa);
 	public Pessoa get(Long id);
+	
 }

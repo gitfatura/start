@@ -6,6 +6,8 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import org.apache.commons.lang3.StringUtils;
+
 import br.com.start.dao.PersistenceUtils;
 import br.com.start.dao.QueryUtils;
 import br.com.start.entity.Pessoa;
@@ -41,7 +43,10 @@ public class PessoaBO implements Serializable, AppBO<Pessoa> {
 
 	@Override
 	public List<Pessoa> selected(String value) {
-		return query.recuperaItem(Pessoa.class, value, "nome");
+		if (StringUtils.isNumeric(value)) {
+			return query.recuperaValores(Pessoa.class, value, "id");
+		}
+		return query.recuperaValores(Pessoa.class, value, "nome");
 	}
 
 	@Override

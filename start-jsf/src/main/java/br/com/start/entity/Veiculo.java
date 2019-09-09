@@ -24,22 +24,19 @@ public class Veiculo extends AppBase implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "VEI_ID")
 	private Long id;
+	
+	@Column(name = "VEI_PLACA", unique = true)
+	private String placa;
+	
+	@Column(name = "VEI_MODELO")
+	private String modelo;
 
 	@Column(name = "VEI_MARCA")
 	private String marca;
 
-	@Column(name = "VEI_MODELO")
-	private String modelo;
-
-	@Column(name = "VEI_PLACA", unique=true)
-	private String placa;
-
 	@ManyToOne(targetEntity = Pessoa.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "VEI_PESID")
 	private Pessoa pessoa;
-
-	@OneToMany(targetEntity = Avaria.class, fetch = FetchType.LAZY, mappedBy = "veiculo")
-	private List<Avaria> avarias;
 
 	@OneToMany(targetEntity = OrdemServico.class, fetch = FetchType.LAZY, mappedBy = "veiculo")
 	private List<OrdemServico> servicos;
@@ -47,14 +44,12 @@ public class Veiculo extends AppBase implements Serializable {
 	public Veiculo() {
 	}
 
-	public Veiculo(Long id, String marca, String modelo, String placa, Pessoa pessoa, List<Avaria> avarias,
-			List<OrdemServico> servicos) {
+	public Veiculo(Long id, String marca, String modelo, String placa, Pessoa pessoa, List<OrdemServico> servicos) {
 		this.id = id;
 		this.marca = marca;
 		this.modelo = modelo;
 		this.placa = placa;
 		this.pessoa = pessoa;
-		this.avarias = avarias;
 		this.servicos = servicos;
 	}
 
@@ -89,14 +84,6 @@ public class Veiculo extends AppBase implements Serializable {
 
 	public void setPlaca(String placa) {
 		this.placa = placa;
-	}
-
-	public List<Avaria> getAvarias() {
-		return avarias;
-	}
-
-	public void setAvarias(List<Avaria> avarias) {
-		this.avarias = avarias;
 	}
 
 	public Pessoa getPessoa() {

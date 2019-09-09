@@ -84,39 +84,58 @@ public class QueryUtils<T> {
 		return manager.createQuery(sql.toString()).setParameter("param", "%" + valorARecuperar.toUpperCase() + "%")
 				.getResultList();
 	}
-	
+
+	@SuppressWarnings("unchecked")
+	public List<T> recuperaValores(Class<T> classe, String valor, String parametro) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("from ");
+		sql.append(classe.getName());
+		sql.append(" p where upper (p.");
+		sql.append(parametro);
+		sql.append(") like :param");
+
+		Query query = manager.createQuery(sql.toString());
+
+		if (StringUtils.isNotBlank(valor) && StringUtils.isNumeric(valor)) {
+			query.setParameter("param", Long.valueOf(valor));
+		} else {
+			query.setParameter("param", "%" + valor.toUpperCase() + "%");
+		}
+		return query.getResultList();
+	}
+
 	@SuppressWarnings("unchecked")
 	public List<Pessoa> recuperaPessoa(String nome, TipoPessoa tipoPessoa) {
 		StringBuilder sql = new StringBuilder();
-		
+
 		sql.append("select p from Pessoa p ");
-		
-		if(StringUtils.isNotBlank(nome) || tipoPessoa !=null) {
+
+		if (StringUtils.isNotBlank(nome) || tipoPessoa != null) {
 			sql.append(" where ");
 		}
-		
+
 		if (StringUtils.isNotBlank(nome)) {
 			sql.append(" upper (p.nome) like :nome");
 		}
-		
-		if (StringUtils.isBlank(nome) && tipoPessoa !=null) {
+
+		if (StringUtils.isBlank(nome) && tipoPessoa != null) {
 			sql.append(" p.tipoPessoa = :tipoPessoa ");
 		}
-		
-		if (StringUtils.isNotBlank(nome) && tipoPessoa !=null) {
+
+		if (StringUtils.isNotBlank(nome) && tipoPessoa != null) {
 			sql.append(" and p.tipoPessoa = :tipoPessoa ");
 		}
-		
+
 		Query query = manager.createQuery(sql.toString());
-		
+
 		if (StringUtils.isNotBlank(nome)) {
-			query.setParameter("nome", "%"+ nome.toUpperCase() +"%");
+			query.setParameter("nome", "%" + nome.toUpperCase() + "%");
 		}
-		
-		if (tipoPessoa !=null) {
+
+		if (tipoPessoa != null) {
 			query.setParameter("tipoPessoa", tipoPessoa);
 		}
-		 
+
 		return (List<Pessoa>) query.getResultList();
 	}
 

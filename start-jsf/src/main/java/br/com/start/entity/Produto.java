@@ -1,18 +1,14 @@
 package br.com.start.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -26,41 +22,23 @@ public class Produto extends AppBase implements Serializable {
 	@Column(name = "PRO_ID")
 	private Long id;
 
-	@Column(name = "PRO_NOME")
-	private String nome;
-
 	@Column(name = "PRO_DESCRICAO")
 	private String descricao;
-
-	@Column(name = "PRO_VALOR")
-	private BigDecimal valor;
-
-	@Column(name = "PRO_DATA")
-	private Date data = Calendar.getInstance().getTime();
 
 	@Column(name = "PRO_QUANTIDADE")
 	private Integer quantidade;
 
-	@Column(name = "PRO_VALTOTAL")
-	private BigDecimal valorTotal = BigDecimal.ZERO;
-
-	@ManyToOne(targetEntity = Categoria.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "PRO_CATEGORIAID")
-	private Categoria categoria;
+	@Column(name = "PRO_DATA")
+	private Date data = Calendar.getInstance().getTime();
 
 	public Produto() {
 	}
 
-	public Produto(Long id, BigDecimal valor, String nome, String descricao, Date data, Integer quantidade,
-			BigDecimal valorTotal, Categoria categoria) {
+	public Produto(Long id, String descricao, Integer quantidade, Date data) {
 		this.id = id;
-		this.valor = valor;
-		this.nome = nome;
 		this.descricao = descricao;
-		this.data = data;
 		this.quantidade = quantidade;
-		this.valorTotal = valorTotal;
-		this.categoria = categoria;
+		this.data = data;
 	}
 
 	@Override
@@ -72,36 +50,12 @@ public class Produto extends AppBase implements Serializable {
 		this.id = id;
 	}
 
-	public BigDecimal getValor() {
-		return valor;
-	}
-
-	public void setValor(BigDecimal valor) {
-		this.valor = valor;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
 	public String getDescricao() {
 		return descricao;
 	}
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
-
-	public Date getData() {
-		return data;
-	}
-
-	public void setData(Date data) {
-		this.data = data;
 	}
 
 	public Integer getQuantidade() {
@@ -112,20 +66,12 @@ public class Produto extends AppBase implements Serializable {
 		this.quantidade = quantidade;
 	}
 
-	public BigDecimal getValorTotal() {
-		return valorTotal;
+	public Date getData() {
+		return data;
 	}
 
-	public void setValorTotal(BigDecimal valorTotal) {
-		this.valorTotal = valorTotal;
-	}
-
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
+	public void setData(Date data) {
+		this.data = data;
 	}
 
 	@Override

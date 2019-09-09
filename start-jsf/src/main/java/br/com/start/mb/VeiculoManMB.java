@@ -1,7 +1,6 @@
 package br.com.start.mb;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -11,9 +10,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.apache.commons.lang3.StringUtils;
+import org.primefaces.event.SelectEvent;
 
 import br.com.start.comum.FacesUtil;
-import br.com.start.entity.Avaria;
 import br.com.start.entity.Pessoa;
 import br.com.start.entity.Veiculo;
 import br.com.start.facade.PessoaFacade;
@@ -34,30 +33,35 @@ public class VeiculoManMB implements Serializable {
 	@Inject
 	private Veiculo veiculo;
 
-	@Inject
-	private Avaria avaria;
-
-	private List<Avaria> avarias;
-
 	private List<Pessoa> pessoas;
+
+	@Inject
+	private Pessoa pessoa;
 
 	@PostConstruct
 	public void start() {
 		recuperaPessoa();
 		recuperaVeiculos();
-		avarias = new ArrayList<Avaria>();
 	}
 
 	public void grava() {
 		try {
-			veiculoFacade.gravaVeiculo(veiculo, avarias);
+			veiculoFacade.gravaVeiculo(veiculo);
 			novaInstancia();
 			FacesUtil.addInfoMessage("Registro gravado com sucesso!");
 		} catch (Exception e) {
-			if(e.getCause().getMessage().contains("ConstraintViolationException:")) {
-				FacesUtil.addErrorMessageFatal("Placa "+veiculo.getPlaca()+" já existe.");
+			if (e.getCause().getMessage().contains("ConstraintViolationException:")) {
+				FacesUtil.addErrorMessageFatal("Placa " + veiculo.getPlaca() + " já existe.");
 			}
 		}
+	}
+
+	public List<Pessoa> completarPessoa(String nome) {
+		return pessoaFacade.selected(nome);
+	}
+	
+	public void pessoaSelecionada(SelectEvent event) {
+		pessoa = (Pessoa) event.getObject();
 	}
 
 	public void recuperaPessoa() {
@@ -66,25 +70,6 @@ public class VeiculoManMB implements Serializable {
 
 	public void novaInstancia() {
 		veiculo = new Veiculo();
-	}
-
-	public void removeAvaria() {
-		for (int i = 0; i < avarias.size(); i++) {
-			boolean equals = avarias.get(i).getDescricao().equals(avaria.getDescricao());
-			if (equals) {
-				avarias.remove(i);
-			}
-		}
-		
-		System.out.println(avaria);
-	}
-	
-	public void adicionaAvaria() {
-		if (avaria !=null) {
-			avarias.add(avaria);
-		}
-		
-		avaria = new Avaria();
 	}
 
 	private void recuperaVeiculos() {
@@ -110,20 +95,12 @@ public class VeiculoManMB implements Serializable {
 		this.pessoas = pessoas;
 	}
 
-	public Avaria getAvaria() {
-		return avaria;
+	public Pessoa getPessoa() {
+		return pessoa;
 	}
 
-	public void setAvaria(Avaria avaria) {
-		this.avaria = avaria;
-	}
-
-	public List<Avaria> getAvarias() {
-		return avarias;
-	}
-
-	public void setAvarias(List<Avaria> avarias) {
-		this.avarias = avarias;
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 
 }

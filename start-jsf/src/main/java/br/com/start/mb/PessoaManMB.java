@@ -2,16 +2,19 @@ package br.com.start.mb;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
 import org.apache.commons.lang3.StringUtils;
+import org.primefaces.PrimeFaces;
+
 import br.com.start.comum.FacesUtil;
 import br.com.start.entity.Pessoa;
 import br.com.start.facade.PessoaFacade;
-import br.com.start.types.Sexo;
 import br.com.start.types.TipoPessoa;
 
 @ViewScoped
@@ -48,20 +51,17 @@ public class PessoaManMB implements Serializable {
 		}
 	}
 
+	
+	
 	public void novaInstacia() {
 		pessoa = new Pessoa();
+		PrimeFaces.current().resetInputs("frm:panelPessoa");
 	}
 
-	public Sexo[] getSexos() {
-		return Sexo.values();
-	}
-	
 	public TipoPessoa[] getTipoPessoas() {
 		return TipoPessoa.values();
 	}
-	
-	
-	
+
 	public Pessoa getPessoa() {
 		return pessoa;
 	}

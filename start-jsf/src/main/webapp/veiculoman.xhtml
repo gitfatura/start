@@ -1,0 +1,106 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+    template="/WEB-INF/template.xhtml">
+	<ui:define name="content">
+	
+	
+		<p:fieldset legend="Cadastro de veiculos" style="margin-top: 10px">
+			
+			<h:form id="frm">
+				<div class="ContainerIndent ui-fluid">
+					<p:panel>
+						<div class="ContainerIndent">
+							<p:messages id="msg" autoUpdate="false" closable="true"/>
+						</div>
+						<div class="Container">
+							<div class="Container20 Responsive50">
+								<div class="ContainerIndent">
+									<div class="Container100">
+										<p:outputLabel for="placa" value="Placa"/>
+										<p:inputMask mask="aaa-9999" id="placa" title="Placa" required="true" requiredMessage="Placa é obrigatório." value="#{veiculoManMB.veiculo.placa}" style="text-transform: uppercase" styleClass="FontBold Fs15 hardblue"/>
+									</div>
+								</div>
+							</div>
+							<div class="Container40 Responsive50">
+								<div class="ContainerIndent">
+									<div class="Container100">
+										<p:outputLabel for="modelo" value="Modelo"/>
+										<p:inputText  id="modelo" title="Modelo" value="#{veiculoManMB.veiculo.modelo}" required="true" requiredMessage="Modelo é obrigatório." styleClass="FontBold Fs15 hardblue"/>
+									</div>
+								</div>
+							</div>
+							<div class="Container40 Responsive50">
+								<div class="ContainerIndent">
+									<div class="Container100">
+										<p:outputLabel for="nome" value="Marca"/>
+										<p:inputText  id="nome" title="Marca" value="#{veiculoManMB.veiculo.marca}" styleClass="FontBold Fs15 hardblue"/>
+									</div>
+								</div>
+							</div>
+							
+							<div class="Container40 Responsive50">
+								<div class="ContainerIndent">
+									<div class="Container100">
+										<p:outputLabel for="proprietario" value="Proprietário"/>
+										<p:autoComplete id="proprietario" value="#{veiculoManMB.pessoa}" placeholder="pesquise pelo nome ou código" completeMethod="#{veiculoManMB.completarPessoa}"
+										var="c" itemLabel="#{c.nome}" itemValue="#{c}" forceSelection="true"/>
+									</div>
+								</div>
+							</div>
+							
+							<div class="Container5 Responsive50" >
+								<div class="ContainerIndent">
+									<div class="Container100">
+										<p:commandButton style="margin-left: -20px; margin-top: 20px" id="pessoa"  icon="ui-icon-search" title="Pesquisa" action="#{veiculoConMB.abrirDialogo}"
+											process="@this" update="@none">
+											<p:ajax event="dialogReturn" listener="#{veiculoManMB.pessoaSelecionada}"
+												process="@this" update="proprietario" />
+											<p:resetInput target="proprietario" />
+										</p:commandButton>
+									</div>
+								</div>
+							</div>
+							
+							
+							
+							<!-- <div class="Container60 Responsive50">
+								<div class="ContainerIndent">
+									<div class="Container100">
+										<p:outputLabel for="cliente" value="Proprietário"/>
+										<p:selectOneMenu id="cliente" value="#{veiculoManMB.veiculo.pessoa}" styleClass="FontBold Fs15 hardblue" required="true" requiredMessage="Proprietário é obrigatório.">
+											<f:selectItem itemLabel="Selecione um proprietário" />
+											<f:selectItems value="#{veiculoManMB.pessoas}" var="pessoa" itemValue="#{pessoa}" itemLabel="#{pessoa.nome}"  />
+										</p:selectOneMenu>
+									</div>
+								</div>
+							</div> -->
+							
+							
+						</div>
+						
+						<div class="EmptyBox20"></div>
+						<div class="Container">
+						
+							<div class="Container20 Responsive50">
+								<div class="ContainerIndent">
+									<div class="Container100">
+										<p:commandButton title="Registrar" value="Registrar" id="botaoSalvar" update="frm,frm:placa" action="#{veiculoManMB.grava}" />
+									</div>
+								</div>
+							</div>
+							
+							
+						</div>
+						
+					</p:panel>
+				</div>
+			</h:form>
+			
+		</p:fieldset>
+	</ui:define>
+</ui:composition>

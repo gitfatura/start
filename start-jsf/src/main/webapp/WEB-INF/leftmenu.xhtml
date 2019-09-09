@@ -19,35 +19,29 @@
         
         <h:form id="menuform" >
             <ps:menu id="sm_leftmenu">
-                <p:menuitem id="sm_dashboard" value="Dashboard" delay="true" global="false" icon="icon-home-outline" outcome="/dashboard" containerStyleClass="layout-menubar-active"/>
-                	
                 	<p:submenu label="Pessoas" icon="icon-users">
-                		<p:menuitem id="sm_pessoa"  value="Cadastro de Pessoas" global="false" outcome="/pessoa/pessoaman"/>
-		                <p:menuitem id="sm_pessoas"  value="Lista de Pessoas" global="false" outcome="/pessoa/pessoacon"/>
+                		<p:menuitem id="sm_pessoa"  value="Cadastro de Pessoas" global="false" outcome="pessoaman"/>
+		                <p:menuitem id="sm_pessoas"  value="Lista de Pessoas" global="false" outcome="pessoacon"/>
             		</p:submenu>
             		
                 	<p:submenu label="Veiculos" icon=" icon-th">
-                		<p:menuitem id="sm_veiculo"  value="Cadastro de veiculos" global="false" outcome="/veiculo/veiculoman"/>
-                		<p:menuitem id="sm_veiculos"  value="Lista de veiculos" global="false" outcome="/veiculo/veiculocon"/>
+                		<p:menuitem id="sm_veiculo"  value="Cadastro de veiculos" global="false" outcome="veiculoman"/>
+                		<p:menuitem id="sm_veiculos"  value="Lista de veiculos" global="false" outcome="veiculocon"/>
             		</p:submenu>
                 	
                 	<p:submenu label="Servicos" icon="icon-cog">
-                		<p:menuitem id="sm_servico"  value="Cadastro de serviço" global="false" outcome="/servico/servicoman"/>
-                		<p:menuitem id="sm_servicos"  value="Lista de serviços" global="false" outcome="/servico/servicocon"/>
+                		<p:menuitem id="sm_servico"  value="Cadastro de serviço" global="false" outcome="servicoman"/>
+                		<p:menuitem id="sm_servicos"  value="Lista de serviços" global="false" outcome="servicocon"/>
             		</p:submenu>
             		 
             		<p:submenu label="Ordem de serviço" icon="icon-cog-alt">
-                		<p:menuitem id="sm_os"  value="Ordem de serviço" global="false" outcome="/ordemservico/ordemservicoman"/>
-            		</p:submenu>
-            		
-            		<p:submenu label="Financeiro" icon="icon-money">
-                		<p:menuitem id="sm_financeiro"  value="Resumo financeiro" global="false"/>
+                		<p:menuitem id="sm_os"  value="Ordem de serviço" global="false" outcome="ordemservicoman"/>
             		</p:submenu>
             		
             		<p:submenu label="Produtos" icon="icon-basket">
-                		<p:menuitem id="sm_produto"  value="Cadastro de produto" global="false" outcome="/produto/produtoman"/>
-                		<p:menuitem id="sm_produtos"  value="Lista de produtos" global="false" outcome="/produto/produtocon"/>
-                		<p:menuitem id="sm_entradaproduto"  value="Manutenção de produto" global="false" outcome="/produto/entradaprodutoman"/>
+                		<p:menuitem id="sm_produto"  value="Cadastro de produto" global="false" outcome="produtoman"/>
+                		<p:menuitem id="sm_produtos"  value="Lista de produtos" global="false" outcome="produtocon"/>
+                		<p:menuitem id="sm_entradaproduto"  value="Manutenção de produto" global="false" outcome="entradaprodutoman"/>
             		</p:submenu>
             		
             		<p:submenu label="Administrador" icon="icon-money">

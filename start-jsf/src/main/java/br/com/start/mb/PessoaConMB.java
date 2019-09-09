@@ -61,7 +61,7 @@ public class PessoaConMB implements Serializable {
 	public TipoPessoa[] getTipoPessoas() {
 		return TipoPessoa.values();
 	}
-	
+
 	public String getPesquisa() {
 		return pesquisa;
 	}
