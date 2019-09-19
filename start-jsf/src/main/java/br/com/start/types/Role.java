@@ -3,7 +3,7 @@ package br.com.start.types;
 public enum Role {
 
 	ADMIN("Administrador"), 
-	FUNCIONARIO("Funcionario");
+	FUNCIONARIO("Funcionário");
 
 	private String label;
 

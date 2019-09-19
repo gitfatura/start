@@ -7,7 +7,7 @@
 	xmlns:o="http://omnifaces.org/ui"
     template="/WEB-INF/template.xhtml">
 	<ui:define name="content">
-		<p:fieldset legend="Cadastro de pessoas" id="fildpessoa" style="margin-top: 10px">
+		<p:fieldset legend="Cadastrar cliente" id="fildpessoa" style="margin-top: 10px">
 			<h:form id="frm">
 				<div class="ContainerIndent ui-fluid">
 					<p:panel id="panelPessoa">
@@ -29,7 +29,7 @@
 									<div class="Container100">
 										<p:outputLabel for="tipoPessoa" value="Tipo de Pessoa"/>
 										<p:selectOneMenu id="tipoPessoa" onchange="trocouTipoPessoa();" value="#{pessoaManMB.pessoa.tipoPessoa}" required="true" requiredMessage="Informe o tipo de pessoa." styleClass="FontBold Fs18 hardblue">
-				    						<f:selectItem itemValue="" itemLabel="Selecione" />
+				    						<f:selectItem itemValue="#{pessoaManMB.pessoa.tipoPessoa.label}" itemLabel="Selecione" />
 				    						<f:selectItems value="#{pessoaManMB.tipoPessoas}"  var="tipo" itemValue="#{tipo}"  itemLabel="#{tipo.label}"/>
 				    					</p:selectOneMenu>
 									</div>
@@ -98,7 +98,7 @@
 							<div class="Container20 Responsive50">
 								<div class="ContainerIndent">
 									<div class="Container100">
-										<p:commandButton value="Cancelar" update="panelPessoa" onclick="trocouTipoPessoa();" process="@this" action="#{pessoaManMB.novaInstacia}"/>
+										<p:commandButton value="Cancelar" update="panelPessoa, frm, fildpessoa" onclick="trocouTipoPessoa();" process="@this" action="#{pessoaManMB.novaInstacia}"/>
 									</div>
 								</div>
 							</div>

@@ -5,9 +5,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import br.com.start.types.Role;
 
@@ -31,6 +34,10 @@ public class Usuario extends AppBase implements Serializable {
 	@Column(name = "USU_ROLE", nullable = false, length = 15)
 	@Enumerated(EnumType.STRING)
 	private Role role;
+
+	@ManyToOne(targetEntity = Pessoa.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "USU_PESID")
+	private Pessoa pessoa;
 
 	public boolean isAdmin() {
 		return Role.ADMIN.equals(role);
@@ -70,6 +77,14 @@ public class Usuario extends AppBase implements Serializable {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 
 	@Override

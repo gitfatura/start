@@ -19,32 +19,37 @@
         
         <h:form id="menuform" >
             <ps:menu id="sm_leftmenu">
-                	<p:submenu label="Pessoas" icon="icon-users">
-                		<p:menuitem id="sm_pessoa"  value="Cadastro de Pessoas" global="false" outcome="pessoaman"/>
-		                <p:menuitem id="sm_pessoas"  value="Lista de Pessoas" global="false" outcome="pessoacon"/>
+                	<p:submenu label="Clientes" icon="icon-users">
+                		<p:menuitem id="sm_pessoa"  value="Cadastrar Clientes" global="false" outcome="pessoaman"/>
+		                <p:menuitem id="sm_pessoas"  value="Lista de Clientes" global="false" outcome="pessoacon"/>
             		</p:submenu>
             		
-                	<p:submenu label="Veiculos" icon=" icon-th">
-                		<p:menuitem id="sm_veiculo"  value="Cadastro de veiculos" global="false" outcome="veiculoman"/>
-                		<p:menuitem id="sm_veiculos"  value="Lista de veiculos" global="false" outcome="veiculocon"/>
+            		<p:submenu label="Funcionários" icon="icon-users-1">
+                		<p:menuitem id="sm_funcionario"  value="Cadastrar Funcionários" global="false" outcome="funcionarioman"/>
+		                <p:menuitem id="sm_funcionarios"  value="Lista de Funcionários" global="false" outcome="funcionariocon"/>
+            		</p:submenu>
+            		
+                	<p:submenu label="Veículos" icon=" icon-th">
+                		<p:menuitem id="sm_veiculo"  value="Cadastrar veículos" global="false" outcome="veiculoman"/>
+                		<p:menuitem id="sm_veiculos"  value="Lista de veículos" global="false" outcome="veiculocon"/>
             		</p:submenu>
                 	
                 	<p:submenu label="Servicos" icon="icon-cog">
-                		<p:menuitem id="sm_servico"  value="Cadastro de serviço" global="false" outcome="servicoman"/>
+                		<p:menuitem id="sm_servico"  value="Cadastrar serviços" global="false" outcome="servicoman"/>
                 		<p:menuitem id="sm_servicos"  value="Lista de serviços" global="false" outcome="servicocon"/>
             		</p:submenu>
             		 
-            		<p:submenu label="Ordem de serviço" icon="icon-cog-alt">
+            		<p:submenu label="Ordem de serviços" icon="icon-cog-alt">
                 		<p:menuitem id="sm_os"  value="Ordem de serviço" global="false" outcome="ordemservicoman"/>
             		</p:submenu>
             		
             		<p:submenu label="Produtos" icon="icon-basket">
-                		<p:menuitem id="sm_produto"  value="Cadastro de produto" global="false" outcome="produtoman"/>
+                		<p:menuitem id="sm_produto"  value="Cadastrar produto" global="false" outcome="produtoman"/>
                 		<p:menuitem id="sm_produtos"  value="Lista de produtos" global="false" outcome="produtocon"/>
                 		<p:menuitem id="sm_entradaproduto"  value="Manutenção de produto" global="false" outcome="entradaprodutoman"/>
             		</p:submenu>
             		
-            		<p:submenu label="Administrador" icon="icon-money">
+            		<p:submenu label="Administrador" icon="icon-user-2">
                 		<p:menuitem id="sm_admin"  value="Controle de permissões" global="false"/>
             		</p:submenu>
             		

@@ -47,7 +47,7 @@ public class Pessoa extends AppBase implements Serializable {
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "PES_TIPOPESSOA")
-	private TipoPessoa tipoPessoa;
+	private TipoPessoa tipoPessoa = TipoPessoa.PESSOAFISICA;
 
 	@OneToMany(targetEntity = Veiculo.class, fetch = FetchType.LAZY, mappedBy = "pessoa")
 	private List<Veiculo> veiculos;
@@ -138,6 +138,9 @@ public class Pessoa extends AppBase implements Serializable {
 	}
 
 	public TipoPessoa getTipoPessoa() {
+		if (tipoPessoa ==null) {
+			return TipoPessoa.PESSOAFISICA;
+		}
 		return tipoPessoa;
 	}
 

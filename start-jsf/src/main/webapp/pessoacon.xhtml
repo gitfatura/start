@@ -8,14 +8,14 @@
     template="/WEB-INF/template.xhtml">
 	<ui:define name="content">
 		<div class="ContainerIndent">
-			<p:fieldset legend="Pessoas">
+			<p:fieldset legend="Lista de Pessoas">
 				<p:panel>
 					<div class="ContainerIndent">
 						
 						<h:form id="frmpesquisa">
 							<p:toolbar>
 								<p:toolbarGroup>
-									<p:button value="Novo pessoa" outcome="pessoaman"/>
+									<p:button value="Novo cliente" outcome="pessoaman"/>
 									<p:selectOneMenu  style="margin-left: 10px" id="tipoPessoa" value="#{pessoaConMB.tipoPessoaStr}" styleClass="FontBold Fs18 hardblue">
 			    						<f:selectItem itemValue="" itemLabel="Selecione o tipo de pessoa" />
 			    						<f:selectItems value="#{pessoaConMB.tipoPessoas}"  var="tipo" itemValue="#{tipo}"  itemLabel="#{tipo.label}"/>
@@ -33,7 +33,7 @@
 							<p:dataTable id="pessoa" var="pessoa" value="#{pessoaConMB.pessoas}"
 	                                     rows="5" paginator="true" paginatorTemplate="{CurrentPageReport}  
 	                                     {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-	                                     rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"  emptyMessage="Nenhuma pessoa encontrada" 
+	                                     rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"  emptyMessage="Nenhum cliente encontrado" 
 	                                     paginatorAlwaysVisible="true" reflow="true">
 	                                     
 								<p:column headerText="Nome" sortBy="#{pessoa.nome}">

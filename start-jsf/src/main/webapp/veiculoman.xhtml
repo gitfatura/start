@@ -8,14 +8,13 @@
     template="/WEB-INF/template.xhtml">
 	<ui:define name="content">
 	
-	
-		<p:fieldset legend="Cadastro de veiculos" style="margin-top: 10px">
+		<p:fieldset legend="Cadastrar veículo" id="filveiculo" style="margin-top: 10px">
 			
 			<h:form id="frm">
 				<div class="ContainerIndent ui-fluid">
-					<p:panel>
+					<p:panel id="panel">
 						<div class="ContainerIndent">
-							<p:messages id="msg" autoUpdate="false" closable="true"/>
+							<p:messages id="msg" autoUpdate="true" closable="true"/>
 						</div>
 						<div class="Container">
 							<div class="Container20 Responsive50">
@@ -67,20 +66,6 @@
 							</div>
 							
 							
-							
-							<!-- <div class="Container60 Responsive50">
-								<div class="ContainerIndent">
-									<div class="Container100">
-										<p:outputLabel for="cliente" value="Proprietário"/>
-										<p:selectOneMenu id="cliente" value="#{veiculoManMB.veiculo.pessoa}" styleClass="FontBold Fs15 hardblue" required="true" requiredMessage="Proprietário é obrigatório.">
-											<f:selectItem itemLabel="Selecione um proprietário" />
-											<f:selectItems value="#{veiculoManMB.pessoas}" var="pessoa" itemValue="#{pessoa}" itemLabel="#{pessoa.nome}"  />
-										</p:selectOneMenu>
-									</div>
-								</div>
-							</div> -->
-							
-							
 						</div>
 						
 						<div class="EmptyBox20"></div>
@@ -90,6 +75,14 @@
 								<div class="ContainerIndent">
 									<div class="Container100">
 										<p:commandButton title="Registrar" value="Registrar" id="botaoSalvar" update="frm,frm:placa" action="#{veiculoManMB.grava}" />
+									</div>
+								</div>
+							</div>
+							
+							<div class="Container20 Responsive50">
+								<div class="ContainerIndent">
+									<div class="Container100">
+										<p:commandButton value="Cancelar" update="frm,frm:placa,frm:modelo, filveiculo, panel, msg,"  process="@this" action="#{veiculoManMB.novaInstancia}"/>
 									</div>
 								</div>
 							</div>
