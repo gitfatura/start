@@ -39,9 +39,30 @@ public class PessoaManMB implements Serializable {
 	}
 
 	public void grava() {
-		pessoaFacade.grava(pessoa);
-		novaInstacia();
-		FacesUtil.addInfoMessage("Registro gravado com sucesso!");
+		try {
+			validaCpfCnpj(pessoa);
+			pessoaFacade.grava(pessoa);
+			novaInstacia();
+			FacesUtil.addInfoMessage("Registro gravado com sucesso!");
+		} catch (Exception e) {
+			if (e.getCause().getMessage().contains("ConstraintViolationException:")) {
+				if (pessoa !=null && TipoPessoa.PESSOAFISICA.equals(pessoa.getTipoPessoa())) {
+					FacesUtil.addErrorMessageFatal("Cpf: " + pessoa.getCpf() + " já cadastrado.");
+				}
+				if (pessoa !=null && TipoPessoa.PESSOAJURIDICA.equals(pessoa.getTipoPessoa())) {
+					FacesUtil.addErrorMessageFatal("Cnpj: " + pessoa.getCnpj() + " já cadastrado.");
+				}
+			}
+		}
+	}
+	
+	public void validaCpfCnpj(Pessoa pessoa) {
+		if (pessoa.getTipoPessoa() !=null && TipoPessoa.PESSOAFISICA.equals(pessoa.getTipoPessoa())) {
+			pessoa.setCnpj(null);
+		}
+		if (pessoa.getTipoPessoa() !=null && TipoPessoa.PESSOAJURIDICA.equals(pessoa.getTipoPessoa())) {
+			pessoa.setCpf(null);
+		}
 	}
 
 	private void recuperaPessoas() {

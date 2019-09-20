@@ -37,10 +37,62 @@
 								<div class="ContainerIndent">
 									<div class="Container100">
 										<p:outputLabel for="nome" value="Marca"/>
-										<p:inputText  id="nome" title="Marca" value="#{veiculoManMB.veiculo.marca}" styleClass="FontBold Fs15 hardblue"/>
+										<p:selectOneMenu id="nome" value="#{veiculoManMB.veiculo.marca}"  styleClass="FontBold Fs15 hardblue">
+				    						<f:selectItem itemLabel="Selecione" itemValue=""  />
+				    						 <f:selectItem itemLabel="Agrale" itemValue="Agrale"  />
+											 <f:selectItem itemLabel="Aston Martin" itemValue="Aston Martin"  />
+											 <f:selectItem itemLabel="Audi" itemValue="Audi"  />
+											 <f:selectItem itemLabel="Bentley" itemValue="Bentley"  />
+											 <f:selectItem itemLabel="Changan" itemValue="Changan"  />
+											 <f:selectItem itemLabel="Chery" itemValue="Chery"  />
+											 <f:selectItem itemLabel="GM/Chevrolet" itemValue="GM/Chevrolet"  />
+											 <f:selectItem itemLabel="Chrysler" itemValue="Chrysler"  />
+											 <f:selectItem itemLabel="Citroën" itemValue="Citroën"  />
+											 <f:selectItem itemLabel="Dodge" itemValue="Dodge"  />
+											 <f:selectItem itemLabel="Effa" itemValue="Effa"  />
+											 <f:selectItem itemLabel="Ferrari" itemValue="Ferrari"  />
+											 <f:selectItem itemLabel="Fiat" itemValue="Fiat"  />
+											 <f:selectItem itemLabel="Ford" itemValue="Ford"  />
+											 <f:selectItem itemLabel="Geely" itemValue="Geely"  />
+											 <f:selectItem itemLabel="Honda" itemValue="Honda"  />
+											 <f:selectItem itemLabel="Hyundai" itemValue="Hyundai"  />
+											 <f:selectItem itemLabel="Iveco" itemValue="Iveco"  />
+											 <f:selectItem itemLabel="Jac Motors" itemValue="Jac Motors"  />
+											 <f:selectItem itemLabel="Jaguar" itemValue="Jaguar"  />
+											 <f:selectItem itemLabel="Jeep" itemValue="Jeep"  />
+											 <f:selectItem itemLabel="Jinbei" itemValue="Jinbei"  />
+											 <f:selectItem itemLabel="Kia" itemValue="Kia"  />
+											 <f:selectItem itemLabel="Lamborghini" itemValue="Lamborghini"  />
+											 <f:selectItem itemLabel="Land Rover" itemValue="Land Rover"  />
+											 <f:selectItem itemLabel="Lifan" itemValue="Lifan"  />
+											 <f:selectItem itemLabel="Mahindra" itemValue="Mahindra"  />
+											 <f:selectItem itemLabel="Maserati" itemValue="Maserati"  />
+											 <f:selectItem itemLabel="Mercedes-Benz" itemValue="Mercedes-Benz"  />
+											 <f:selectItem itemLabel="MG Motors" itemValue="MG Motors"  />
+											 <f:selectItem itemLabel="Mini" itemValue="Mini"  />
+											 <f:selectItem itemLabel="Mitsubishi" itemValue="Mitsubishi"  />
+											 <f:selectItem itemLabel="Nissan" itemValue="Nissan"  />
+											 <f:selectItem itemLabel="Peugeot" itemValue="Peugeot"  />
+											 <f:selectItem itemLabel="Porsche" itemValue="Porsche"  />
+											 <f:selectItem itemLabel="Ram" itemValue="Ram"  />
+											 <f:selectItem itemLabel="Renault" itemValue="Renault"  />
+											 <f:selectItem itemLabel="Smart" itemValue="Smart"  />
+											 <f:selectItem itemLabel="Ssangyong" itemValue="Ssangyong"  />
+											 <f:selectItem itemLabel="Subaru" itemValue="Subaru"  />
+											 <f:selectItem itemLabel="Suzuki" itemValue="Suzuki"  />
+											 <f:selectItem itemLabel="Toyota" itemValue="Toyota"  />
+											 <f:selectItem itemLabel="Troller" itemValue="Troller"  />
+											 <f:selectItem itemLabel="Volkswagen" itemValue="Volkswagen"  />
+											 <f:selectItem itemLabel="Volvo" itemValue="Volvo"  />
+				    					</p:selectOneMenu>
 									</div>
 								</div>
 							</div>
+							
+						</div>
+							
+						<div class="Container">	
+							
 							
 							<div class="Container40 Responsive50">
 								<div class="ContainerIndent">
@@ -74,7 +126,7 @@
 							<div class="Container20 Responsive50">
 								<div class="ContainerIndent">
 									<div class="Container100">
-										<p:commandButton title="Registrar" value="Registrar" id="botaoSalvar" update="frm,frm:placa" action="#{veiculoManMB.grava}" />
+										<p:commandButton title="Registrar" value="Registrar" id="botaoSalvar" update="frm,frm:placa, proprietario" action="#{veiculoManMB.grava}" />
 									</div>
 								</div>
 							</div>
@@ -82,7 +134,7 @@
 							<div class="Container20 Responsive50">
 								<div class="ContainerIndent">
 									<div class="Container100">
-										<p:commandButton value="Cancelar" update="frm,frm:placa,frm:modelo, filveiculo, panel, msg,"  process="@this" action="#{veiculoManMB.novaInstancia}"/>
+										<p:commandButton value="Cancelar" update="frm,frm:placa,frm:modelo, filveiculo, panel, msg"  process="@this" action="#{veiculoManMB.novaInstancia}"/>
 									</div>
 								</div>
 							</div>

@@ -8,7 +8,7 @@
     template="/WEB-INF/template.xhtml">
 	<ui:define name="content">
 		<div class="ContainerIndent">
-			<p:fieldset legend="Lista de Pessoas">
+			<p:fieldset legend="Lista de Clientes">
 				<p:panel>
 					<div class="ContainerIndent">
 						
@@ -23,7 +23,7 @@
 								</p:toolbarGroup>
 								
 								<p:toolbarGroup align="right">
-									<p:inputText title="Entre com nome" value="#{pessoaConMB.pesquisa}" size="40"/>
+									<p:inputText title="Entre com nome" placeholder="Entre com nome" value="#{pessoaConMB.pesquisa}" size="40"/>
 									<p:commandButton value="Pesquisar" action="#{pessoaConMB.carregaPessoas}" update="frmpesquisa,frm"/>
 								</p:toolbarGroup>
 							</p:toolbar>
@@ -39,24 +39,30 @@
 								<p:column headerText="Nome" sortBy="#{pessoa.nome}">
 									<h:outputText value="#{pessoa.nome}" />
 								</p:column>
-								<p:column headerText="Cpf" sortBy="#{pessoa.cpf}">
+								<p:column headerText="Cpf" sortBy="#{pessoa.cpf}" style="width: 120px">
 									<h:outputText value="#{pessoa.cpf}" />
 								</p:column>
-								<p:column headerText="Telefone" sortBy="#{pessoa.telefone}">
+								
+								<p:column headerText="Cnpj" sortBy="#{pessoa.cnpj}" style="width: 135px">
+									<h:outputText value="#{pessoa.cnpj}" />
+								</p:column>
+								
+								
+								<p:column headerText="Telefone" sortBy="#{pessoa.telefone}" style="width: 120px">
 									<h:outputText value="#{pessoa.telefone}" />
 								</p:column>
-								<p:column headerText="Celular" sortBy="#{pessoa.celular}">
+								<p:column headerText="Celular" sortBy="#{pessoa.celular}" style="width: 120px">
 									<h:outputText value="#{pessoa.celular}" />
 								</p:column>
 								<p:column headerText="Email" sortBy="#{pessoa.email}">
 									<h:outputText value="#{pessoa.email}" />
 								</p:column>
-								<p:column style="width: 50px">
+								<p:column style="width: 32px">
 									<p:button outcome="pessoaman" icon="ui-icon-pencil" title="Editar">
 										<f:param name="id" value="#{pessoa.id}"/>
 									</p:button>
 								</p:column>
-								<p:column style="width: 50px">
+								<p:column style="width: 32px">
 									<p:commandButton title="Excluir" oncomplete="PF('removerpessoa').show()" process="@this" update="frm" icon="ui-icon-trash">
 										<f:setPropertyActionListener   value="#{pessoa}" target="#{pessoaConMB.pessoa}"/>
 									</p:commandButton>

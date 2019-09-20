@@ -47,6 +47,7 @@ public class VeiculoManMB implements Serializable {
 	public void grava() {
 		try {
 			veiculoFacade.gravaVeiculo(veiculo);
+			pessoa = new Pessoa();
 			novaInstancia();
 			FacesUtil.addInfoMessage("Registro gravado com sucesso!");
 		} catch (Exception e) {
