@@ -37,13 +37,7 @@ public class ServicoConMB implements Serializable {
 	}
 
 	public void recuperaServicos() {
-		if (StringUtils.isNotEmpty(pesquisa)) {
-			servicos = new ArrayList<>();
-			servicos = servicoFacade.selected(pesquisa);
-		} else {
-			servicos = servicoFacade.all();
-		}
-
+		servicos = servicoFacade.recuperaServicos(pesquisa);
 	}
 
 	public void remove() {

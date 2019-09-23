@@ -10,7 +10,9 @@ import javax.persistence.Query;
 import org.apache.commons.lang3.StringUtils;
 
 import br.com.start.entity.Pessoa;
-import br.com.start.types.TipoPessoa;
+import br.com.start.entity.Servico;
+import br.com.start.entity.Usuario;
+import br.com.start.entity.Veiculo;
 
 public class QueryUtils<T> {
 
@@ -32,36 +34,36 @@ public class QueryUtils<T> {
 		return manager.createQuery("select p.id from " + classe.getName() + " p").getResultList();
 	}
 
-//	public UsuarioEntity logar(UsuarioEntity usuario) {
-//		UsuarioEntity usuarioEntity = null;
-//		try {
-//			usuarioEntity = (UsuarioEntity) manager
-//					.createQuery("from UsuarioEntity p where p.login =:login and p.senha =:senha")
-//					.setParameter("login", usuario.getLogin()).setParameter("senha", usuario.getSenha())
-//					.getSingleResult();
-//		} catch (Exception e) {
-//			return null;
-//		}
-//		return usuarioEntity;
-//	}
+	public Usuario logar(Usuario usuario) {
+		Usuario usuarioLogado = null;
+		try {
+			usuarioLogado = (Usuario) manager
+					.createQuery("from Usuario p where p.login =:login and p.senha =:senha")
+					.setParameter("login", usuario.getLogin()).setParameter("senha", usuario.getSenha())
+					.getSingleResult();
+		} catch (Exception e) {
+			return null;
+		}
+		return usuarioLogado;
+	}
 
-//	public boolean validarUsuarioESenha(UsuarioEntity usuario) {
-//		try {
-//
-//			UsuarioEntity usuarioAutenticado = new UsuarioEntity();
-//			usuarioAutenticado = (UsuarioEntity) manager
-//					.createQuery("select p from UsuarioEntity p where p.login =:login and p.senha =:senha")
-//					.setParameter("login", usuario.getLogin()).setParameter("senha", usuario.getSenha())
-//					.getSingleResult();
-//			if (usuarioAutenticado == null) {
-//				return false;
-//			}
-//		} catch (Exception e) {
-//			return false;
-//		}
-//		return true;
-//
-//	}
+	public boolean validarUsuarioESenha(Usuario usuario) {
+		try {
+
+			Usuario usuarioAutenticado = new Usuario();
+			usuarioAutenticado = (Usuario) manager
+					.createQuery("select p from UsuarioEntity p where p.login =:login and p.senha =:senha")
+					.setParameter("login", usuario.getLogin()).setParameter("senha", usuario.getSenha())
+					.getSingleResult();
+			if (usuarioAutenticado == null) {
+				return false;
+			}
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
+
+	}
 
 	@SuppressWarnings("unchecked")
 	public List<T> recuperaItensOrdenado(Class<T> classe, String parametroOrdenado) {
@@ -105,37 +107,90 @@ public class QueryUtils<T> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Pessoa> recuperaPessoa(String nome, TipoPessoa tipoPessoa) {
+	public List<Veiculo> recuperaVeiculos(String pessoaNome) {
 		StringBuilder sql = new StringBuilder();
-
-		sql.append("select p from Pessoa p ");
-
-		if (StringUtils.isNotBlank(nome) || tipoPessoa != null) {
+		sql.append("select v from Veiculo v ");
+		sql.append(" inner join v.pessoa p ");
+		
+		if (StringUtils.isNotBlank(pessoaNome)) {
+			sql.append(" where upper (p.nome) like :nome ");
+		}
+		
+		sql.append(" order by p.nome, v.modelo ");
+		
+		Query query = manager.createQuery(sql.toString());
+		if (StringUtils.isNotBlank(pessoaNome)) {
+			query.setParameter("nome", "%" + pessoaNome.toUpperCase() + "%");
+		}
+		return (List<Veiculo>) query.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Servico> recuperaServicos(String descricao) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("select s from Servico s ");
+		
+		if(StringUtils.isNotBlank(descricao)) {
 			sql.append(" where ");
 		}
-
-		if (StringUtils.isNotBlank(nome)) {
-			sql.append(" upper (p.nome) like :nome");
+		
+		if(StringUtils.isNumeric(descricao)) {
+			sql.append(" upper (s.codigo) like :codigo ");
+		}else {
+			if (StringUtils.isNotBlank(descricao)) {
+				sql.append(" upper (s.descricao) like :descricao ");
+			}
 		}
-
-		if (StringUtils.isBlank(nome) && tipoPessoa != null) {
-			sql.append(" p.tipoPessoa = :tipoPessoa ");
-		}
-
-		if (StringUtils.isNotBlank(nome) && tipoPessoa != null) {
-			sql.append(" and p.tipoPessoa = :tipoPessoa ");
-		}
-
+		
+		sql.append(" order by s.descricao, s.valor ");
+		
 		Query query = manager.createQuery(sql.toString());
+		
+		if (StringUtils.isNumeric(descricao)) {
+			query.setParameter("codigo", "%" + descricao.toUpperCase() + "%");
+		}else {
+			if (StringUtils.isNotBlank(descricao)) {
+				query.setParameter("descricao", "%" + descricao.toUpperCase() + "%");
+			}
+		}
+		
+		return (List<Servico>) query.getResultList();
+	}
 
+	
+	
+	@SuppressWarnings("unchecked")
+	public List<Pessoa> recuperaPessoa(String nome, boolean ehFuncionario, boolean ehPessoaFisica, boolean ehPessoaJuridica) {
+		StringBuilder sql = new StringBuilder();
+
+		sql.append("select p from Pessoa p  where ");
+		
+		if (StringUtils.isNotBlank(nome)) {
+			sql.append(" upper (p.nome) like :nome ");
+		}
+		
+		if(StringUtils.isNotBlank(nome) && (ehFuncionario || ehPessoaFisica || ehPessoaJuridica)) {
+			sql.append(" and ");
+		}
+		
+		
+		if (ehFuncionario) {
+			sql.append(" p.tipoPessoa = 'FUNCIONARIO' ");
+		}else if (ehPessoaFisica) {
+			sql.append(" p.tipoPessoa = 'PESSOAFISICA' ");
+		}else if (ehPessoaJuridica) {
+			sql.append(" p.tipoPessoa = 'PESSOAJURIDICA' ");
+		}else {
+			if(StringUtils.isNotBlank(nome)) {
+				sql.append(" and ");
+			}
+			sql.append(" p.tipoPessoa IN('PESSOAFISICA', 'PESSOAJURIDICA') ");
+			
+		}
+		Query query = manager.createQuery(sql.toString());
 		if (StringUtils.isNotBlank(nome)) {
 			query.setParameter("nome", "%" + nome.toUpperCase() + "%");
 		}
-
-		if (tipoPessoa != null) {
-			query.setParameter("tipoPessoa", tipoPessoa);
-		}
-
 		return (List<Pessoa>) query.getResultList();
 	}
 

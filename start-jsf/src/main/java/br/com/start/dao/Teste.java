@@ -1,16 +1,23 @@
 package br.com.start.dao;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import br.com.start.types.TipoPessoa;
 
 public class Teste {
 
 	public static void main(String[] args) {
 		
-		String valorStr ="1,50";
-		BigDecimal valor = new BigDecimal(valorStr.trim().replace(".", "").replace(",", "."));
 		
-		System.out.println(valor);
-
+		
+		String valores = "PESSOAFISICA, PESSOAJURIDICA";
+		
+		String[] vetor = valores.split(","); 
+		
+		
 	}
 
 }

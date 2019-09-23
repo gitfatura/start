@@ -12,7 +12,6 @@ import br.com.start.dao.PersistenceUtils;
 import br.com.start.dao.QueryUtils;
 import br.com.start.entity.Pessoa;
 import br.com.start.facade.AppBO;
-import br.com.start.types.TipoPessoa;
 
 @ApplicationScoped
 public class PessoaBO implements Serializable, AppBO<Pessoa> {
@@ -21,11 +20,10 @@ public class PessoaBO implements Serializable, AppBO<Pessoa> {
 
 	@Inject
 	private QueryUtils<Pessoa> query;
-		
+
 	@Inject
 	private PersistenceUtils<Pessoa> dao;
-	
-	
+
 	@Override
 	public void grava(Pessoa pessoa) {
 		dao.save(pessoa);
@@ -54,9 +52,8 @@ public class PessoaBO implements Serializable, AppBO<Pessoa> {
 		return query.get(Pessoa.class, id);
 	}
 
-	public List<Pessoa> recuperaPeloTipoPessoa(String valor, TipoPessoa tipoPessoa) {
-		return query.recuperaPessoa(valor, tipoPessoa);
+	public List<Pessoa> recuperaPeloTipoPessoa(String valor, boolean ehFuncionario, boolean ehPessoaFisica, boolean ehPessoaJuridica) {
+		return query.recuperaPessoa(valor, ehFuncionario, ehPessoaFisica, ehPessoaJuridica);
 	}
 
-	
 }

@@ -51,5 +51,9 @@ public class VeiculoImpl implements Serializable, VeiculoFacade {
 	public void gravaVeiculo(Veiculo veiculo) {
 		veiculoBO.grava(veiculo);
 	}
+	
+	public List<Veiculo> recuperaVeiculos(String pessoaNome) {
+		return veiculoBO.recuperaVeiculos(pessoaNome);
+	}
 
 }

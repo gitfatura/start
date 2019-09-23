@@ -7,10 +7,10 @@
 	xmlns:o="http://omnifaces.org/ui"
     template="/WEB-INF/template.xhtml">
 	<ui:define name="content">
-		<p:fieldset legend="Cadastrar cliente" id="fildpessoa" style="margin-top: 10px">
+		<p:fieldset legend="Cadastrar cliente" id="fildcliente" style="margin-top: 10px">
 			<h:form id="frm">
 				<div class="ContainerIndent ui-fluid">
-					<p:panel id="panelPessoa">
+					<p:panel id="panelcliente">
 						<div class="ContainerIndent">
 							<p:messages id="msg" />
 						</div>
@@ -19,7 +19,7 @@
 								<div class="ContainerIndent">
 									<div class="Container100">
 										<p:outputLabel for="nome" value="Nome"/>
-										<p:inputText id="nome" title="Nome" value="#{pessoaManMB.pessoa.nome}" styleClass="FontBold Fs18 hardblue" required="true" requiredMessage="Informe nome."/>
+										<p:inputText id="nome" title="Nome" value="#{clienteManMB.cliente.nome}" styleClass="FontBold Fs18 hardblue" required="true" requiredMessage="Informe nome."/>
 									</div>
 								</div>
 							</div>
@@ -27,10 +27,10 @@
 							<div class="Container20 Responsive50">
 								<div class="ContainerIndent">
 									<div class="Container100">
-										<p:outputLabel for="tipoPessoa" value="Tipo de Pessoa"/>
-										<p:selectOneMenu id="tipoPessoa" onchange="trocouTipoPessoa();" value="#{pessoaManMB.pessoa.tipoPessoa}" required="true" requiredMessage="Informe o tipo de pessoa." styleClass="FontBold Fs18 hardblue">
-				    						<f:selectItem itemValue="#{pessoaManMB.pessoa.tipoPessoa.label}" itemLabel="Selecione" />
-				    						<f:selectItems value="#{pessoaManMB.tipoPessoas}"  var="tipo" itemValue="#{tipo}"  itemLabel="#{tipo.label}"/>
+										<p:outputLabel for="tipocliente" value="Tipo de cliente"/>
+										<p:selectOneMenu id="tipocliente" onchange="trocouTipoCliente();" value="#{clienteManMB.tipoCliente}" required="true" requiredMessage="Informe o tipo de cliente." styleClass="FontBold Fs18 hardblue">
+				    						<f:selectItem itemValue="PESSOAFISICA" itemLabel="Pessoa física" />
+				    						<f:selectItem itemValue="PESSOAJURIDICA" itemLabel="Pessoa jurídica" />
 				    					</p:selectOneMenu>
 									</div>
 								</div>
@@ -40,7 +40,7 @@
 								<div class="ContainerIndent">
 									<div class="Container100">
 										<p:outputLabel for="cpf" value="CPF"/>
-										<p:inputMask id="cpf" title="Cpf" mask="999.999.999-99" value="#{pessoaManMB.pessoa.cpf}" styleClass="FontBold Fs18 hardblue"/>
+										<p:inputMask id="cpf" title="Cpf" mask="999.999.999-99" value="#{clienteManMB.cliente.cpf}" styleClass="FontBold Fs18 hardblue"/>
 									</div>
 								</div>
 							</div>
@@ -49,7 +49,7 @@
 								<div class="ContainerIndent">
 									<div class="Container100">
 										<p:outputLabel for="cnpj" value="CNPJ"/>
-										<p:inputMask id="cnpj" title="CNPJ" mask="99.999.999/9999-99" value="#{pessoaManMB.pessoa.cnpj}" styleClass="FontBold Fs18 hardblue"/>
+										<p:inputMask id="cnpj" title="CNPJ" mask="99.999.999/9999-99" value="#{clienteManMB.cliente.cnpj}" styleClass="FontBold Fs18 hardblue"/>
 									</div>
 								</div>
 							</div>
@@ -61,7 +61,7 @@
 								<div class="ContainerIndent">
 									<div class="Container100">
 										<p:outputLabel for="fone" value="Telefone"/>
-										<p:inputMask title="Telefone" mask="(99) 99999-9999" value="#{pessoaManMB.pessoa.telefone}" styleClass="FontBold Fs18 hardblue" id="fone"/>
+										<p:inputMask title="Telefone" mask="(99) 99999-9999" value="#{clienteManMB.cliente.telefone}" styleClass="FontBold Fs18 hardblue" id="fone"/>
 									</div>
 								</div>
 							</div>
@@ -69,7 +69,7 @@
 								<div class="ContainerIndent">
 									<div class="Container100">
 										<p:outputLabel for="celular" value="Celular"/>
-										<p:inputMask title="Celular" mask="(99) 99999-9999" value="#{pessoaManMB.pessoa.celular}" styleClass="FontBold Fs18 hardblue" id="celular"/>
+										<p:inputMask title="Celular" mask="(99) 99999-9999" value="#{clienteManMB.cliente.celular}" styleClass="FontBold Fs18 hardblue" id="celular"/>
 									</div>
 								</div>
 							</div>
@@ -78,7 +78,7 @@
 								<div class="ContainerIndent">
 									<div class="Container100">
 										<p:outputLabel for="email" value="Email"/>
-										<p:inputText title="Email" value="#{pessoaManMB.pessoa.email}" styleClass="FontBold Fs18 hardblue" id="email"/>
+										<p:inputText title="Email" value="#{clienteManMB.cliente.email}" styleClass="FontBold Fs18 hardblue" id="email"/>
 									</div>
 								</div>
 							</div>
@@ -90,7 +90,7 @@
 							<div class="Container20 Responsive50">
 								<div class="ContainerIndent">
 									<div class="Container100">
-										<p:commandButton title="Registrar" value="Registrar" id="botaoSalvar" update="frm" action="#{pessoaManMB.grava}" />
+										<p:commandButton title="Registrar" value="Registrar" id="botaoSalvar" update="frm, frm:tipocliente" action="#{clienteManMB.grava}" />
 									</div>
 								</div>
 							</div>
@@ -98,7 +98,7 @@
 							<div class="Container20 Responsive50">
 								<div class="ContainerIndent">
 									<div class="Container100">
-										<p:commandButton value="Cancelar" update="panelPessoa, frm, fildpessoa" onclick="trocouTipoPessoa();" process="@this" action="#{pessoaManMB.novaInstacia}"/>
+										<p:commandButton value="Cancelar" update="panelcliente, frm, fildcliente" onclick="trocouTipocliente();" process="@this" action="#{clienteManMB.novaInstacia}"/>
 									</div>
 								</div>
 							</div>
@@ -111,19 +111,20 @@
 				<script type="text/javascript">
 					
 				$(document).ready(function() {
-					trocouTipoPessoa();
+					trocouTipoCliente();
 				});
 				
-				   function trocouTipoPessoa(){
-						var tipoPessoa = document.getElementById("frm:tipoPessoa_input").value;
+				   function trocouTipoCliente(){
+						var tipocliente = document.getElementById("frm:tipocliente_input").value;
 						$("#cnpj").hide();
-						if(tipoPessoa == 'PESSOAFISICA'){
+						if(tipocliente == 'PESSOAFISICA'){
 							$("#cnpj").hide();
 							$("#cpf").show();	
-						}
-						if(tipoPessoa == 'PESSOAJURIDICA'){
+						}else if(tipocliente == 'PESSOAJURIDICA'){
 							$("#cnpj").show();
 							$("#cpf").hide();
+						}else{
+							$("#cpf").show();
 						}
 					}
 				</script>

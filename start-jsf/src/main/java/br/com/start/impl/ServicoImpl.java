@@ -43,5 +43,10 @@ public class ServicoImpl implements Serializable, ServicoFacade {
 	public Servico get(Long id) {
 		return servicoBO.get(id);
 	}
+	
+	@Override
+	public List<Servico> recuperaServicos(String descricao){
+		return servicoBO.recuperaServicos(descricao);
+	}
 
 }

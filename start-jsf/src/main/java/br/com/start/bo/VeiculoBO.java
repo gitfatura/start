@@ -46,5 +46,9 @@ public class VeiculoBO implements Serializable, AppBO<Veiculo> {
 	public Veiculo get(Long id) {
 		return query.get(Veiculo.class, id);
 	}
+	
+	public List<Veiculo> recuperaVeiculos(String pessoaNome) {
+		return query.recuperaVeiculos(pessoaNome);
+	}
 
 }

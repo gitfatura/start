@@ -16,65 +16,66 @@
 							<p:toolbar>
 								<p:toolbarGroup>
 									<p:button value="Novo cliente" outcome="pessoaman"/>
-									<p:selectOneMenu  style="margin-left: 10px" id="tipoPessoa" value="#{pessoaConMB.tipoPessoaStr}" styleClass="FontBold Fs18 hardblue">
+									<p:selectOneMenu  style="margin-left: 10px" id="tipoPessoa" value="#{clienteConMB.tipoPessoaStr}" styleClass="FontBold Fs18 hardblue">
 			    						<f:selectItem itemValue="" itemLabel="Selecione o tipo de pessoa" />
-			    						<f:selectItems value="#{pessoaConMB.tipoPessoas}"  var="tipo" itemValue="#{tipo}"  itemLabel="#{tipo.label}"/>
+			    						<f:selectItem itemValue="PESSOAFISICA" itemLabel="Pessoa física" />
+			    						<f:selectItem itemValue="PESSOAJURIDICA" itemLabel="Pessoa jurídica" />
 			    					</p:selectOneMenu>
 								</p:toolbarGroup>
 								
 								<p:toolbarGroup align="right">
-									<p:inputText title="Entre com nome" placeholder="Entre com nome" value="#{pessoaConMB.pesquisa}" size="40"/>
-									<p:commandButton value="Pesquisar" action="#{pessoaConMB.carregaPessoas}" update="frmpesquisa,frm"/>
+									<p:inputText title="Entre com nome" placeholder="Entre com nome" value="#{clienteConMB.pesquisa}" size="40"/>
+									<p:commandButton value="Pesquisar" action="#{clienteConMB.carregaClientes}" update="frmpesquisa,frm"/>
 								</p:toolbarGroup>
 							</p:toolbar>
 						</h:form>
 						
 						<h:form id="frm">
-							<p:dataTable id="pessoa" var="pessoa" value="#{pessoaConMB.pessoas}"
-	                                     rows="5" paginator="true" paginatorTemplate="{CurrentPageReport}  
+							<p:dataTable id="cliente" var="cliente" value="#{clienteConMB.clientes}"
+	                                     rows="10" paginator="true" paginatorTemplate="{CurrentPageReport}  
 	                                     {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 	                                     rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"  emptyMessage="Nenhum cliente encontrado" 
 	                                     paginatorAlwaysVisible="true" reflow="true">
 	                                     
-								<p:column headerText="Nome" sortBy="#{pessoa.nome}">
-									<h:outputText value="#{pessoa.nome}" />
+								<p:column headerText="Nome" sortBy="#{cliente.nome}">
+									<h:outputText value="#{cliente.nome}" />
 								</p:column>
-								<p:column headerText="Cpf" sortBy="#{pessoa.cpf}" style="width: 120px">
-									<h:outputText value="#{pessoa.cpf}" />
-								</p:column>
-								
-								<p:column headerText="Cnpj" sortBy="#{pessoa.cnpj}" style="width: 135px">
-									<h:outputText value="#{pessoa.cnpj}" />
+								<p:column headerText="Cpf" sortBy="#{cliente.cpf}" style="width: 120px">
+									<h:outputText value="#{cliente.cpf}" />
 								</p:column>
 								
+								<p:column headerText="Cnpj" sortBy="#{cliente.cnpj}" style="width: 135px">
+									<h:outputText value="#{cliente.cnpj}" />
+								</p:column>
 								
-								<p:column headerText="Telefone" sortBy="#{pessoa.telefone}" style="width: 120px">
-									<h:outputText value="#{pessoa.telefone}" />
+								
+								<p:column headerText="Telefone" sortBy="#{cliente.telefone}" style="width: 120px">
+									<h:outputText value="#{cliente.telefone}" />
 								</p:column>
-								<p:column headerText="Celular" sortBy="#{pessoa.celular}" style="width: 120px">
-									<h:outputText value="#{pessoa.celular}" />
+								<p:column headerText="Celular" sortBy="#{cliente.celular}" style="width: 120px">
+									<h:outputText value="#{cliente.celular}" />
 								</p:column>
-								<p:column headerText="Email" sortBy="#{pessoa.email}">
-									<h:outputText value="#{pessoa.email}" />
+								<p:column headerText="Email" sortBy="#{cliente.email}">
+									<h:outputText value="#{cliente.email}" />
 								</p:column>
 								<p:column style="width: 32px">
 									<p:button outcome="pessoaman" icon="ui-icon-pencil" title="Editar">
-										<f:param name="id" value="#{pessoa.id}"/>
+										<f:param name="id" value="#{cliente.id}"/>
 									</p:button>
 								</p:column>
 								<p:column style="width: 32px">
-									<p:commandButton title="Excluir" oncomplete="PF('removerpessoa').show()" process="@this" update="frm" icon="ui-icon-trash">
-										<f:setPropertyActionListener   value="#{pessoa}" target="#{pessoaConMB.pessoa}"/>
+									<p:commandButton title="Excluir" oncomplete="PF('removercliente').show()" process="@this" update="frm" icon="ui-icon-trash">
+										<f:setPropertyActionListener   value="#{cliente}" target="#{clienteConMB.cliente}"/>
 									</p:commandButton>
 								</p:column>
 							</p:dataTable>
-							<p:dialog header="Deseja excluir pessoa" id="removerpessoa" widgetVar="removerpessoa" width="350" height="100">
+							<p:dialog header="Deseja excluir cliente" id="removercliente" widgetVar="removercliente" width="350" height="100">
 								<div class="col-70">
-									<p:outputLabel id="idNome" value="#{pessoaConMB.pessoa.nome}"/>
+									<p:outputLabel id="idNome" value="#{clienteConMB.cliente.nome}"/>
 									<hr/>
 								</div>
-								<p:button value="Não" onclick="PF('removerpessoa').hide(); return false;" />
-								<p:commandButton value="Sim" action="#{pessoaConMB.remove}" update="frm,pessoa"  onclick="PF('removerpessoa').hide()"/>
+								<p:button value="Não" onclick="PF('removercliente').hide(); return false;" />
+								<p:commandButton value="Sim" action="#{clienteConMB.remove}" update="frm,cliente"  onclick="PF('removercliente').hide()"/>
 							</p:dialog>
 						</h:form>
 					</div>

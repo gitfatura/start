@@ -2,13 +2,14 @@ package br.com.start.impl;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+
 import br.com.start.bo.PessoaBO;
 import br.com.start.entity.Pessoa;
 import br.com.start.facade.PessoaFacade;
 import br.com.start.jpa.Transactional;
-import br.com.start.types.TipoPessoa;
 
 @ApplicationScoped
 public class PessoaImpl implements Serializable, PessoaFacade {
@@ -46,8 +47,8 @@ public class PessoaImpl implements Serializable, PessoaFacade {
 	}
 
 	@Override
-	public List<Pessoa> recuperaPeloTipoPessoa(String valor, TipoPessoa tipoPessoa) {
-		return pessoaBO.recuperaPeloTipoPessoa(valor, tipoPessoa);
+	public List<Pessoa> recuperaPeloTipoPessoa(String valor, boolean ehFuncionario, boolean ehPessoaFisica, boolean ehPessoaJuridica) {
+		return pessoaBO.recuperaPeloTipoPessoa(valor, ehFuncionario, ehPessoaFisica, ehPessoaJuridica);
 	}
 
 }

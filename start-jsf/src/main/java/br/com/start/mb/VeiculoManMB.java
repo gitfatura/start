@@ -71,12 +71,14 @@ public class VeiculoManMB implements Serializable {
 
 	public void novaInstancia() {
 		veiculo = new Veiculo();
+		pessoa = new Pessoa();
 	}
 
 	private void recuperaVeiculos() {
 		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
 		if (StringUtils.isNotEmpty(id) && StringUtils.isNotBlank(id)) {
 			this.veiculo = veiculoFacade.get(Long.valueOf(id));
+			pessoa = veiculo.getPessoa();
 		}
 	}
 

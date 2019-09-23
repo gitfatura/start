@@ -37,7 +37,7 @@
 								<div class="ContainerIndent">
 									<div class="Container100">
 										<p:outputLabel for="nome" value="Marca"/>
-										<p:selectOneMenu id="nome" value="#{veiculoManMB.veiculo.marca}"  styleClass="FontBold Fs15 hardblue">
+										<p:selectOneMenu required="true" id="nome" value="#{veiculoManMB.veiculo.marca}" requiredMessage="Marca é obrigatório."  styleClass="FontBold Fs15 hardblue">
 				    						<f:selectItem itemLabel="Selecione" itemValue=""  />
 				    						 <f:selectItem itemLabel="Agrale" itemValue="Agrale"  />
 											 <f:selectItem itemLabel="Aston Martin" itemValue="Aston Martin"  />
@@ -98,7 +98,7 @@
 								<div class="ContainerIndent">
 									<div class="Container100">
 										<p:outputLabel for="proprietario" value="Proprietário"/>
-										<p:autoComplete id="proprietario" value="#{veiculoManMB.pessoa}" placeholder="pesquise pelo nome ou código" completeMethod="#{veiculoManMB.completarPessoa}"
+										<p:autoComplete required="true" id="proprietario" value="#{veiculoManMB.pessoa}" requiredMessage="Proprietário é obrigatório." placeholder="pesquise pelo nome ou código" completeMethod="#{veiculoManMB.completarPessoa}"
 										var="c" itemLabel="#{c.nome}" itemValue="#{c}" forceSelection="true"/>
 									</div>
 								</div>
@@ -107,7 +107,7 @@
 							<div class="Container5 Responsive50" >
 								<div class="ContainerIndent">
 									<div class="Container100">
-										<p:commandButton style="margin-left: -20px; margin-top: 20px" id="pessoa"  icon="ui-icon-search" title="Pesquisa" action="#{veiculoConMB.abrirDialogo}"
+										<p:commandButton style="margin-left: -50px; margin-top: 20px" id="pessoa"  icon="ui-icon-search" title="Pesquisa" action="#{veiculoConMB.abrirDialogo}"
 											process="@this" update="@none">
 											<p:ajax event="dialogReturn" listener="#{veiculoManMB.pessoaSelecionada}"
 												process="@this" update="proprietario" />

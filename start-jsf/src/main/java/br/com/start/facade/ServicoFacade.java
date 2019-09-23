@@ -9,4 +9,5 @@ public interface ServicoFacade {
 	public void remove(Servico servico);
 	public List<Servico> selected(String value);
 	public Servico get(Long id);
+	public List<Servico> recuperaServicos(String descricao);
 }

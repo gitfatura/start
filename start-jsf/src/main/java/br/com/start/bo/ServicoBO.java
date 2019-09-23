@@ -45,8 +45,12 @@ public class ServicoBO implements Serializable, AppBO<Servico> {
 		return query.recuperaItem(Servico.class, value, "descricao");
 	}
 
-	public Servico recuperaservico(Long id) {
+	public Servico recuperaServico(Long id) {
 		return query.get(Servico.class, id);
 	}
-
+	
+	public List<Servico> recuperaServicos(String descricao){
+		return query.recuperaServicos(descricao);
+	}
+	
 }

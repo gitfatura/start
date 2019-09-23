@@ -33,6 +33,8 @@ public class OrdemServicoManMB implements Serializable {
 	private static final long serialVersionUID = 3819230534860340809L;
 	private static final DecimalFormat df = new DecimalFormat("#,##0.00");
 
+	private String filtroPlaca;
+
 	@Inject
 	private OrdemServicoFacade ordemServicoFacade;
 
@@ -80,6 +82,10 @@ public class OrdemServicoManMB implements Serializable {
 
 	}
 
+	public List<Veiculo> completarVeiculo(String modelo) {
+		return veiculoFacade.selected(modelo);
+	}
+
 	public void grava() {
 		ordemServicoFacade.grava(ordemServico);
 		novaInstancia();
@@ -98,23 +104,23 @@ public class OrdemServicoManMB implements Serializable {
 	public void caculaServico() {
 		List<String> ldescricao = dservicos.getTarget();
 		valorServicos = BigDecimal.ZERO;
-		for(String umaDescricao : ldescricao) {
-			for(Servico umServico : servicos){
-				String servicoDescricao = umServico.getDescricao() +" - R$"+ df.format(umServico.getValor());
+		for (String umaDescricao : ldescricao) {
+			for (Servico umServico : servicos) {
+				String servicoDescricao = umServico.getDescricao() + " - R$" + df.format(umServico.getValor());
 				if (umaDescricao.equals(servicoDescricao)) {
 					valorServicos = valorServicos.add(umServico.getValor());
 				}
 			}
 		}
 	}
-	
+
 	private void carregaServicos() {
 		servicos = servicoFacade.all();
 		servicoSource = new ArrayList<>();
 		servicoTarget = new ArrayList<>();
-		
+
 		for (Servico umServico : servicos) {
-			servicoSource.add(umServico.getDescricao() +" - R$"+ df.format(umServico.getValor()));
+			servicoSource.add(umServico.getDescricao() + " - R$" + df.format(umServico.getValor()));
 		}
 		dservicos = new DualListModel<String>(servicoSource, servicoTarget);
 	}
@@ -236,6 +242,14 @@ public class OrdemServicoManMB implements Serializable {
 
 	public void setValorServicos(BigDecimal valorServicos) {
 		this.valorServicos = valorServicos;
+	}
+
+	public String getFiltroPlaca() {
+		return filtroPlaca;
+	}
+
+	public void setFiltroPlaca(String filtroPlaca) {
+		this.filtroPlaca = filtroPlaca;
 	}
 
 }
