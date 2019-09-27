@@ -8,76 +8,70 @@
     template="/WEB-INF/template.xhtml">
     
 	<ui:define name="content">
-	
+		
 		<p:fieldset legend="Cadastrar OS" style="margin-top: 10px">
-			
 			<h:form id="frm">
 			
 				<div class="ContainerIndent ui-fluid">
 					
-					<p:panel id="panel">
-						
 						<div class="ContainerIndent">
 							<p:messages id="msg" autoUpdate="false" closable="true"/>
 						</div>
 						
-						<!-- Filtros -->
-						<div class="Container">
-							<div class="Container20 Responsive50">
-								<div class="ContainerIndent">
-									<div class="Container100">
-										<p:outputLabel for="placa" value="Placa"/>
-										<p:inputMask mask="aaa-9999" id="placa" title="Placa"
-										 value="#{ordemServicoManMB.filtroPlaca}" styleClass="FontBold Fs15 hardblue"/>
-										 
-									</div>
-								</div>
-							</div>
-							
-							
-							<div class="Container40 Responsive50">
-								<div class="ContainerIndent">
-									<div class="Container100">
-										<p:outputLabel for="veiculo" value="Veículo"/>
-										<p:autoComplete required="true" id="veiculo" value="#{veiculoManMB.pessoa}" 
-										requiredMessage="Proprietário é obrigatório." placeholder="pesquise pelo nome ou código" completeMethod="#{veiculoManMB.completarPessoa}"
-										var="c" itemLabel="#{c.nome}" itemValue="#{c}" forceSelection="true"/>
-									</div>
-								</div>
-							</div>
-							
-							
-							
-							<div class="Container60 Responsive50">
-								<div class="ContainerIndent">
-									<div class="Container100">
-										<p:outputLabel for="modelo" value="Veiculo"/>
-										<p:inputText readonly="true"  id="modelo" title="Modelo" value="#{veiculoManMB.veiculo.modelo}" required="true" requiredMessage="Modelo é obrigatório." styleClass="FontBold Fs15 hardblue"/>
-									</div>
-								</div>
-							</div>
-							<div class="Container20 Responsive50">
-								<div class="ContainerIndent">
-									<div class="Container100">
-										<p:outputLabel for="status" value="Status"/>
-										<p:selectOneMenu id="status" value="#{pessoaManMB.pessoa.sexo}" styleClass="FontBold Fs18 hardblue">
-											<f:selectItem itemValue="" itemLabel="Selecione" />
-											<f:selectItems value="#{pessoaManMB.sexos}"  var="sta" itemValue="#{sta}"  itemLabel="#{sta.label}"/>
-										</p:selectOneMenu>
-									</div>
-								</div>
-							</div>
-						</div>
+						<p:accordionPanel>
 						
-						
-						<div class="EmptyBox20"></div>
-					</p:panel>
+					        <p:tab title="#{ordemServicoManMB.montaFiltros()}">
+					        	
+					        	<div class="Container">
+							
+									<div class="Container10 Responsive50">
+										<div class="ContainerIndent">
+											<div class="Container100">
+												<p:outputLabel for="placa" value="Placa"/>
+												<p:inputMask mask="aaa-9999" id="placa" title="Placa"
+												 value="#{ordemServicoManMB.filtroPlaca}" styleClass="FontBold Fs15 hardblue"/>
+											</div>
+										</div>
+									</div>
+								
+									<div class="Container30 Responsive50">
+										<div class="ContainerIndent">
+											<div class="Container100">
+												<p:outputLabel for="veiculo" value="Veículo"/>
+												<p:autoComplete required="true" id="veiculo" value="#{ordemServicoManMB.veiculo}" 
+												 placeholder="pesquise pelo modelo ou código" completeMethod="#{ordemServicoManMB.completarVeiculo}"
+												var="c" itemLabel="#{c.modelo}" itemValue="#{c}" forceSelection="true"/>
+											</div>
+										</div>
+									</div>
+								
+									<div class="Container5 Responsive50" >
+										<div class="ContainerIndent">
+											<div class="Container100">
+												<p:commandButton style="margin-left: -50px; margin-top: 18px" id="veiculos" icon="ui-icon-search" title="Pesquisa" 
+												action="#{ordemServicoManMB.abrirDialogoVeiculo}"
+													process="@this" update="@none">
+													<p:ajax event="dialogReturn" listener="#{ordemServicoManMB.veiculoSelecionado}"
+														process="@this" update="veiculo" />
+													<p:resetInput target="veiculo" />
+												</p:commandButton>
+											</div>
+										</div>
+									</div>
+								
+								</div>	
+								<div class="Container20 Responsive50">
+									<div class="ContainerIndent">
+										<div class="Container100">
+											<p:commandButton title="Registrar" value="Registrar" id="botaoSalvar" update="frm" action="#{ordemServicoManMB.atualiza}" />
+										</div>
+									</div>
+								</div>
+								
+					        </p:tab>
+				   	 	</p:accordionPanel>
 				</div>
-				
-				
 			</h:form>
 		</p:fieldset>
-		
-		
 	</ui:define>
 </ui:composition>

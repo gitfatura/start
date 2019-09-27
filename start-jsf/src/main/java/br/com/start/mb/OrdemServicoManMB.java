@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
@@ -13,6 +15,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.apache.commons.lang3.StringUtils;
+import org.primefaces.PrimeFaces;
+import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DualListModel;
 
 import br.com.start.comum.FacesUtil;
@@ -34,7 +38,11 @@ public class OrdemServicoManMB implements Serializable {
 	private static final DecimalFormat df = new DecimalFormat("#,##0.00");
 
 	private String filtroPlaca;
+	
+	@Inject
+	private Veiculo veiculo;
 
+	
 	@Inject
 	private OrdemServicoFacade ordemServicoFacade;
 
@@ -44,9 +52,7 @@ public class OrdemServicoManMB implements Serializable {
 	@Inject
 	private VeiculoFacade veiculoFacade;
 
-	@Inject
-	private Veiculo veiculo;
-
+	
 	private List<Veiculo> veiculos;
 
 	@Inject
@@ -82,8 +88,8 @@ public class OrdemServicoManMB implements Serializable {
 
 	}
 
-	public List<Veiculo> completarVeiculo(String modelo) {
-		return veiculoFacade.selected(modelo);
+	public void atualiza() {
+		System.out.println("ddddd");
 	}
 
 	public void grava() {
@@ -113,6 +119,8 @@ public class OrdemServicoManMB implements Serializable {
 			}
 		}
 	}
+	
+	
 
 	private void carregaServicos() {
 		servicos = servicoFacade.all();
@@ -140,6 +148,39 @@ public class OrdemServicoManMB implements Serializable {
 		}
 	}
 
+	public String montaFiltros() {
+		StringBuilder filtros = new StringBuilder();
+		filtros.append("Filtros: ");
+		if (StringUtils.isNotBlank(filtroPlaca)) {
+			filtros.append(" Placa: ").append(filtroPlaca);
+		}
+		if (veiculo !=null && StringUtils.isNotBlank(veiculo.getModelo())) {
+			filtros.append(" Veículo: ").append(filtroPlaca);
+		}
+		return filtros.toString();
+	}
+	
+	public void abrirDialogoVeiculo() {
+		Map<String, Object> opcoes = new HashMap<>();
+		opcoes.put("modal", true);
+		opcoes.put("resizable", false);
+		opcoes.put("contentHeight", 500);
+		PrimeFaces.current().dialog().openDynamic("veiculoselecao", opcoes, null);
+	}
+	
+	public List<Veiculo> completarVeiculo(String modelo) {
+		return veiculoFacade.selected(modelo);
+	}
+	
+	public void veiculoSelecionado(SelectEvent event) {
+		veiculo = (Veiculo) event.getObject();
+	}
+	
+	
+	public void selecionar(Veiculo veiculo) {
+		PrimeFaces.current().dialog().closeDynamic(veiculo);
+	}
+	
 	public OrdemServico getOrdemServico() {
 		return ordemServico;
 	}

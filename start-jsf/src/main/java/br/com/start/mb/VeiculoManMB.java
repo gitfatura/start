@@ -64,7 +64,12 @@ public class VeiculoManMB implements Serializable {
 	public void pessoaSelecionada(SelectEvent event) {
 		pessoa = (Pessoa) event.getObject();
 	}
-
+	
+	public void veiculoSelecionada(SelectEvent event) {
+		veiculo = (Veiculo) event.getObject();
+	}
+	
+	
 	public void recuperaPessoa() {
 		pessoas = pessoaFacade.all();
 	}

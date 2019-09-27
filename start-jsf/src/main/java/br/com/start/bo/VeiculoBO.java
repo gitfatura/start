@@ -39,7 +39,7 @@ public class VeiculoBO implements Serializable, AppBO<Veiculo> {
 
 	@Override
 	public List<Veiculo> selected(String value) {
-		return query.recuperaItem(Veiculo.class, value, "placa");
+		return query.recuperaItem(Veiculo.class, value, "modelo");
 	}
 
 	@Override
