@@ -6,8 +6,11 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import br.com.start.as.OrdemServicoAS;
 import br.com.start.bo.OrdemServicoBO;
 import br.com.start.entity.OrdemServico;
+import br.com.start.entity.Servico;
+import br.com.start.entity.Veiculo;
 import br.com.start.facade.OrdemServicoFacade;
 import br.com.start.jpa.Transactional;
 
@@ -18,6 +21,9 @@ public class OrdemServicoImpl implements Serializable, OrdemServicoFacade {
 
 	@Inject
 	private OrdemServicoBO ordemServicoBO;
+	
+	@Inject
+	private OrdemServicoAS ordemServicoAS;
 
 	@Transactional
 	@Override
@@ -44,6 +50,17 @@ public class OrdemServicoImpl implements Serializable, OrdemServicoFacade {
 	@Override
 	public OrdemServico get(Long id) {
 		return ordemServicoBO.get(id);
+	}
+
+	@Override
+	public Veiculo recuperaVeiculoPelaPlaca(String placa) {
+		return ordemServicoBO.recuperaVeiculoPelaPlaca(placa);
+	}
+
+	@Transactional
+	@Override
+	public void gravaServicos(List<Servico> servicos) {
+		ordemServicoAS.gravaServico(servicos);
 	}
 
 }

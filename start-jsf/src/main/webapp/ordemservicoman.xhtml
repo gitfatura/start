@@ -6,72 +6,242 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:o="http://omnifaces.org/ui"
     template="/WEB-INF/template.xhtml">
-    
-	<ui:define name="content">
+	
+	<style type="text/css">
+		.botao{
+			padding-left:35px;
+			padding-top:5px;
+			height:35px;     
+			float: left;
+			color: #6B6B6B;
+			width: 320px;
+			background-color: #F4F4F4;
+			border: 1px;
+			border-style: solid;
+			border-color: #c4c4c4;
+			margin-bottom: 12px;  
+			background-image:url(imagem);  
+			background-repeat:no-repeat;
+		}
 		
-		<p:fieldset legend="Cadastrar OS" style="margin-top: 10px">
-			<h:form id="frm">
+	</style>
+	<ui:define name="content">
+	
+		
+		<p:fieldset legend="Cadastrar OS" id="os" style="margin-top: 10px">
 			
-				<div class="ContainerIndent ui-fluid">
+			<div class="ContainerIndent ui-fluid">
 					
-						<div class="ContainerIndent">
-							<p:messages id="msg" autoUpdate="false" closable="true"/>
-						</div>
-						
-						<p:accordionPanel>
-						
-					        <p:tab title="#{ordemServicoManMB.montaFiltros()}">
-					        	
-					        	<div class="Container">
+					<h:form id="frm">
+					
+					<div class="ContainerIndent">
+						<p:messages id="msg" autoUpdate="false" closable="true"/>
+					</div>
+					<p:accordionPanel id="filtros">
+						<p:tab title="#{ordemServicoManMB.montaFiltros()}">
 							
-									<div class="Container10 Responsive50">
-										<div class="ContainerIndent">
-											<div class="Container100">
-												<p:outputLabel for="placa" value="Placa"/>
-												<p:inputMask mask="aaa-9999" id="placa" title="Placa"
-												 value="#{ordemServicoManMB.filtroPlaca}" styleClass="FontBold Fs15 hardblue"/>
-											</div>
-										</div>
-									</div>
+							<div class="Container">
 								
-									<div class="Container30 Responsive50">
-										<div class="ContainerIndent">
-											<div class="Container100">
-												<p:outputLabel for="veiculo" value="Veículo"/>
-												<p:autoComplete required="true" id="veiculo" value="#{ordemServicoManMB.veiculo}" 
-												 placeholder="pesquise pelo modelo ou código" completeMethod="#{ordemServicoManMB.completarVeiculo}"
-												var="c" itemLabel="#{c.modelo}" itemValue="#{c}" forceSelection="true"/>
-											</div>
-										</div>
-									</div>
-								
-									<div class="Container5 Responsive50" >
-										<div class="ContainerIndent">
-											<div class="Container100">
-												<p:commandButton style="margin-left: -50px; margin-top: 18px" id="veiculos" icon="ui-icon-search" title="Pesquisa" 
-												action="#{ordemServicoManMB.abrirDialogoVeiculo}"
-													process="@this" update="@none">
-													<p:ajax event="dialogReturn" listener="#{ordemServicoManMB.veiculoSelecionado}"
-														process="@this" update="veiculo" />
-													<p:resetInput target="veiculo" />
-												</p:commandButton>
-											</div>
-										</div>
-									</div>
-								
-								</div>	
-								<div class="Container20 Responsive50">
+								<div class="Container20 Responsive50" style="width: 10%">
 									<div class="ContainerIndent">
 										<div class="Container100">
-											<p:commandButton title="Registrar" value="Registrar" id="botaoSalvar" update="frm" action="#{ordemServicoManMB.atualiza}" />
+											<p:outputLabel for="placa" value="Placa"/>
+											<p:inputText id="placa" title="Placa" 
+												 value="#{ordemServicoManMB.filtroPlaca}" style="text-transform: uppercase" styleClass="FontBold Fs15 hardblue">
+												 	<p:ajax listener="#{ordemServicoManMB.recuperaVeiculo}" update="veiculo, frm"/> 
+											</p:inputText> 
 										</div>
 									</div>
 								</div>
 								
-					        </p:tab>
-				   	 	</p:accordionPanel>
-				</div>
-			</h:form>
+								<div class="Container30 Responsive50" style="width: 25%;">
+									<div class="ContainerIndent">
+										<div class="Container100">
+											<p:outputLabel for="veiculo" value="Veículo"/>
+											<p:autoComplete  id="veiculo" value="#{ordemServicoManMB.veiculo}" required="true" requiredMessage="Veículo é obrigatório."
+												 placeholder="Pesquise pelo modelo ou código" completeMethod="#{ordemServicoManMB.completarVeiculo}"
+												var="c" itemLabel="#{c.modelo}" itemValue="#{c}" forceSelection="true" styleClass="botao, FontBold Fs18 hardblue">
+											</p:autoComplete>	
+										</div>
+									</div>
+								</div>
+								
+								<div class="Container20 Responsive50" style="width: 5%; margin-left: -50px; margin-top: 18px;">
+									<div class="ContainerIndent">
+										<div class="Container100">
+											<p:commandButton id="veiculos" 
+												icon="ui-icon-search" title="Pesquisa" 
+												action="#{ordemServicoManMB.abrirDialogoVeiculo}" process="@this" update="@none">
+												<p:ajax event="dialogReturn" listener="#{ordemServicoManMB.veiculoSelecionado}"
+														process="@this" update="veiculo" />
+												<p:resetInput target="veiculo" />
+											</p:commandButton>
+										</div>
+									</div>
+								</div>
+								
+								
+								 
+								<div class="Container30 Responsive50" style="width: 25%">
+									<div class="ContainerIndent">
+										<div class="Container100">
+											<p:outputLabel for="servico" value="Serviço"/>
+											<p:autoComplete id="servico" value="#{ordemServicoManMB.servico}" required="true" requiredMessage="Serviço é obrigatório."
+												 placeholder="Pesquise pela descrição ou código do serviço" completeMethod="#{ordemServicoManMB.completarServicos}"
+												var="c" itemLabel="#{c.descricao}" itemValue="#{c}" forceSelection="true">
+											</p:autoComplete>	
+										</div>
+									</div>
+								</div>
+								
+								<div class="Container20 Responsive50" style="width: 5%; margin-left: -50px; margin-top: 18px;">
+									<div class="ContainerIndent">
+										<div class="Container100">
+											<p:commandButton id="servicos" icon="ui-icon-search" title="Pesquisa" 
+												action="#{ordemServicoManMB.abrirDialogoServico}"
+													process="@this" update="@none">
+												<p:ajax event="dialogReturn" listener="#{ordemServicoManMB.servicoSelecionado}"
+														process="@this" update="servico" />
+												<p:resetInput target="servico" />
+											</p:commandButton>
+										</div>
+									</div>
+								</div>
+								
+								
+								<div class="Container20 Responsive50" style="width: 15%">
+									<div class="ContainerIndent">
+										<div class="Container100">
+											<p:outputLabel for="tipocliente" value="Status"/>
+											<p:selectOneMenu id="tipocliente" value="#{ordemServicoManMB.status}"  required="true" requiredMessage="Informe o tipo de cliente." styleClass="FontBold Fs18 hardblue">
+												<f:selectItem itemValue="ABERTO" itemLabel="Em aberto" />
+												<f:selectItem itemValue="FINALIZADO" itemLabel="Finalizado" />
+												<f:selectItem itemValue="CANCELADO" itemLabel="Cancelado" />
+											</p:selectOneMenu>
+										</div>
+									</div>
+								</div>
+								
+								<div class="Container10 Responsive50" style="width: 22%; margin-top: 18px">
+									<div class="ContainerIndent">
+										<div class="Container100">
+											<p:commandButton title="Registrar" value="Adicionar" id="botaoSalvar" update="frm,frmservicos" action="#{ordemServicoManMB.adicionaServico}" />
+										</div>
+									</div>
+								</div>
+								
+							</div>
+						</p:tab>
+					</p:accordionPanel>
+					</h:form>
+					
+					<h:form id="frmservicos">
+					 
+					
+					<p:fieldset legend="Serviços" id="servicosfild" style="margin-top: 10px">
+						<div class="Container">
+							<p:dataTable id="servicosel" var="servicosel" value="#{ordemServicoManMB.servicosFiltrados}"
+		                                     
+		                                     rows="100" paginator="false" paginatorTemplate="{CurrentPageReport}  
+		                                     {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+		                                     rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"  emptyMessage="Nenhum serviço encontrado" 
+		                                     paginatorAlwaysVisible="true" reflow="true">
+		                                     
+		                                     
+								<p:column headerText="Código" sortBy="#{servicosel.codigo}" style="width: 120px">
+									<h:outputText value="#{servicosel.codigo}" />
+								</p:column>
+								<p:column headerText="Descrição" sortBy="#{servicosel.descricao}">
+									<h:outputText value="#{servicosel.descricao}" />
+								</p:column>
+								<p:column headerText="Valor" sortBy="#{servicosel.valor}">
+									<h:outputText value="#{servicosel.valor}">
+										<f:convertNumber  type="currency" currencySymbol="R$"/>
+									</h:outputText>
+								</p:column>
+								<p:column style="width: 50px">
+									<p:commandButton title="Excluir" oncomplete="PF('removerservico').show()" process="@this" update="frmservicos" icon="ui-icon-trash">
+										<f:setPropertyActionListener value="#{servicosel}" target="#{ordemServicoManMB.servico}"/>
+									</p:commandButton>
+								</p:column>
+							</p:dataTable>
+							<p:dialog header="Deseja excluir serviço" id="removerservico" widgetVar="removerservico" width="300" height="100">
+								<div class="col-70">
+									<p:outputLabel id="idNome" value="#{ordemServicoManMB.servico.descricao}"/>
+									<hr/>
+								</div>
+							<div class="Container">	
+								<div class="Container40 Responsive50">
+									<div class="ContainerIndent">
+										<div class="Container100">
+											<p:button value="Não" onclick="PF('removerservico').hide(); return false;" />
+										</div>
+									</div>
+								</div>
+								
+								<div class="Container40 Responsive50">
+									<div class="ContainerIndent">
+										<div class="Container100">
+											<p:commandButton value="Sim" action="#{ordemServicoManMB.removeServico}" update="frmservicos,servicosel"  
+											onclick="PF('removerservico').hide()"/>
+										</div>
+									</div>
+								</div>
+							</div>	
+							</p:dialog>
+						</div>
+					</p:fieldset>
+					
+					<div class="EmptyBox20"/>
+						<p:fieldset style="margin-top: 5px">
+							<p:outputLabel id="valorServico" value="Valor total: R$#{ordemServicoManMB.valorServicos}">
+								<f:convertNumber pattern="#,##0.00"/>
+							</p:outputLabel>
+						</p:fieldset>
+						<div class="EmptyBox20"></div>
+					
+						<div class="Container10 Responsive50" style="width: 22%; margin-top: 18px">
+							<div class="ContainerIndent">
+								<div class="Container100">
+									<p:commandButton title="Registrar" value="Registrar" id="botaoRegistrar" update="frm,frmservicos" action="#{ordemServicoManMB.grava}" />
+								</div>
+							</div>
+						</div>
+						
+						<div class="Container20 Responsive50" style="width: 22%; margin-top: 18px">
+							<div class="ContainerIndent">
+								<div class="Container100">
+									<p:commandButton value="Cancelar" update="frm" process="@this" action="#{ordemServicoManMB.novaInstancia}"/>
+								</div>
+							</div>
+						</div>
+						
+					</h:form>
+					</div>
+			
+			
 		</p:fieldset>
+		
+		<!-- <script type="text/javascript">
+			$(document).ready(function(){
+				formataPlaca();
+			});
+			
+			function formataPlaca(){
+				$('.frm:filtros:placa').mask('AAA-9999', {reverse: true});
+				alert("alert");
+			}
+		</script>
+		 -->
+		
 	</ui:define>
 </ui:composition>
+
+
+
+
+
+
+
+
+

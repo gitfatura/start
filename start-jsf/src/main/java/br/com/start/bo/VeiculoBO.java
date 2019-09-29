@@ -51,4 +51,8 @@ public class VeiculoBO implements Serializable, AppBO<Veiculo> {
 		return query.recuperaVeiculos(pessoaNome);
 	}
 
+	public Veiculo recuperaVeiculoPelaPlaca(String placa) {
+		return query.recuperaVeiculosPelaPlaca(placa);
+	}
+
 }

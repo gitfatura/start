@@ -2,7 +2,6 @@ package br.com.start.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,7 +24,7 @@ public class Servico extends AppBase implements Serializable {
 	@Column(name = "SER_ID")
 	private Long id;
 
-	@Column(name = "SER_CODIGOD", unique=true)
+	@Column(name = "SER_CODIGOD", unique = true)
 	private String codigo;
 
 	@Column(name = "SER_DESCRICAO", length = 100, nullable = false)
@@ -33,18 +33,19 @@ public class Servico extends AppBase implements Serializable {
 	@Column(name = "SER_VALOR", nullable = true)
 	private BigDecimal valor;
 
-	@OneToMany(targetEntity = OrdemServico.class, fetch = FetchType.LAZY, mappedBy = "servico")
-	private List<OrdemServico> servicos;
+	@ManyToOne(targetEntity = OrdemServico.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "SER_ORDEMSERVICOID")
+	private OrdemServico ordemServico;
 
 	public Servico() {
 	}
 
-	public Servico(Long id, String codigo, String descricao, BigDecimal valor, List<OrdemServico> servicos) {
+	public Servico(Long id, String codigo, String descricao, BigDecimal valor, OrdemServico ordemServico) {
 		this.id = id;
 		this.codigo = codigo;
 		this.descricao = descricao;
 		this.valor = valor;
-		this.servicos = servicos;
+		this.ordemServico = ordemServico;
 	}
 
 	@Override
@@ -80,12 +81,12 @@ public class Servico extends AppBase implements Serializable {
 		this.valor = valor;
 	}
 
-	public List<OrdemServico> getServicos() {
-		return servicos;
+	public OrdemServico getOrdemServico() {
+		return ordemServico;
 	}
 
-	public void setServicos(List<OrdemServico> servicos) {
-		this.servicos = servicos;
+	public void setOrdemServico(OrdemServico ordemServico) {
+		this.ordemServico = ordemServico;
 	}
 
 	@Override

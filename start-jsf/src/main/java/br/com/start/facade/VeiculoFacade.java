@@ -12,4 +12,5 @@ public interface VeiculoFacade {
 	public Veiculo get(Long id);
 	public void gravaVeiculo(Veiculo veiculo);
 	public List<Veiculo> recuperaVeiculos(String pessoaNome);
+	
 }

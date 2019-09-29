@@ -21,7 +21,9 @@
 								<div class="ContainerIndent">
 									<div class="Container100">
 										<p:outputLabel for="placa" value="Placa"/>
-										<p:inputMask mask="aaa-9999" id="placa" title="Placa" required="true" requiredMessage="Placa é obrigatório." value="#{veiculoManMB.veiculo.placa}" style="text-transform: uppercase" styleClass="FontBold Fs15 hardblue"/>
+										<p:inputText id="placa" title="Placa" required="true" onblur="this.value = this.value.toUpperCase();" 
+										 requiredMessage="Placa é obrigatório." value="#{veiculoManMB.veiculo.placa}" 
+										style="text-transform: uppercase" styleClass="FontBold Fs15 hardblue"/>
 									</div>
 								</div>
 							</div>
@@ -98,7 +100,7 @@
 								<div class="ContainerIndent">
 									<div class="Container100">
 										<p:outputLabel for="proprietario" value="Proprietário"/>
-										<p:autoComplete required="true" id="proprietario" value="#{veiculoManMB.pessoa}" requiredMessage="Proprietário é obrigatório." placeholder="pesquise pelo nome ou código" completeMethod="#{veiculoManMB.completarPessoa}"
+										<p:autoComplete required="true" id="proprietario" value="#{veiculoManMB.pessoa}" requiredMessage="Proprietário é obrigatório." placeholder="Pesquise pelo nome ou código" completeMethod="#{veiculoManMB.completarPessoa}"
 										var="c" itemLabel="#{c.nome}" itemValue="#{c}" forceSelection="true"/>
 									</div>
 								</div>

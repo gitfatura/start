@@ -125,6 +125,21 @@ public class QueryUtils<T> {
 		return (List<Veiculo>) query.getResultList();
 	}
 	
+	public Veiculo recuperaVeiculosPelaPlaca(String placa) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("select v from Veiculo v ");
+		
+		if (StringUtils.isNotBlank(placa)) {
+			sql.append(" where v.placa = :placa ");
+		}
+		
+		Query query = manager.createQuery(sql.toString());
+		if (StringUtils.isNotBlank(placa)) {
+			query.setParameter("placa", placa);
+		}
+		return (Veiculo) query.getSingleResult();
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Servico> recuperaServicos(String descricao) {
 		StringBuilder sql = new StringBuilder();

@@ -39,6 +39,10 @@ public class ServicoConMB implements Serializable {
 	public void recuperaServicos() {
 		servicos = servicoFacade.recuperaServicos(pesquisa);
 	}
+	
+	public void servicosSelecionados() {
+		servicos = servicoFacade.recuperaServicos(pesquisa);
+	}
 
 	public void remove() {
 		servicoFacade.remove(servico);
