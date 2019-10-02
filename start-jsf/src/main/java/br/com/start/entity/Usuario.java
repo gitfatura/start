@@ -16,7 +16,7 @@ import br.com.start.types.Role;
 
 @Entity
 @Table(name = "TB_USUARIO")
-public class Usuario extends AppBase implements Serializable {
+public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = -2094929034363252346L;
 

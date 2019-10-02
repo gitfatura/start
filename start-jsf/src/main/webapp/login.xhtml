@@ -4,11 +4,9 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-
 <h:head>
-	<title>SENTINEL BLUE | Prime Faces Layouts Header</title>
+	<title>PROJETO | PDS</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-        
     <h:outputScript name="js/login.js" library="sentinel-layout" />
     <h:outputStylesheet name="css/font-icon-layout.css" library="sentinel-layout" />
     <h:outputStylesheet name="css/sentinel-layout.css" library="sentinel-layout" />
@@ -19,12 +17,10 @@
       
     <h:form>	
     <div class="Container">
-    
         <div class="Container80 MaxWid500 Fnone MarAuto TexAlCenter PaddingTopPercent10">
             <a href="" id="login-logo">
-                <span class="Fs30 FontTitilliumSemiBoldItalic Fleft"><span class="softblue">PC </span><span class="hardblue">SYSTEMS</span></span>
+                <span class="Fs30 FontTitilliumSemiBoldItalic Fleft"><span class="softblue">PROJETO </span><span class="hardblue">PDS</span></span>
             </a>
-            <div class="EmptyBox10"></div>
         </div>
 
         <div class="Container80 MaxWid500 white-back Fnone MarAuto BordRad10" id="login-box">
@@ -42,11 +38,11 @@
 
                 <div class="Container90 Fnone MarAuto TexAlCenter TabContent OvHidden" id="TAB1">
                     <div class="EmptyBox50"></div>
-                    <p:inputText value="#{loginMB.usuario.login}" placeholder="Usuário" styleClass="Container80 Fnone MarAuto Fs18"/>
+                    <p:inputText value="#{usuarioManMB.usuario.login}" placeholder="Usuário" styleClass="Container80 Fnone MarAuto Fs18"/>
                     <div class="EmptyBox10"></div>
-                    <p:password value="#{loginMB.usuario.senha}" placeholder="Senha" styleClass="Container80 Fnone MarAuto Fs18"/>
+                    <p:password value="#{usuarioManMB.usuario.senha}" placeholder="Senha" styleClass="Container80 Fnone MarAuto Fs18"/>
                     <div class="EmptyBox20"></div>
-                    <p:commandButton value="Log In" action="#{loginMB.validarUsuarioESenha}" styleClass="Fs16" update="@form"/>
+                    <p:commandButton value="Logar" action="#{usuarioManMB.logar}" styleClass="Fs16" update="@form"/>
                     <div class="EmptyBox50"></div>
                 </div>
 

@@ -42,7 +42,7 @@ public class QueryUtils<T> {
 					.setParameter("login", usuario.getLogin()).setParameter("senha", usuario.getSenha())
 					.getSingleResult();
 		} catch (Exception e) {
-			return null;
+			throw e;
 		}
 		return usuarioLogado;
 	}

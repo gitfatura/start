@@ -22,6 +22,7 @@
 								</p:toolbarGroup>
 							</p:toolbar>
 						</h:form>
+						<div class="EmptyBox20"></div>
 						<h:form id="frm">
 							<p:dataTable id="produto" var="produto" value="#{produtoConMB.produtos}"
 	                                     rows="5" paginator="true" paginatorTemplate="{CurrentPageReport}  
@@ -29,28 +30,16 @@
 	                                     rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"  emptyMessage="Nenhum produto encontrado" 
 	                                     paginatorAlwaysVisible="true" reflow="true">
 								
-								<p:column headerText="Código" sortBy="#{produto.id}">
+								<p:column headerText="Código" sortBy="#{produto.id}" style="width: 80px">
 									<h:outputText value="#{produto.id}" />
 								</p:column>
-								
-								<p:column headerText="Nome" sortBy="#{produto.nome}">
-									<h:outputText value="#{produto.nome}" />
-								</p:column>
-								
 								
 								<p:column headerText="Descrição" sortBy="#{produto.descricao}">
 									<h:outputText value="#{produto.descricao}" />
 								</p:column>
 								
-								<p:column headerText="Quantidade" sortBy="#{produto.quantidade}">
+								<p:column headerText="Quantidade" sortBy="#{produto.quantidade}" style="width: 120px">
 									<h:outputText value="#{produto.quantidade}" />
-								</p:column>
-								
-								
-								<p:column headerText="Valor" sortBy="#{produto.valor}">
-									<h:outputText value="#{produto.valor}">
-										 <f:convertNumber  type="currency" currencySymbol="R$"/>	
-									</h:outputText> 
 								</p:column>
 								
 								<p:column style="width: 50px">

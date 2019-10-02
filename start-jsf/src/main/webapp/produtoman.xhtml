@@ -18,15 +18,6 @@
 							<div class="Container40 Responsive50">
 								<div class="ContainerIndent">
 									<div class="Container100">
-										<p:outputLabel for="nome" value="Nome"/>
-										<p:inputText id="nome" title="Nome" value="#{produtoManMB.produto.nome}" required="true" requiredMessage="Nome é obrigatório." styleClass="FontBold Fs18 hardblue"/>
-									</div>
-								</div>
-							</div>
-							
-							<div class="Container40 Responsive50">
-								<div class="ContainerIndent">
-									<div class="Container100">
 										<p:outputLabel for="descricao" value="Descrição"/>
 										<p:inputText id="descricao" title="Descrição" value="#{produtoManMB.produto.descricao}" styleClass="FontBold Fs18 hardblue"/>
 									</div>
@@ -41,27 +32,13 @@
 									</div>
 								</div>
 							</div>
-							</div>
-					<div class="Container">
-							
-							<div class="Container20 Responsive50">
-								<div class="ContainerIndent">
-									<div class="Container100">
-										<p:outputLabel for="valor" value="Valor"/>
-										<p:inputText id="valor" title="Valor" value="#{produtoManMB.produto.valor}" styleClass="FontBold Fs18 hardblue money">
-											<f:convertNumber pattern="#,##0.00"/>
-										</p:inputText>
-									</div>
-								</div>
-							</div>
-							  
 						</div>
 						<div class="EmptyBox20"></div>
 						<div class="Container">
 							<div class="Container20 Responsive50">
 								<div class="ContainerIndent">
 									<div class="Container100">
-										<p:commandButton title="Registrar" value="Registrar" id="botaoSalvar" update="frm,frm:valor" action="#{produtoManMB.grava}" />
+										<p:commandButton title="Registrar" value="Registrar" id="botaoSalvar" update="frm" action="#{produtoManMB.grava}" />
 									</div>
 								</div>
 							</div>
@@ -69,12 +46,7 @@
 						<div class="EmptyBox20"></div>
 					</p:panel>
 				</div>
-				
-				<script type="text/javascript">
-		   			 $(document).ready(function(){
-		          		$('.money').mask('000.000.000.000.000,00', {reverse: true});
-		        	});      
-     			</script>
+				 
 			</h:form>
 		</p:fieldset>
 	</ui:define>

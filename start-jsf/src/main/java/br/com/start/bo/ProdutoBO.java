@@ -50,7 +50,7 @@ public class ProdutoBO implements Serializable, AppBO<Produto> {
 
 	@Override
 	public List<Produto> selected(String value) {
-		return query.recuperaItem(Produto.class, value, "nome");
+		return query.recuperaItem(Produto.class, value, "descricao");
 	}
 
 	public Produto recuperaProduto(Long id) {
