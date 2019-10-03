@@ -1,0 +1,94 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+    template="/WEB-INF/template.xhtml">
+	<ui:define name="content">
+		<p:fieldset legend="Cadastrar Funcionário" id="fildfuncionario" style="margin-top: 10px">
+			<h:form id="frm">
+				<div class="ContainerIndent ui-fluid">
+					<p:panel id="panelfuncionario">
+						<div class="ContainerIndent">
+							<p:messages id="msg" />
+						</div>
+						<div class="Container">
+							<div class="Container60 Responsive50">
+								<div class="ContainerIndent">
+									<div class="Container100">
+										<p:outputLabel for="nome" value="Nome"/>
+										<p:inputText id="nome" title="Nome" value="#{funcionarioManMB.funcionario.nome}" styleClass="FontBold Fs18 hardblue" required="true" requiredMessage="Informe nome."/>
+									</div>
+								</div>
+							</div>
+							
+							
+							<div class="Container20 Responsive50" id="cpf">
+								<div class="ContainerIndent">
+									<div class="Container100">
+										<p:outputLabel for="cpf" value="CPF"/>
+										<p:inputMask id="cpf" title="Cpf" mask="999.999.999-99" value="#{funcionarioManMB.funcionario.cpf}" styleClass="FontBold Fs18 hardblue"/>
+									</div>
+								</div>
+							</div>
+							
+							<div class="Container20 Responsive50">
+								<div class="ContainerIndent">
+									<div class="Container100">
+										<p:outputLabel for="fone" value="Telefone"/>
+										<p:inputMask title="Telefone" mask="(99) 99999-9999" value="#{funcionarioManMB.funcionario.telefone}" styleClass="FontBold Fs18 hardblue" id="fone"/>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+						
+						<div class="Container">
+							
+							<div class="Container20 Responsive50">
+								<div class="ContainerIndent">
+									<div class="Container100">
+										<p:outputLabel for="celular" value="Celular"/>
+										<p:inputMask title="Celular" mask="(99) 99999-9999" value="#{funcionarioManMB.funcionario.celular}" styleClass="FontBold Fs18 hardblue" id="celular"/>
+									</div>
+								</div>
+							</div>
+							
+							<div class="Container40 Responsive50">
+								<div class="ContainerIndent">
+									<div class="Container100">
+										<p:outputLabel for="email" value="Email"/>
+										<p:inputText title="Email" value="#{funcionarioManMB.funcionario.email}" styleClass="FontBold Fs18 hardblue" id="email"/>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+						
+						<div class="EmptyBox20"></div>
+						<div class="Container">
+							<div class="Container20 Responsive50">
+								<div class="ContainerIndent">
+									<div class="Container100">
+										<p:commandButton title="Registrar" value="Registrar" id="botaoSalvar" update="frm" action="#{funcionarioManMB.grava}" />
+									</div>
+								</div>
+							</div>
+							
+							<div class="Container20 Responsive50">
+								<div class="ContainerIndent">
+									<div class="Container100">
+										<p:commandButton value="Cancelar" update="panelfuncionario, frm, fildfuncionario" process="@this" action="#{funcionarioManMB.novaInstacia}"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="EmptyBox20"></div>
+					</p:panel>
+				</div>
+			</h:form>
+		</p:fieldset>
+	</ui:define>
+</ui:composition>

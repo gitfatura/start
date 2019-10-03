@@ -1,0 +1,74 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+    template="/WEB-INF/template.xhtml">
+	<ui:define name="content">
+		<div class="ContainerIndent">
+			<p:fieldset legend="Lista de Veículos">
+					<div class="ContainerIndent">
+						<h:form id="frmpesquisa">
+							<p:toolbar>
+								<p:toolbarGroup>
+									<p:button value="Novo Veículo" outcome="veiculoman"/>
+								</p:toolbarGroup>
+								<p:toolbarGroup align="right">
+									<p:inputText title="Entre com a placa" placeholder="Entre com nome do proprietário" value="#{veiculoConMB.pesquisa}" size="40"/>
+									<p:commandButton value="Pesquisar" action="#{veiculoConMB.recuperaVeiculosSelecionado}" update="frmpesquisa,frm"/>
+								</p:toolbarGroup>
+							</p:toolbar>
+						</h:form>
+						<h:form id="frm">
+							<p:dataTable id="veiculo" var="veiculo" value="#{veiculoConMB.veiculos}"
+	                                     rows="10" paginator="true" paginatorTemplate="{CurrentPageReport}  
+	                                     {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                                     rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"  emptyMessage="Nenhum veículo encontrado" 
+	                                     paginatorAlwaysVisible="true" reflow="true">
+								
+								<p:column headerText="Proprietário" sortBy="#{veiculo.pessoa.nome}">
+									<h:outputText value="#{veiculo.pessoa.nome}" />
+								</p:column>
+								
+								<p:column headerText="Modelo" sortBy="#{veiculo.modelo}">
+									<h:outputText value="#{veiculo.modelo}" />
+								</p:column>
+								
+								<p:column headerText="Marca" sortBy="#{veiculo.marca}">
+									<h:outputText value="#{veiculo.marca}" />
+								</p:column>
+								
+								<p:column headerText="Placa" sortBy="#{veiculo.placa}" style="width: 100px"> 
+									<h:outputText value="#{veiculo.placa}" style="text-transform: uppercase" />
+								</p:column>
+								
+								
+								<p:column style="width: 33px">
+									<p:button outcome="veiculoman" icon="ui-icon-pencil" title="Editar">
+										<f:param name="id" value="#{veiculo.id}"/>
+									</p:button>
+								</p:column>
+								
+								<p:column style="width: 33px">
+									<p:commandButton title="Excluir" oncomplete="PF('removerveiculo').show()" process="@this" update="frm" icon="ui-icon-trash">
+										<f:setPropertyActionListener   value="#{veiculo}" target="#{veiculoConMB.veiculo}"/>
+									</p:commandButton>
+								</p:column>
+								
+							</p:dataTable>
+							<p:dialog header="Deseja excluir veiculo" id="removerveiculo" widgetVar="removerveiculo" width="350" height="100">
+								<div class="col-70">
+									<p:outputLabel id="idNome" value="#{veiculoConMB.veiculo.modelo}"/>
+									<hr/>
+								</div>
+								<p:button value="Não" onclick="PF('removerveiculo').hide(); return false;" />
+								<p:commandButton value="Sim" action="#{veiculoConMB.remove}" update="frm,veiculo, frm:veiculo"  onclick="PF('removerveiculo').hide()"/>
+							</p:dialog>
+						</h:form>
+					</div>
+			</p:fieldset>
+		</div>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,72 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+    template="/WEB-INF/template.xhtml">
+	<ui:define name="content">
+		<div class="ContainerIndent">
+			<p:fieldset legend="Serviços">
+				<p:panel>
+					<div class="ContainerIndent">
+						<h:form id="frmpesquisa">
+							<p:toolbar>
+								<p:toolbarGroup>
+									<p:button value="Novo produto" outcome="produtoman"/>
+								</p:toolbarGroup>
+								<p:toolbarGroup align="right">
+									<p:inputText title="Entre com a descricão" placeholder="Entre com a descricão" value="#{produtoConMB.pesquisa}" size="40"/>
+									<p:commandButton value="Pesquisar" action="#{produtoConMB.selected}" update="frmpesquisa,frm"/>
+								</p:toolbarGroup>
+							</p:toolbar>
+						</h:form>
+						<div class="EmptyBox20"></div>
+						<h:form id="frm">
+							<p:dataTable id="produto" var="produto" value="#{produtoConMB.produtos}"
+	                                     rows="5" paginator="true" paginatorTemplate="{CurrentPageReport}  
+	                                     {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                                     rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"  emptyMessage="Nenhum produto encontrado" 
+	                                     paginatorAlwaysVisible="true" reflow="true">
+								
+								<p:column headerText="Código" sortBy="#{produto.id}" style="width: 80px">
+									<h:outputText value="#{produto.id}" />
+								</p:column>
+								
+								<p:column headerText="Descrição" sortBy="#{produto.descricao}">
+									<h:outputText value="#{produto.descricao}" />
+								</p:column>
+								
+								<p:column headerText="Quantidade" sortBy="#{produto.quantidade}" style="width: 120px">
+									<h:outputText value="#{produto.quantidade}" />
+								</p:column>
+								
+								<p:column style="width: 50px">
+									<p:button outcome="produtoman" icon="ui-icon-pencil" title="Editar">
+										<f:param name="id" value="#{produto.id}"/>
+									</p:button>
+								</p:column>
+								
+								<p:column style="width: 50px">
+									<p:commandButton title="Excluir" oncomplete="PF('removerproduto').show()" process="@this" update="frm" icon="ui-icon-trash">
+										<f:setPropertyActionListener   value="#{produto}" target="#{produtoConMB.produto}"/>
+									</p:commandButton>
+								</p:column>
+								
+							</p:dataTable>
+							<p:dialog header="Deseja excluir serviço" id="removerproduto" widgetVar="removerproduto" width="350" height="100">
+								<div class="col-70">
+									<p:outputLabel id="idNome" value="#{produtoConMB.produto.descricao}"/>
+									<hr/>
+								</div>
+								<p:button value="Não" onclick="PF('removerproduto').hide(); return false;" />
+								<p:commandButton value="Sim" action="#{produtoConMB.remove}" update="frm,produto"  onclick="PF('removerproduto').hide()"/>
+							</p:dialog>
+						</h:form>
+					</div>
+				</p:panel>
+			</p:fieldset>
+		</div>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,75 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+    template="/WEB-INF/template.xhtml">
+	<ui:define name="content">
+		<div class="ContainerIndent">
+			<p:fieldset legend="Lista de Funcionários">
+				<p:panel>
+					<div class="ContainerIndent">
+						
+						<h:form id="frmpesquisa">
+							<p:toolbar>
+								<p:toolbarGroup>
+									<p:button value="Novo funcionário" outcome="funcionarioman"/>
+								</p:toolbarGroup>
+								
+								<p:toolbarGroup align="right">
+									<p:inputText title="Entre com nome" placeholder="Entre com nome" value="#{funcionarioConMB.pesquisa}" size="40"/>
+									<p:commandButton value="Pesquisar" action="#{funcionarioConMB.carregaFunarios}" update="frmpesquisa,frm"/>
+								</p:toolbarGroup>
+							</p:toolbar>
+						</h:form>
+						
+						<h:form id="frm">
+							<p:dataTable id="funcionario" var="funcionario" value="#{funcionarioConMB.funcionarios}"
+	                                     rows="10" paginator="true" paginatorTemplate="{CurrentPageReport}  
+	                                     {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                                     rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"  emptyMessage="Nenhum funcionário encontrado" 
+	                                     paginatorAlwaysVisible="true" reflow="true">
+	                                     
+								<p:column headerText="Nome" sortBy="#{funcionario.nome}">
+									<h:outputText value="#{funcionario.nome}" />
+								</p:column>
+								<p:column headerText="Cpf" sortBy="#{funcionario.cpf}" style="width: 120px">
+									<h:outputText value="#{funcionario.cpf}" />
+								</p:column>
+								<p:column headerText="Telefone" sortBy="#{funcionario.telefone}" style="width: 120px">
+									<h:outputText value="#{funcionario.telefone}" />
+								</p:column>
+								<p:column headerText="Celular" sortBy="#{funcionario.celular}" style="width: 120px">
+									<h:outputText value="#{funcionario.celular}" />
+								</p:column>
+								<p:column headerText="Email" sortBy="#{funcionario.email}">
+									<h:outputText value="#{funcionario.email}" />
+								</p:column>
+								<p:column style="width: 33px">
+									<p:button outcome="funcionarioman" icon="ui-icon-pencil" title="Editar">
+										<f:param name="id" value="#{funcionario.id}"/>
+									</p:button>
+								</p:column>
+								<p:column style="width: 33px">
+									<p:commandButton title="Excluir" oncomplete="PF('removerfuncionario').show()" process="@this" update="frm" icon="ui-icon-trash">
+										<f:setPropertyActionListener   value="#{funcionario}" target="#{funcionarioConMB.funcionario}"/>
+									</p:commandButton>
+								</p:column>
+							</p:dataTable>
+							<p:dialog header="Deseja excluir funcionario" id="removerfuncionario" widgetVar="removerfuncionario" width="350" height="100">
+								<div class="col-70">
+									<p:outputLabel id="idNome" value="#{funcionarioConMB.funcionario.nome}"/>
+									<hr/>
+								</div>
+								<p:button value="Não" onclick="PF('removerfuncionario').hide(); return false;" />
+								<p:commandButton value="Sim" action="#{funcionarioConMB.remove}" update="frm,funcionario"  onclick="PF('removerfuncionario').hide()"/>
+							</p:dialog>
+						</h:form>
+					</div>
+				</p:panel>
+			</p:fieldset>
+		</div>
+	</ui:define>
+</ui:composition>

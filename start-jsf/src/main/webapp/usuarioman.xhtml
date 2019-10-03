@@ -1,0 +1,90 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+    template="/WEB-INF/template.xhtml">
+	<ui:define name="content">
+		<p:fieldset legend="Manutenção de produtos" style="margin-top: 10px">
+			<h:form id="frm">
+				<div class="ContainerIndent ui-fluid">
+					<div class="ContainerIndent">
+						<p:messages id="msg" />
+					</div>
+					<div class="Container">
+						<div class="Container50 Responsive50" style="width: 35%">
+							<div class="ContainerIndent">
+								<div class="Container100">
+									<p:outputLabel for="pessoa" value="Funcionário(a)"/>
+									<p:autoComplete required="true" id="pessoa" value="#{usuarioManMB.pessoa}" requiredMessage="Pessoa é obrigatório." placeholder="Pesquise pela nome ou código" 
+										completeMethod="#{usuarioManMB.completarPessoa}"
+										var="c" itemLabel="#{c.nome}" itemValue="#{c}" forceSelection="true"/>
+								</div>
+							</div>
+						</div>
+						<div class="Container5 Responsive50" >
+							<div class="ContainerIndent">
+								<div class="Container100">
+									<p:commandButton style="margin-left: -50px; margin-top: 19px" id="pessoas"  icon="ui-icon-search" title="Pesquisa" action="#{usuarioManMB.abrirDialogo}"
+											process="@this" update="@none">
+										<p:ajax event="dialogReturn" listener="#{usuarioManMB.pessoaSelecionada}"
+												process="@this" update="pessoa" />
+										<p:resetInput target="pessoa" />
+									</p:commandButton>
+								</div>
+							</div>
+						</div>
+						<div class="Container20 Responsive50" style="margin-left: -50px">
+							<div class="ContainerIndent">
+								<div class="Container100">
+									<p:outputLabel for="usuario" value="Usuário"/>
+									<p:inputText id="usuario" value="#{usuarioManMB.usuario.login}" styleClass="FontBold Fs15 hardblue number" required="true" requiredMessage="Informe a quantidade."/>
+								</div>
+							</div>
+						</div>
+						<div class="Container20 Responsive50">
+							<div class="ContainerIndent">
+								<div class="Container100">
+									<p:outputLabel for="senha" value="Senha"/>
+									<p:inputText id="senha" value="#{usuarioManMB.usuario.senha}" styleClass="FontBold Fs15 hardblue number" required="true" requiredMessage="Informe a quantidade."/>
+								</div>
+							</div>
+						</div>
+						<div class="Container20 Responsive50">
+							<div class="ContainerIndent">
+								<div class="Container100">
+									<p:outputLabel for="tipo" value="Tipo de permissão" />
+									<p:selectOneMenu id="tipo" value="#{usuarioManMB.usuario.role}" required="true" requiredMessage="Informe entrada/saida." styleClass="FontBold Fs15 hardblue">
+										<f:selectItem itemValue="" itemLabel="Selecione" />
+										<f:selectItem itemValue="ADMIN" itemLabel="Administrador" />
+										<f:selectItem itemValue="FUNCIONARIO" itemLabel="Funcionário" />
+									</p:selectOneMenu>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="Container">
+						<div class="Container">
+							<div class="Container20 Responsive50">
+								<div class="ContainerIndent">
+									<div class="Container100">
+										<p:commandButton title="Registrar" value="Registrar" id="botaoSalvar" update="frm" action="#{usuarioManMB.grava}" />
+									</div>
+								</div>
+							</div>
+							<div class="Container20 Responsive50">
+								<div class="ContainerIndent">
+									<div class="Container100">
+										<p:commandButton value="Cancelar" update="frm" process="@this" action="#{usuarioManMB.novaInstacia}"/>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</h:form>
+		</p:fieldset>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,42 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+    template="/WEB-INF/template.xhtml">
+	<ui:define name="content">
+		<div class="ContainerIndent">
+			 
+			 <h:form>
+		    	<div style="margin-top: 5px; margin-bottom: 20px">
+		    		<p:inputText id="nome" size="40" value="#{clienteSelecao.nome}" placeholder="Nome do cliente" />
+		    		
+		    		<p:spacer width="10px"/>
+		    		
+		    		<p:commandButton value="Pesquisar" action="#{clienteSelecao.pesquisar}" update="@form" />
+		    	</div>
+    	
+		    	<p:dataTable value="#{clienteSelecao.pessoas}" var="pessoa"
+		    		emptyMessage="Nenhuma pessoa encontrado." rows="10"
+		    		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+		    		
+		    		<p:column headerText="Código" style="text-align: center; width: 40px">
+		    			<h:outputText value="#{pessoa.id}" />
+		    		</p:column>
+		    		<p:column headerText="Nome">
+		    			<h:outputText value="#{pessoa.nome}" />
+		    		</p:column>
+		    		<p:column style="width: 30px; text-align: center">
+		    			<p:commandButton icon="ui-icon-check" title="Selecionar"
+		    				action="#{clienteSelecao.selecionar(pessoa)}"
+		    				process="@this" />
+		    		</p:column>
+		    		
+		    	</p:dataTable>
+			</h:form>
+			 
+		</div>
+	</ui:define>
+</ui:composition>

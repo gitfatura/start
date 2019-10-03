@@ -1,0 +1,84 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+    template="/WEB-INF/template.xhtml">
+    
+	<ui:define name="content">
+	
+		<p:fieldset legend="Manutenção de produtos" style="margin-top: 10px">
+			
+			<h:form id="frm">
+				<div class="ContainerIndent ui-fluid">
+					
+					<div class="ContainerIndent">
+						<p:messages id="msg" />
+					</div>
+					
+					<div class="Container">
+						
+						<div class="Container50 Responsive50">
+								<div class="ContainerIndent">
+									<div class="Container100">
+										<p:outputLabel for="produto" value="Produto"/>
+										<p:autoComplete required="true" id="produto" value="#{manutencaoProdutoManMB.produto}" requiredMessage="Produto é obrigatório." placeholder="Pesquise pela descrição ou código" completeMethod="#{manutencaoProdutoManMB.completarProduto}"
+										var="c" itemLabel="#{c.descricao}" itemValue="#{c}" forceSelection="true"/>
+									</div>
+								</div>
+							</div>
+							
+							<div class="Container5 Responsive50" >
+								<div class="ContainerIndent">
+									<div class="Container100">
+										<p:commandButton style="margin-left: -50px; margin-top: 19px" id="produtos"  icon="ui-icon-search" title="Pesquisa" action="#{manutencaoProdutoManMB.abrirDialogo}"
+											process="@this" update="@none">
+											<p:ajax event="dialogReturn" listener="#{manutencaoProdutoManMB.produtoSelecionado}"
+												process="@this" update="produto" />
+											<p:resetInput target="produto" />
+										</p:commandButton>
+									</div>
+								</div>
+							</div>
+							
+						
+						<div class="Container20 Responsive50">
+							<div class="ContainerIndent">
+								<div class="Container100">
+									<p:outputLabel for="tipo" value="Entrada/Saida" />
+									<p:selectOneMenu id="tipo" value="#{manutencaoProdutoManMB.entradaSaidaProdutoStr}" required="true" requiredMessage="Informe entrada/saida." styleClass="FontBold Fs15 hardblue">
+										<f:selectItem itemValue="" itemLabel="Selecione" />
+										<f:selectItems value="#{manutencaoProdutoManMB.entradaSaidaProduto}" var="sta" itemValue="#{sta}" itemLabel="#{sta.label}" />
+									</p:selectOneMenu>
+								</div>
+							</div>
+						</div>
+						
+						<div class="Container20 Responsive50">
+							<div class="ContainerIndent">
+								<div class="Container100">
+									<p:outputLabel for="qtd" value="Quantidade"/>
+									<p:inputText id="qtd" value="#{manutencaoProdutoManMB.produto.quantidade}" styleClass="FontBold Fs15 hardblue number" required="true" requiredMessage="Informe a quantidade."/>
+								</div>
+							</div>
+						</div>
+						
+					</div>	
+					
+					<div class="Container">
+					<div class="Container20 Responsive50">
+							<div class="ContainerIndent">
+								<div class="Container100">
+									<div class="EmptyBox20"/>
+									<p:commandButton value="Registrar" update="frm" action="#{manutencaoProdutoManMB.grava}" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</h:form>
+		</p:fieldset>
+	</ui:define>
+</ui:composition>
