@@ -54,5 +54,10 @@ public class VeiculoBO implements Serializable, AppBO<Veiculo> {
 	public Veiculo recuperaVeiculoPelaPlaca(String placa) {
 		return query.recuperaVeiculosPelaPlaca(placa);
 	}
+	
+	public boolean existeRegistro(String valor) {
+		String parametro = "placa";
+		return query.existeRegistro(Veiculo.class, parametro, valor);
+	}
 
 }

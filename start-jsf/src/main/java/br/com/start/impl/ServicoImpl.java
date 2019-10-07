@@ -49,4 +49,9 @@ public class ServicoImpl implements Serializable, ServicoFacade {
 		return servicoBO.recuperaServicos(descricao);
 	}
 
+	@Override
+	public boolean existeServico(String codigo) {
+		return servicoBO.existeRegistro(codigo);
+	}
+
 }

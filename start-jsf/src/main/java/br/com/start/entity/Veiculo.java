@@ -25,13 +25,13 @@ public class Veiculo extends AppBase implements Serializable {
 	@Column(name = "VEI_ID")
 	private Long id;
 	
-	@Column(name = "VEI_PLACA", unique = true)
+	@Column(name = "VEI_PLACA", length=10)
 	private String placa;
 	
-	@Column(name = "VEI_MODELO")
+	@Column(name = "VEI_MODELO", length=100)
 	private String modelo;
 
-	@Column(name = "VEI_MARCA")
+	@Column(name = "VEI_MARCA", length=100)
 	private String marca;
 
 	@ManyToOne(targetEntity = Pessoa.class, fetch = FetchType.LAZY)

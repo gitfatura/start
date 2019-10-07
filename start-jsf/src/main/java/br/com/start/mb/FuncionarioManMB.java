@@ -39,22 +39,24 @@ public class FuncionarioManMB implements Serializable {
 
 	public void grava() {
 		try {
-			funcionario.setTipoPessoa(TipoPessoa.FUNCIONARIO);
-			funcionario.setCnpj(null);
-			pessoaFacade.grava(funcionario);
-			novaInstacia();
-			FacesUtil.addInfoMessage("Registro gravado com sucesso!");
+			if(!validaFuncionario(funcionario)) {
+				pessoaFacade.grava(funcionario);
+				novaInstacia();
+				FacesUtil.addInfoMessage("Registro gravado com sucesso!");
+			}else {
+				FacesUtil.addErrorMessageFatal("Cpf: " + funcionario.getCpf() + " já cadastrado.");
+			}
 		} catch (Exception e) {
-			trataMensagemDeErro(e);
+			FacesUtil.addErrorMessageFatal("Ocorreu erro interno: "+e.getMessage());
 		}
 	}
 
-	private void trataMensagemDeErro(Exception e) {
-		if (e.getCause().getMessage().contains("ConstraintViolationException:")) {
-			FacesUtil.addErrorMessageFatal("Cpf: " + funcionario.getCpf() + " já cadastrado.");
-		}
+	private boolean validaFuncionario(Pessoa funcionario) {
+		funcionario.setTipoPessoa(TipoPessoa.FUNCIONARIO);
+		funcionario.setCnpj(null);
+		return pessoaFacade.existePessoa(funcionario.getCpf());
 	}
-
+	
 	private void recuperaFuncionario() {
 		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
 		if (StringUtils.isNotEmpty(id) && StringUtils.isNotBlank(id)) {

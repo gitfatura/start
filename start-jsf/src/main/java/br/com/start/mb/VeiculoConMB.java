@@ -91,7 +91,6 @@ public class VeiculoConMB implements Serializable {
 
 	public void recuperaVeiculosSelecionado() {
 		veiculos = veiculoFacade.recuperaVeiculos(pesquisa);
-
 	}
 
 	public Veiculo getVeiculo() {

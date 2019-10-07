@@ -2,8 +2,10 @@ package br.com.start.bo;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+
 import br.com.start.dao.PersistenceUtils;
 import br.com.start.dao.QueryUtils;
 import br.com.start.entity.Servico;
@@ -51,6 +53,11 @@ public class ServicoBO implements Serializable, AppBO<Servico> {
 	
 	public List<Servico> recuperaServicos(String descricao){
 		return query.recuperaServicos(descricao);
+	}
+	
+	public boolean existeRegistro(String valor) {
+		String parametro = "codigo";
+		return query.existeRegistro(Servico.class, parametro, valor);
 	}
 	
 }

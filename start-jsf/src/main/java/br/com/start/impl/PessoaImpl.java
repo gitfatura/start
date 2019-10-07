@@ -50,5 +50,9 @@ public class PessoaImpl implements Serializable, PessoaFacade {
 	public List<Pessoa> recuperaPeloTipoPessoa(String valor, boolean ehFuncionario, boolean ehPessoaFisica, boolean ehPessoaJuridica) {
 		return pessoaBO.recuperaPeloTipoPessoa(valor, ehFuncionario, ehPessoaFisica, ehPessoaJuridica);
 	}
-
+	
+	@Override
+	public boolean existePessoa(String cpfOuCnpj) {
+		return pessoaBO.existeRegistro(cpfOuCnpj);
+	}
 }

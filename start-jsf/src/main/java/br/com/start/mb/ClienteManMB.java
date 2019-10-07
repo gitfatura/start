@@ -42,41 +42,40 @@ public class ClienteManMB implements Serializable {
 
 	public void grava() {
 		try {
-			validaTipocliente(cliente);
-			clienteFacade.grava(cliente);
-			tipoCliente = null;
-			novaInstacia();
-			FacesUtil.addInfoMessage("Registro gravado com sucesso!");
+			if (!validaCliente(cliente)) {
+				clienteFacade.grava(cliente);
+				novaInstacia();
+				FacesUtil.addInfoMessage("Registro gravado com sucesso!");
+			} 
 		} catch (Exception e) {
-			trataMensagemDeErro(e);
+			FacesUtil.addErrorMessageFatal("Ocorreu erro interno: "+e.getMessage());
 		}
 	}
 
-	private void validaTipocliente(Pessoa cliente) {
-		if (StringUtils.isNotBlank(tipoCliente)) {
-			TipoPessoa tipoclienteAux = TipoPessoa.valueOf(tipoCliente);
+	private boolean validaCliente(Pessoa cliente) {
+		TipoPessoa tipoclienteAux = TipoPessoa.valueOf(tipoCliente);
+		boolean existePessoa = false;
 
-			if (TipoPessoa.PESSOAFISICA.equals(tipoclienteAux)) {
-				cliente.setCnpj(null);
-				cliente.setTipoPessoa(tipoclienteAux);
-			} else {
-				cliente.setCpf(null);
-				cliente.setTipoPessoa(tipoclienteAux);
-			}
-		}
-	}
-
-	private void trataMensagemDeErro(Exception e) {
-		if (e.getCause().getMessage().contains("ConstraintViolationException:")) {
-			TipoPessoa tipoclienteAux = cliente.getTipoPessoa();
-
-			if (TipoPessoa.PESSOAFISICA.equals(tipoclienteAux)) {
+		if (TipoPessoa.PESSOAFISICA.equals(tipoclienteAux)) {
+			cliente.setTipoPessoa(tipoclienteAux);
+			cliente.setCnpj(null);
+			existePessoa = clienteFacade
+					.existePessoa(StringUtils.isNotBlank(cliente.getCpf()) ? cliente.getCpf() : null);
+			if (existePessoa) {
 				FacesUtil.addErrorMessageFatal("Cpf: " + cliente.getCpf() + " já cadastrado.");
 			}
-			if (TipoPessoa.PESSOAJURIDICA.equals(cliente.getTipoPessoa())) {
+		} else {
+			cliente.setTipoPessoa(tipoclienteAux);
+			cliente.setCpf(null);
+			existePessoa = clienteFacade
+					.existePessoa(StringUtils.isNotBlank(cliente.getCnpj()) ? cliente.getCnpj() : null);
+			if (existePessoa) {
 				FacesUtil.addErrorMessageFatal("Cnpj: " + cliente.getCnpj() + " já cadastrado.");
 			}
+
 		}
+
+		return existePessoa;
 	}
 
 	private void recuperaClientes() {
@@ -89,6 +88,7 @@ public class ClienteManMB implements Serializable {
 
 	public void novaInstacia() {
 		cliente = new Pessoa();
+		tipoCliente = null;
 		PrimeFaces.current().resetInputs("frm:panelcliente");
 	}
 

@@ -55,5 +55,9 @@ public class VeiculoImpl implements Serializable, VeiculoFacade {
 	public List<Veiculo> recuperaVeiculos(String pessoaNome) {
 		return veiculoBO.recuperaVeiculos(pessoaNome);
 	}
+	
+	public boolean existeVeiculo(String placa) {
+		return veiculoBO.existeRegistro(placa);
+	}
 
 }

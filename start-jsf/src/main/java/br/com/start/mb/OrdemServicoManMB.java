@@ -101,12 +101,9 @@ public class OrdemServicoManMB implements Serializable {
 	
 	public void recuperaVeiculo() {
 		if (StringUtils.isNotBlank(filtroPlaca)) {
-			try {
-				veiculo = ordemServicoFacade.recuperaVeiculoPelaPlaca(filtroPlaca);
-			} catch (Exception e) {
-				if (e.getMessage().contains("No entity found for query")) {
-					FacesUtil.addInfoMessageWarn("Nenhum veículo encontrado.");
-				}
+			veiculo = ordemServicoFacade.recuperaVeiculoPelaPlaca(filtroPlaca);
+			if (veiculo == null) {
+				FacesUtil.addInfoMessageWarn("Nenhum veículo encontrado.");
 			}
 		}
 	}

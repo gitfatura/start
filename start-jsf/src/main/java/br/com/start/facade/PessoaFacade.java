@@ -11,5 +11,6 @@ public interface PessoaFacade {
 	public List<Pessoa> selected(String value);
 	public List<Pessoa> recuperaPeloTipoPessoa(String valor, boolean ehFuncionario, boolean ehPessoaFisica, boolean ehPessoaJuridica);
 	public Pessoa get(Long id);
+	public boolean existePessoa(String cpfOuCnpj);
 	
 }

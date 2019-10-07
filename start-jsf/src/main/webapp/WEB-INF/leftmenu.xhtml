@@ -12,17 +12,17 @@
             <a href="#" id="layout-menubar-resize2" class="BordRad3" title="Open Menu"><i class="icon-menu"></i></a>
         </div>
         
-        <div class="layout-menubarinner-box" id="searchArea">
+        <!-- <div class="layout-menubarinner-box" id="searchArea">
             <i class="icon-search floatLeft gray"></i>
             <input type="text" class="layout-menubar-search floatLeft Animated05" placeholder="Search"/>
-        </div>
+        </div> -->
         
-        <h:form id="menuform" >
+        <h:form id="menuform">
             <ps:menu id="sm_leftmenu">
             		
-            		<p:menuitem id="sm_login"  value="Dashboard" global="false" outcome="dashboard"/>
+            		<p:menuitem id="sm_login" icon="icon-th-large"  value="Dashboard" global="false" outcome="dashboard"/>
             		
-                	<p:submenu label="Clientes" icon="icon-users">
+                	<p:submenu label="Clientes" id="sm_cliente" icon="icon-users">
                 		<p:menuitem id="sm_pessoa"  value="Cadastrar Clientes" global="false" outcome="pessoaman"/>
 		                <p:menuitem id="sm_pessoas"  value="Lista de Clientes" global="false" outcome="pessoacon"/>
             		</p:submenu>

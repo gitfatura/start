@@ -8,40 +8,34 @@
     template="/WEB-INF/template.xhtml">
     
 	<ui:define name="content">
-	
 		<p:fieldset legend="Manutenção de produtos" style="margin-top: 10px">
-			
 			<h:form id="frm">
 				<div class="ContainerIndent ui-fluid">
-					
 					<div class="ContainerIndent">
 						<p:messages id="msg" />
 					</div>
-					
 					<div class="Container">
-						
-						<div class="Container50 Responsive50">
-								<div class="ContainerIndent">
-									<div class="Container100">
-										<p:outputLabel for="produto" value="Produto"/>
-										<p:autoComplete required="true" id="produto" value="#{manutencaoProdutoManMB.produto}" requiredMessage="Produto é obrigatório." placeholder="Pesquise pela descrição ou código" completeMethod="#{manutencaoProdutoManMB.completarProduto}"
+						<div class="Container60 Responsive50">
+							<div class="ContainerIndent">
+								<div class="Container100">
+									
+									<p:outputLabel for="produto" value="Produto"/>
+									<div class="ui-inputgroup">	
+										<p:autoComplete required="true" id="produto" value="#{manutencaoProdutoManMB.produto}" requiredMessage="Produto é obrigatório." 
+										placeholder="Pesquise pela descrição ou código" completeMethod="#{manutencaoProdutoManMB.completarProduto}"
 										var="c" itemLabel="#{c.descricao}" itemValue="#{c}" forceSelection="true"/>
-									</div>
-								</div>
-							</div>
-							
-							<div class="Container5 Responsive50" >
-								<div class="ContainerIndent">
-									<div class="Container100">
-										<p:commandButton style="margin-left: -50px; margin-top: 19px" id="produtos"  icon="ui-icon-search" title="Pesquisa" action="#{manutencaoProdutoManMB.abrirDialogo}"
+										
+										<p:commandButton style="min-width: 2.7em;" id="produtos"  icon="ui-icon-search" title="Pesquisa" 
+										action="#{manutencaoProdutoManMB.abrirDialogo}"
 											process="@this" update="@none">
 											<p:ajax event="dialogReturn" listener="#{manutencaoProdutoManMB.produtoSelecionado}"
 												process="@this" update="produto" />
 											<p:resetInput target="produto" />
 										</p:commandButton>
+										</div>
 									</div>
 								</div>
-							</div>
+						</div>
 							
 						
 						<div class="Container20 Responsive50">

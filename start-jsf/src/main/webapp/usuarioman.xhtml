@@ -6,7 +6,8 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:o="http://omnifaces.org/ui"
     template="/WEB-INF/template.xhtml">
-	<ui:define name="content">
+	
+<ui:define name="content">
 		<p:fieldset legend="Manutenção de produtos" style="margin-top: 10px">
 			<h:form id="frm">
 				<div class="ContainerIndent ui-fluid">
@@ -14,29 +15,30 @@
 						<p:messages id="msg" />
 					</div>
 					<div class="Container">
-						<div class="Container50 Responsive50" style="width: 35%">
+					
+						<div class="Container40 Responsive50">
 							<div class="ContainerIndent">
 								<div class="Container100">
+									
 									<p:outputLabel for="pessoa" value="Funcionário(a)"/>
-									<p:autoComplete required="true" id="pessoa" value="#{usuarioManMB.pessoa}" requiredMessage="Pessoa é obrigatório." placeholder="Pesquise pela nome ou código" 
-										completeMethod="#{usuarioManMB.completarPessoa}"
-										var="c" itemLabel="#{c.nome}" itemValue="#{c}" forceSelection="true"/>
+										
+									<div class="ui-inputgroup">	
+									<p:autoComplete  required="true" id="pessoa" value="#{usuarioManMB.pessoa}" requiredMessage="Pessoa é obrigatório." placeholder="Pesquise pela nome ou código" 
+											completeMethod="#{usuarioManMB.completarPessoa}"
+											var="c" itemLabel="#{c.nome}" itemValue="#{c}" forceSelection="true">
+												<p:commandLink value="dsadsa"></p:commandLink>
+											</p:autoComplete>
+											<p:commandButton style="min-width: 2.7em;" id="pessoas"  icon="ui-icon-search" title="Pesquisa" action="#{usuarioManMB.abrirDialogo}"
+												process="@this" update="@none">
+											<p:ajax event="dialogReturn" listener="#{usuarioManMB.pessoaSelecionada}"
+													process="@this" update="pessoa" />
+											<p:resetInput target="pessoa" />
+											</p:commandButton>
+									</div>		
 								</div>
 							</div>
 						</div>
-						<div class="Container5 Responsive50" >
-							<div class="ContainerIndent">
-								<div class="Container100">
-									<p:commandButton style="margin-left: -50px; margin-top: 19px" id="pessoas"  icon="ui-icon-search" title="Pesquisa" action="#{usuarioManMB.abrirDialogo}"
-											process="@this" update="@none">
-										<p:ajax event="dialogReturn" listener="#{usuarioManMB.pessoaSelecionada}"
-												process="@this" update="pessoa" />
-										<p:resetInput target="pessoa" />
-									</p:commandButton>
-								</div>
-							</div>
-						</div>
-						<div class="Container20 Responsive50" style="margin-left: -50px">
+						<div class="Container20 Responsive50">
 							<div class="ContainerIndent">
 								<div class="Container100">
 									<p:outputLabel for="usuario" value="Usuário"/>

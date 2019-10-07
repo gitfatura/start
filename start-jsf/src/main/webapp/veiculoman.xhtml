@@ -17,11 +17,12 @@
 							<p:messages id="msg" autoUpdate="true" closable="true"/>
 						</div>
 						<div class="Container">
-							<div class="Container20 Responsive50">
+							<div class="Container10 Responsive50">
 								<div class="ContainerIndent">
 									<div class="Container100">
 										<p:outputLabel for="placa" value="Placa"/>
-										<p:inputText id="placa" title="Placa" required="true" onblur="this.value = this.value.toUpperCase();" 
+										<p:inputText id="placa" autocomplete="false" title="Placa" required="true" 
+										onkeypress="formatarPlaca(this);"
 										 requiredMessage="Placa é obrigatório." value="#{veiculoManMB.veiculo.placa}" 
 										style="text-transform: uppercase" styleClass="FontBold Fs15 hardblue"/>
 									</div>
@@ -35,7 +36,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="Container40 Responsive50">
+							<div class="Container50 Responsive50">
 								<div class="ContainerIndent">
 									<div class="Container100">
 										<p:outputLabel for="nome" value="Marca"/>
@@ -99,26 +100,23 @@
 							<div class="Container40 Responsive50">
 								<div class="ContainerIndent">
 									<div class="Container100">
+									
 										<p:outputLabel for="proprietario" value="Proprietário"/>
-										<p:autoComplete required="true" id="proprietario" value="#{veiculoManMB.pessoa}" requiredMessage="Proprietário é obrigatório." placeholder="Pesquise pelo nome ou código" completeMethod="#{veiculoManMB.completarPessoa}"
+										<div class="ui-inputgroup">
+										
+										<p:autoComplete required="true" id="proprietario" value="#{veiculoManMB.veiculo.pessoa}" requiredMessage="Proprietário é obrigatório." placeholder="Pesquise pelo nome ou código" completeMethod="#{veiculoManMB.completarPessoa}"
 										var="c" itemLabel="#{c.nome}" itemValue="#{c}" forceSelection="true"/>
-									</div>
-								</div>
-							</div>
-							
-							<div class="Container5 Responsive50" >
-								<div class="ContainerIndent">
-									<div class="Container100">
-										<p:commandButton style="margin-left: -50px; margin-top: 20px" id="pessoa"  icon="ui-icon-search" title="Pesquisa" action="#{veiculoConMB.abrirDialogo}"
+										
+										<p:commandButton style="min-width: 2.7em;" id="pessoa"  icon="ui-icon-search" title="Pesquisa" action="#{veiculoConMB.abrirDialogo}"
 											process="@this" update="@none">
 											<p:ajax event="dialogReturn" listener="#{veiculoManMB.pessoaSelecionada}"
 												process="@this" update="proprietario" />
 											<p:resetInput target="proprietario" />
 										</p:commandButton>
+										</div>
 									</div>
 								</div>
 							</div>
-							
 							
 						</div>
 						
@@ -146,6 +144,21 @@
 						
 					</p:panel>
 				</div>
+				
+				
+				<script type="text/javascript">
+					
+					$(document).ready(function(){
+						formatarPlaca(placa);
+					});
+					function formatarPlaca(placa){
+						var info = document.getElementById("frm:placa").value;
+						if(info.length ==3){
+							document.getElementById("frm:placa").value = info +"-";
+						}
+					}	
+				
+				</script>
 			</h:form>
 			
 		</p:fieldset>

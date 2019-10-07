@@ -1,13 +1,13 @@
 package br.com.start.entity;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 import br.com.start.facade.EntidadeBase;
 
 @MappedSuperclass
@@ -15,12 +15,12 @@ public abstract class AppBase implements Serializable, EntidadeBase {
 
 	private static final long serialVersionUID = -8041929115797201847L;
 
-	@Column(name = "USU_ULTI_ALTERCACAO")
+	@Column(name = "USU_ULT_ALTERCACAO", length=60)
 	private String usuarioUltimaAlteracao ="usuarioLogado"; 
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "DATA_ULTI_ALTERACAO")
-	private Date dataUltimaAlteracao = new Date();
+	@Column(name = "DATA_ULT_ALTERACAO")
+	private Date dataUltimaAlteracao = Calendar.getInstance().getTime();
 
 	@Column(name = "ATIVO")
 	private int ativo =1;

@@ -30,7 +30,7 @@ public class OrdemServico extends AppBase implements Serializable {
 	private Long id;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "ORD_FINALIZADO")
+	@Column(name = "ORD_FINALIZADO", length=3)
 	private Finalizado finalizado = Finalizado.NAO;
 
 	@ManyToOne(targetEntity = Veiculo.class, fetch = FetchType.LAZY)
@@ -44,7 +44,7 @@ public class OrdemServico extends AppBase implements Serializable {
 	@JoinColumn(name = "ORD_PESID")
 	private Pessoa pessoa;
 
-	@Column(name = "ORD_OBSERVACAO")
+	@Column(name = "ORD_OBSERVACAO", length=255)
 	private String observacao;
 
 	public OrdemServico() {

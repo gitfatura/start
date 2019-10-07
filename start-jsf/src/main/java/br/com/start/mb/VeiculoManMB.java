@@ -46,15 +46,21 @@ public class VeiculoManMB implements Serializable {
 
 	public void grava() {
 		try {
-			veiculoFacade.gravaVeiculo(veiculo);
-			pessoa = new Pessoa();
-			novaInstancia();
-			FacesUtil.addInfoMessage("Registro gravado com sucesso!");
-		} catch (Exception e) {
-			if (e.getCause().getMessage().contains("ConstraintViolationException:")) {
+			if(!validaVeiculo(veiculo)) {
+				veiculoFacade.gravaVeiculo(veiculo);
+				pessoa = new Pessoa();
+				novaInstancia();
+				FacesUtil.addInfoMessage("Registro gravado com sucesso!");
+			}else {
 				FacesUtil.addErrorMessageFatal("Placa " + veiculo.getPlaca() + " já existe.");
 			}
+		} catch (Exception e) {
+			FacesUtil.addErrorMessageFatal("Ocorreu um erro interno: "+ e.getMessage());
 		}
+	}
+
+	private boolean validaVeiculo(Veiculo veiculo) {
+		return veiculoFacade.existeVeiculo(StringUtils.isNotBlank(veiculo.getPlaca()) ? veiculo.getPlaca() :null);
 	}
 
 	public List<Pessoa> completarPessoa(String nome) {

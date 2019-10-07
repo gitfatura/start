@@ -24,13 +24,13 @@ public class Servico extends AppBase implements Serializable {
 	@Column(name = "SER_ID")
 	private Long id;
 
-	@Column(name = "SER_CODIGOD", unique = true)
+	@Column(name = "SER_CODIGOD", length=3)
 	private String codigo;
 
-	@Column(name = "SER_DESCRICAO", length = 100, nullable = false)
+	@Column(name = "SER_DESCRICAO", length = 100)
 	private String descricao;
 
-	@Column(name = "SER_VALOR", nullable = true)
+	@Column(name = "SER_VALOR")
 	private BigDecimal valor;
 
 	@ManyToOne(targetEntity = OrdemServico.class, fetch = FetchType.LAZY)

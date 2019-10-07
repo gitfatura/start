@@ -56,4 +56,13 @@ public class PessoaBO implements Serializable, AppBO<Pessoa> {
 		return query.recuperaPessoa(valor, ehFuncionario, ehPessoaFisica, ehPessoaJuridica);
 	}
 
+	public boolean existeRegistro(String valor) {
+		String parametro ="";
+		if (StringUtils.isNotBlank(valor) && valor.length() <=14) {
+			parametro = "cpf";
+		}else {
+			parametro = "cnpj";
+		}
+		return query.existeRegistro(Pessoa.class, parametro, valor);
+	}
 }

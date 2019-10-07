@@ -27,13 +27,13 @@ public class Pessoa extends AppBase implements Serializable {
 	@Column(name = "PES_ID")
 	private Long id;
 
-	@Column(name = "PES_NOME")
+	@Column(name = "PES_NOME", length = 100)
 	private String nome;
 
-	@Column(name = "PES_CPF", length = 14, unique=true)
+	@Column(name = "PES_CPF", length = 14)
 	private String cpf;
 
-	@Column(name = "PES_CNPJ", length = 20, unique=true)
+	@Column(name = "PES_CNPJ", length = 20)
 	private String cnpj;
 
 	@Column(name = "PES_TELEFONE", length = 20)
@@ -42,11 +42,11 @@ public class Pessoa extends AppBase implements Serializable {
 	@Column(name = "PES_CELULAR", length = 20)
 	private String celular;
 
-	@Column(name = "PES_EMAIL")
+	@Column(name = "PES_EMAIL", length = 100)
 	private String email;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "PES_TIPOPESSOA")
+	@Column(name = "PES_TIPOPESSOA", length = 15)
 	private TipoPessoa tipoPessoa = TipoPessoa.PESSOAFISICA;
 
 	@OneToMany(targetEntity = Veiculo.class, fetch = FetchType.LAZY, mappedBy = "pessoa")

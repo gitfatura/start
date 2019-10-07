@@ -71,6 +71,8 @@ public class QueryUtils<T> {
 		sql.append("select p from ").append(classe.getName()).append(" as p order by p.").append(parametroOrdenado);
 		return manager.createQuery(sql.toString()).getResultList();
 	}
+	
+	
 
 	@SuppressWarnings("unchecked")
 	public List<T> paginationPage(Class<T> classe, List<Long> lIds) {
@@ -105,18 +107,42 @@ public class QueryUtils<T> {
 		}
 		return query.getResultList();
 	}
+	
+	public boolean existeRegistro(Class<T> classe, String parametro, String valor) {
+		boolean encontrouRegistro = false;
+		try {
+			if (StringUtils.isNotBlank(parametro) && StringUtils.isNotBlank(valor)) {
+				StringBuilder sql = new StringBuilder();
+				sql.append("select count(p.id) from ");
+				sql.append(classe.getName());
+				sql.append(" as p ");
+				sql.append(" where p.");
+				sql.append(parametro);
+				sql.append(" = :parametro ");
+				Query query = manager.createQuery(sql.toString());
+				query.setParameter("parametro", valor);
+				Long retorno = (Long) query.getSingleResult();
+				if (retorno !=null && retorno>0) {
+					encontrouRegistro = true;
+				}
+			}
+		} catch (Exception e) {
+			encontrouRegistro = false;
+		}
+		return encontrouRegistro;
+	}
 
 	@SuppressWarnings("unchecked")
 	public List<Veiculo> recuperaVeiculos(String pessoaNome) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select v from Veiculo v ");
-		sql.append(" inner join v.pessoa p ");
+		sql.append(" left join v.pessoa p ");
 		
 		if (StringUtils.isNotBlank(pessoaNome)) {
 			sql.append(" where upper (p.nome) like :nome ");
 		}
 		
-		sql.append(" order by p.nome, v.modelo ");
+		sql.append(" order by v.modelo, p.nome ");
 		
 		Query query = manager.createQuery(sql.toString());
 		if (StringUtils.isNotBlank(pessoaNome)) {
@@ -126,18 +152,20 @@ public class QueryUtils<T> {
 	}
 	
 	public Veiculo recuperaVeiculosPelaPlaca(String placa) {
-		StringBuilder sql = new StringBuilder();
-		sql.append("select v from Veiculo v ");
-		
-		if (StringUtils.isNotBlank(placa)) {
-			sql.append(" where v.placa = :placa ");
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("select v from Veiculo v ");
+			if (StringUtils.isNotBlank(placa)) {
+				sql.append(" where v.placa = :placa ");
+			}
+			Query query = manager.createQuery(sql.toString());
+			if (StringUtils.isNotBlank(placa)) {
+				query.setParameter("placa", placa);
+			}
+			return (Veiculo) query.getSingleResult();
+		} catch (Exception e) {
+			return null;
 		}
-		
-		Query query = manager.createQuery(sql.toString());
-		if (StringUtils.isNotBlank(placa)) {
-			query.setParameter("placa", placa);
-		}
-		return (Veiculo) query.getSingleResult();
 	}
 	
 	@SuppressWarnings("unchecked")

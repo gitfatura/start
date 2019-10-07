@@ -10,4 +10,5 @@ public interface ServicoFacade {
 	public List<Servico> selected(String value);
 	public Servico get(Long id);
 	public List<Servico> recuperaServicos(String descricao);
+	public boolean existeServico(String codigo);
 }

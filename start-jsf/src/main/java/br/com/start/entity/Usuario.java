@@ -25,13 +25,13 @@ public class Usuario implements Serializable {
 	@Column(name = "USU_ID")
 	private Long id;
 
-	@Column(name = "USU_LOGIN", nullable = false, length = 255)
+	@Column(name = "USU_LOGIN", length = 100)
 	private String login;
 
-	@Column(name = "USU_SENHA", nullable = false, length = 255)
+	@Column(name = "USU_SENHA", length = 100)
 	private String senha;
 
-	@Column(name = "USU_ROLE", nullable = false, length = 15)
+	@Column(name = "USU_ROLE", length = 11)
 	@Enumerated(EnumType.STRING)
 	private Role role;
 

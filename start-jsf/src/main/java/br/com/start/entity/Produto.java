@@ -22,7 +22,7 @@ public class Produto extends AppBase implements Serializable {
 	@Column(name = "PRO_ID")
 	private Long id;
 
-	@Column(name = "PRO_DESCRICAO")
+	@Column(name = "PRO_DESCRICAO", length=100)
 	private String descricao;
 
 	@Column(name = "PRO_QUANTIDADE")
