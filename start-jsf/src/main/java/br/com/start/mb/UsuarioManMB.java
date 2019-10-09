@@ -31,38 +31,52 @@ public class UsuarioManMB implements Serializable {
 	@Inject
 	private Pessoa pessoa;
 
+	private List<Pessoa> pessoas;
+	
+	private String valorPesquisaStr;
+
 	@Inject
 	private UsuarioFacade usuarioFacade;
 
 	@PostConstruct
 	public void start() {
+		recuperaFuncionarios();
+	}
+	
+	public void recuperaFuncionarios() {
+		pessoas = usuarioFacade.recuperaFuncionarios(valorPesquisaStr);
 	}
 
-	public List<Pessoa> completarPessoa(String login) {
-		return usuarioFacade.selected(login);
+	
+	public List<Pessoa> completarPessoa(String valor) {
+		return usuarioFacade.recuperaFuncionarios(valor);
 	}
 
 	public void pessoaSelecionada(SelectEvent event) {
 		pessoa = (Pessoa) event.getObject();
 	}
-	
+
 	public void abrirDialogo() {
 		Map<String, Object> opcoes = new HashMap<>();
 		opcoes.put("modal", true);
 		opcoes.put("resizable", false);
 		opcoes.put("contentHeight", 470);
-		PrimeFaces.current().dialog().openDynamic("usuarioselecao", opcoes, null);
+		PrimeFaces.current().dialog().openDynamic("selecaofuncionarios", opcoes, null);
 	}
 	
+	public void selecionar(Pessoa pessoa) {
+		PrimeFaces.current().dialog().closeDynamic(pessoa);
+	}
+
 	public void novaInstacia() {
 		usuario = new Usuario();
 		pessoa = new Pessoa();
 	}
-	
+
 	public void grava() {
-		
+
 	}
-	
+
 	public String logar() {
 		try {
 			if (usuario == null) {
@@ -106,5 +120,22 @@ public class UsuarioManMB implements Serializable {
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
+
+	public List<Pessoa> getPessoas() {
+		return pessoas;
+	}
+
+	public void setPessoas(List<Pessoa> pessoas) {
+		this.pessoas = pessoas;
+	}
+
+	public String getValorPesquisaStr() {
+		return valorPesquisaStr;
+	}
+
+	public void setValorPesquisaStr(String valorPesquisaStr) {
+		this.valorPesquisaStr = valorPesquisaStr;
+	}
+	
 
 }

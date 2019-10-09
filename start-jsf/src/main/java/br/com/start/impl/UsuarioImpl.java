@@ -33,4 +33,9 @@ public class UsuarioImpl implements Serializable, UsuarioFacade {
 		return pessoaBO.selected(value);
 	}
 
+	@Override
+	public List<Pessoa> recuperaFuncionarios(String valorPesquisa) {
+		return pessoaBO.recuperaFuncionarios(valorPesquisa);
+	}
+
 }

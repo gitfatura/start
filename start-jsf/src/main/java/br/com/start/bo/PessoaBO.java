@@ -65,4 +65,8 @@ public class PessoaBO implements Serializable, AppBO<Pessoa> {
 		}
 		return query.existeRegistro(Pessoa.class, parametro, valor);
 	}
+	
+	public List<Pessoa> recuperaFuncionarios(String valorPesquisa){
+		return query.recuperaFuncionarios(valorPesquisa);
+	}
 }

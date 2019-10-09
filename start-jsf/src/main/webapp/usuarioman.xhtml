@@ -26,8 +26,8 @@
 									<p:autoComplete  required="true" id="pessoa" value="#{usuarioManMB.pessoa}" requiredMessage="Pessoa é obrigatório." placeholder="Pesquise pela nome ou código" 
 											completeMethod="#{usuarioManMB.completarPessoa}"
 											var="c" itemLabel="#{c.nome}" itemValue="#{c}" forceSelection="true">
-												<p:commandLink value="dsadsa"></p:commandLink>
 											</p:autoComplete>
+											
 											<p:commandButton style="min-width: 2.7em;" id="pessoas"  icon="ui-icon-search" title="Pesquisa" action="#{usuarioManMB.abrirDialogo}"
 												process="@this" update="@none">
 											<p:ajax event="dialogReturn" listener="#{usuarioManMB.pessoaSelecionada}"

@@ -201,6 +201,35 @@ public class QueryUtils<T> {
 	}
 
 	
+	@SuppressWarnings("unchecked")
+	public List<Pessoa> recuperaFuncionarios(String valorPesquisa) {
+		StringBuilder sql = new StringBuilder();
+
+		sql.append("select p from Pessoa p  where ");
+		sql.append(" p.tipoPessoa = 'FUNCIONARIO' ");
+		
+		if (StringUtils.isNotBlank(valorPesquisa)) {
+			if (StringUtils.isNumeric(valorPesquisa)) {
+				sql.append(" and p.id = :idPessoa ");
+			}else {
+				sql.append(" and upper (p.nome) like :nome ");
+			}
+		}
+		sql.append("order by  p.nome");
+
+		Query query = manager.createQuery(sql.toString());
+		
+		if (StringUtils.isNotBlank(valorPesquisa)) {
+			if (StringUtils.isNumeric(valorPesquisa)) {
+				query.setParameter("idPessoa", Long.valueOf(valorPesquisa));
+			}else {
+				query.setParameter("nome", "%" + valorPesquisa.toUpperCase() + "%");
+			}
+		}
+		return (List<Pessoa>) query.getResultList();
+	}
+
+	
 	
 	@SuppressWarnings("unchecked")
 	public List<Pessoa> recuperaPessoa(String nome, boolean ehFuncionario, boolean ehPessoaFisica, boolean ehPessoaJuridica) {

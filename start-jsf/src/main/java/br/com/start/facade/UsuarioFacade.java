@@ -11,5 +11,8 @@ public interface UsuarioFacade {
 	
 	public List<Pessoa> selected(String value);
 	
+	public List<Pessoa> recuperaFuncionarios(String valorPesquisa); 
+	
+	
 
 }

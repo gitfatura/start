@@ -24,26 +24,26 @@
                         
 			 <h:form>
 		    	<div style="margin-top: 5px; margin-bottom: 20px">
-		    		<p:inputText id="nome" size="40" value="#{produtoConMB.pesquisa}" placeholder="Nome do cliente" />
+		    		<p:inputText id="nome" size="40" value="#{usuarioManMB.valorPesquisaStr}" placeholder="Pesquise pelo nome ou código do funcionário" />
 		    		
 		    		<p:spacer width="10px"/>
 		    		
-		    		<p:commandButton value="Pesquisar" action="#{produtoConMB.selected}" update="@form" />
+		    		<p:commandButton value="Pesquisar" action="#{usuarioManMB.recuperaFuncionarios}" update="@form" />
 		    	</div>
     	
-		    	<p:dataTable value="#{produtoConMB.produtos}" var="produto"
-		    		emptyMessage="Nenhum produto encontrado." rows="10"
+		    	<p:dataTable value="#{usuarioManMB.pessoas}" var="funcionario"
+		    		emptyMessage="Nenhum funcionário encontrado." rows="10"
 		    		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
 		    		
 		    		<p:column headerText="Código" style="text-align: center; width: 40px">
-		    			<h:outputText value="#{produto.id}" />
+		    			<h:outputText value="#{funcionario.id}" />
 		    		</p:column>
 		    		<p:column headerText="Nome">
-		    			<h:outputText value="#{produto.descricao}" />
+		    			<h:outputText value="#{funcionario.nome}" />
 		    		</p:column>
 		    		<p:column style="width: 30px; text-align: center">
 		    			<p:commandButton icon="ui-icon-check" title="Selecionar"
-		    				action="#{manutencaoProdutoManMB.selecionar(produto)}"
+		    				action="#{usuarioManMB.selecionar(funcionario)}"
 		    				process="@this" />
 		    		</p:column>
 		    		
