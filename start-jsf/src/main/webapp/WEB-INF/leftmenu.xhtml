@@ -28,7 +28,7 @@
             		</p:submenu>
             		
             		<p:submenu label="Funcionários" icon="icon-users-1">
-                		<p:menuitem id="sm_funcionario"  value="Cadastrar Funcionários" global="false" outcome="funcionarioman"/>
+                		<p:menuitem id="sm_funcionario" rendered="#{usuarioManMB.usuario.admin}" value="Cadastrar Funcionários" global="false" outcome="funcionarioman"/>
 		                <p:menuitem id="sm_funcionarios"  value="Lista de Funcionários" global="false" outcome="funcionariocon"/>
             		</p:submenu>
             		

@@ -13,6 +13,7 @@ public interface UsuarioFacade {
 	
 	public List<Pessoa> recuperaFuncionarios(String valorPesquisa); 
 	
+	public void grava(Usuario usuario);
 	
 
 }

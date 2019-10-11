@@ -38,4 +38,10 @@ public class UsuarioImpl implements Serializable, UsuarioFacade {
 		return pessoaBO.recuperaFuncionarios(valorPesquisa);
 	}
 
+	@Override
+	public void grava(Usuario usuario) {
+		usuarioBO.grava(usuario);
+		
+	}
+
 }

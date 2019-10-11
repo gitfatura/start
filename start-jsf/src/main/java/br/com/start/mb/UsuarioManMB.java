@@ -27,7 +27,7 @@ public class UsuarioManMB implements Serializable {
 
 	@Inject
 	private Usuario usuario;
-
+	
 	@Inject
 	private Pessoa pessoa;
 
@@ -40,7 +40,12 @@ public class UsuarioManMB implements Serializable {
 
 	@PostConstruct
 	public void start() {
-		recuperaFuncionarios();
+	}
+	
+	public void grava() {
+		usuarioFacade.grava(usuario);
+		FacesUtil.addInfoMessage("Registro gravado com sucesso!");
+		novaInstacia();
 	}
 	
 	public void recuperaFuncionarios() {
@@ -71,10 +76,6 @@ public class UsuarioManMB implements Serializable {
 	public void novaInstacia() {
 		usuario = new Usuario();
 		pessoa = new Pessoa();
-	}
-
-	public void grava() {
-
 	}
 
 	public String logar() {

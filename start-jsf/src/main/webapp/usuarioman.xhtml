@@ -1,3 +1,4 @@
+
 <ui:composition
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -23,7 +24,7 @@
 									<p:outputLabel for="pessoa" value="Funcionário(a)"/>
 										
 									<div class="ui-inputgroup">	
-									<p:autoComplete  required="true" id="pessoa" value="#{usuarioManMB.pessoa}" requiredMessage="Pessoa é obrigatório." placeholder="Pesquise pela nome ou código" 
+									<p:autoComplete  required="true" id="pessoa" value="#{usuarioManMB.pessoa}" requiredMessage="Funcionário é obrigatório." placeholder="Pesquise pela nome ou código" 
 											completeMethod="#{usuarioManMB.completarPessoa}"
 											var="c" itemLabel="#{c.nome}" itemValue="#{c}" forceSelection="true">
 											</p:autoComplete>
@@ -42,7 +43,7 @@
 							<div class="ContainerIndent">
 								<div class="Container100">
 									<p:outputLabel for="usuario" value="Usuário"/>
-									<p:inputText id="usuario" value="#{usuarioManMB.usuario.login}" styleClass="FontBold Fs15 hardblue number" required="true" requiredMessage="Informe a quantidade."/>
+									<p:inputText id="usuario" value="#{usuarioManMB.usuario.login}" styleClass="FontBold Fs15 hardblue" required="true" requiredMessage="Informe o login."/>
 								</div>
 							</div>
 						</div>
@@ -50,7 +51,7 @@
 							<div class="ContainerIndent">
 								<div class="Container100">
 									<p:outputLabel for="senha" value="Senha"/>
-									<p:inputText id="senha" value="#{usuarioManMB.usuario.senha}" styleClass="FontBold Fs15 hardblue number" required="true" requiredMessage="Informe a quantidade."/>
+									<p:password id="senha" value="#{usuarioManMB.usuario.senha}" styleClass="FontBold Fs15 hardblue" required="true" requiredMessage="Informe a senha."/>
 								</div>
 							</div>
 						</div>
@@ -58,7 +59,7 @@
 							<div class="ContainerIndent">
 								<div class="Container100">
 									<p:outputLabel for="tipo" value="Tipo de permissão" />
-									<p:selectOneMenu id="tipo" value="#{usuarioManMB.usuario.role}" required="true" requiredMessage="Informe entrada/saida." styleClass="FontBold Fs15 hardblue">
+									<p:selectOneMenu id="tipo" value="#{usuarioManMB.usuario.role}" required="true" requiredMessage="Informe Tipo de permissão." styleClass="FontBold Fs15 hardblue">
 										<f:selectItem itemValue="" itemLabel="Selecione" />
 										<f:selectItem itemValue="ADMIN" itemLabel="Administrador" />
 										<f:selectItem itemValue="FUNCIONARIO" itemLabel="Funcionário" />
