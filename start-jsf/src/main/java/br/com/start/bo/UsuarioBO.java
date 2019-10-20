@@ -1,6 +1,7 @@
 package br.com.start.bo;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -29,6 +30,14 @@ public class UsuarioBO implements Serializable {
 	@Transactional
 	public void grava(Usuario usuario) {
 		dao.save(usuario);
+	}
+	
+	public List<Usuario> recuperaUsuarios(String value){
+		return query.recuperaUsuarios(value);
+	}
+
+	public void remove(Usuario usuario) {
+		dao.remove(usuario);
 	}
 	
 }

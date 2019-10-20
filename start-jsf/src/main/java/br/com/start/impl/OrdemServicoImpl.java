@@ -21,15 +21,9 @@ public class OrdemServicoImpl implements Serializable, OrdemServicoFacade {
 
 	@Inject
 	private OrdemServicoBO ordemServicoBO;
-	
+
 	@Inject
 	private OrdemServicoAS ordemServicoAS;
-
-	@Transactional
-	@Override
-	public void grava(OrdemServico servico) {
-		ordemServicoBO.grava(servico);
-	}
 
 	@Transactional
 	@Override
@@ -59,8 +53,8 @@ public class OrdemServicoImpl implements Serializable, OrdemServicoFacade {
 
 	@Transactional
 	@Override
-	public void gravaServicos(List<Servico> servicos) {
-		ordemServicoAS.gravaServico(servicos);
+	public void grava(OrdemServico ordemservico, List<Servico> servicos) {
+		ordemServicoAS.gravaOrdemServicos(ordemservico,servicos);
 	}
 
 }

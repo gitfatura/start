@@ -8,60 +8,61 @@
     template="/WEB-INF/template.xhtml">
 	<ui:define name="content">
 		<div class="ContainerIndent">
-			<p:fieldset legend="Serviços">
+			<p:fieldset legend="Usuários">
 				<p:panel>
 					<div class="ContainerIndent">
 						<h:form id="frmpesquisa">
 							<p:toolbar>
 								<p:toolbarGroup>
-									<p:button value="Novo produto" outcome="produtoman"/>
+									<p:button value="Novo usuário" outcome="usuarioman"/>
 								</p:toolbarGroup>
 								<p:toolbarGroup align="right">
-									<p:inputText title="Entre com a descricão" placeholder="Entre com a descricão" value="#{produtoConMB.pesquisa}" size="40"/>
-									<p:commandButton value="Pesquisar" action="#{produtoConMB.selected}" update="frmpesquisa,frm"/>
+									<p:inputText title="Entre com login ou código" placeholder="Entre com login ou código" value="#{usuarioConMB.valorPesquisaStr}" size="40"/>
+									<p:commandButton value="Pesquisar" action="#{usuarioConMB.recuperaUsuarios}" update="frmpesquisa,frm"/>
 								</p:toolbarGroup>
 							</p:toolbar>
 						</h:form>
 						<div class="EmptyBox20"></div>
 						<h:form id="frm">
-							<p:dataTable id="produto" var="produto" value="#{produtoConMB.produtos}"
+							<p:dataTable id="usuario" var="usuario" value="#{usuarioConMB.usuarios}"
 	                                     rows="5" paginator="true" paginatorTemplate="{CurrentPageReport}  
 	                                     {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-	                                     rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"  emptyMessage="Nenhum produto encontrado" 
+	                                     rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"  emptyMessage="Nenhum usuário encontrado" 
 	                                     paginatorAlwaysVisible="true" reflow="true">
 								
-								<p:column headerText="Código" sortBy="#{produto.id}" style="width: 80px">
-									<h:outputText value="#{produto.id}" />
+								<p:column headerText="Código" sortBy="#{usuario.id}" style="width: 80px">
+									<h:outputText value="#{usuario.id}" />
 								</p:column>
 								
-								<p:column headerText="Descrição" sortBy="#{produto.descricao}">
-									<h:outputText value="#{produto.descricao}" />
+								<p:column headerText="Usuário" sortBy="#{usuario.login}">
+									<h:outputText value="#{usuario.login}" />
 								</p:column>
 								
-								<p:column headerText="Quantidade" sortBy="#{produto.quantidade}" style="width: 120px">
-									<h:outputText value="#{produto.quantidade}" />
+								<p:column headerText="Funcionário" sortBy="#{usuario.pessoa.nome}">
+									<h:outputText value="#{usuario.pessoa.nome}" />
 								</p:column>
+								
 								
 								<p:column style="width: 50px">
-									<p:button outcome="produtoman" icon="ui-icon-pencil" title="Editar">
-										<f:param name="id" value="#{produto.id}"/>
+									<p:button outcome="usuarioman" icon="ui-icon-pencil" title="Editar">
+										<f:param name="id" value="#{usuario.id}"/>
 									</p:button>
 								</p:column>
 								
 								<p:column style="width: 50px">
-									<p:commandButton title="Excluir" oncomplete="PF('removerproduto').show()" process="@this" update="frm" icon="ui-icon-trash">
-										<f:setPropertyActionListener   value="#{produto}" target="#{produtoConMB.produto}"/>
+									<p:commandButton title="Excluir" oncomplete="PF('removerusuario').show()" process="@this" update="frm" icon="ui-icon-trash">
+										<f:setPropertyActionListener   value="#{usuario}" target="#{usuarioConMB.usuario}"/>
 									</p:commandButton>
 								</p:column>
 								
 							</p:dataTable>
-							<p:dialog header="Deseja excluir serviço" id="removerproduto" widgetVar="removerproduto" width="350" height="100">
+							<p:dialog header="Deseja excluir serviço" id="removerusuario" widgetVar="removerusuario" width="350" height="100">
 								<div class="col-70">
-									<p:outputLabel id="idNome" value="#{produtoConMB.produto.descricao}"/>
+									<p:outputLabel id="login" value="#{usuarioConMB.usuario.login}"/>
 									<hr/>
 								</div>
-								<p:button value="Não" onclick="PF('removerproduto').hide(); return false;" />
-								<p:commandButton value="Sim" action="#{produtoConMB.remove}" update="frm,produto"  onclick="PF('removerproduto').hide()"/>
+								<p:button value="Não" onclick="PF('removerusuario').hide(); return false;" />
+								<p:commandButton value="Sim" action="#{usuarioConMB.remove}" update="frm,usuario"  onclick="PF('removerusuario').hide()"/>
 							</p:dialog>
 						</h:form>
 					</div>

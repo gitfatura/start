@@ -44,4 +44,14 @@ public class UsuarioImpl implements Serializable, UsuarioFacade {
 		
 	}
 
+	@Override
+	public List<Usuario> recuperaUsuarios(String value) {
+		return usuarioBO.recuperaUsuarios(value);
+	}
+
+	@Override
+	public void remove(Usuario usuario) {
+		usuarioBO.remove(usuario);
+	}
+
 }

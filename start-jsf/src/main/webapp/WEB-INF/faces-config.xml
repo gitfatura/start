@@ -24,6 +24,18 @@
         </navigation-case>
     </navigation-rule>
 	
+	<!-- <navigation-rule>
+        <from-view-id>/login.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>dashboard</from-outcome>
+            <to-view-id>/dashboard.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <lifecycle>
+        <phase-listener>br.com.start.security.Autorizador</phase-listener>
+    </lifecycle>
+	 -->
 	
 	<component>
 		<component-type>org.primefaces.component.SentinelMenu</component-type>

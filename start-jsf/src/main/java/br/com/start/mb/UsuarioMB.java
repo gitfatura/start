@@ -1,28 +1,31 @@
 package br.com.start.mb;
 
+import java.io.IOException;
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringUtils;
 import org.primefaces.PrimeFaces;
-import org.primefaces.event.SelectEvent;
+import org.primefaces.context.PrimeFacesContext;
+import org.primefaces.context.RequestContext;
 
 import br.com.start.comum.FacesUtil;
 import br.com.start.comum.SessionUtil;
-import br.com.start.entity.Pessoa;
+import br.com.start.comum.Util;
 import br.com.start.entity.Usuario;
 import br.com.start.facade.UsuarioFacade;
 
-@ViewScoped
+@SessionScoped
 @Named
-public class UsuarioManMB implements Serializable {
+public class UsuarioMB implements Serializable {
 
 	private static final long serialVersionUID = 3819230534860340809L;
 
@@ -30,57 +33,13 @@ public class UsuarioManMB implements Serializable {
 	private Usuario usuario;
 	
 	@Inject
-	private Pessoa pessoa;
-
-	private List<Pessoa> pessoas;
-	
-	private String valorPesquisaStr;
-
-	@Inject
 	private UsuarioFacade usuarioFacade;
 
 	@PostConstruct
 	public void start() {
-		//usuarioLogado();
+		System.out.println("dsadas");
 	}
 	
-	public void grava() {
-		usuario.setPessoa(pessoa);
-		usuarioFacade.grava(usuario);
-		FacesUtil.addInfoMessage("Registro gravado com sucesso!");
-		novaInstacia();
-	}
-	
-	public void recuperaFuncionarios() {
-		pessoas = usuarioFacade.recuperaFuncionarios(valorPesquisaStr);
-	}
-
-	
-	public List<Pessoa> completarPessoa(String valor) {
-		return usuarioFacade.recuperaFuncionarios(valor);
-	}
-
-	public void pessoaSelecionada(SelectEvent event) {
-		pessoa = (Pessoa) event.getObject();
-	}
-
-	public void abrirDialogo() {
-		Map<String, Object> opcoes = new HashMap<>();
-		opcoes.put("modal", true);
-		opcoes.put("resizable", false);
-		opcoes.put("contentHeight", 470);
-		PrimeFaces.current().dialog().openDynamic("selecaofuncionarios", opcoes, null);
-	}
-	
-	public void selecionar(Pessoa pessoa) {
-		PrimeFaces.current().dialog().closeDynamic(pessoa);
-	}
-
-	public void novaInstacia() {
-		usuario = new Usuario();
-		pessoa = new Pessoa();
-	}
-
 	public String logar() {
 		try {
 			if (usuario == null) {
@@ -99,7 +58,8 @@ public class UsuarioManMB implements Serializable {
 			} else {
 				Usuario usuarioLogado = usuarioFacade.logar(usuario);
 				if (usuarioLogado != null) {
-					SessionUtil.setUsuario(usuarioLogado);
+					HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+					session.setAttribute("usuario", usuarioLogado);
 					return "/dashboard.xhtml?faces-redirect=false";
 				}
 			}
@@ -110,6 +70,14 @@ public class UsuarioManMB implements Serializable {
 		return "/login.xhtml?faces-redirect=false";
 	}
 
+	public boolean isAdmin() {
+		usuario = SessionUtil.getUsuario();
+		if (usuario !=null) {
+			return usuario.isAdmin();
+		}
+		return false;
+	}
+	
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -117,30 +85,5 @@ public class UsuarioManMB implements Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-
-	public Pessoa getPessoa() {
-		return pessoa;
-	}
-
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
-	}
-
-	public List<Pessoa> getPessoas() {
-		return pessoas;
-	}
-
-	public void setPessoas(List<Pessoa> pessoas) {
-		this.pessoas = pessoas;
-	}
-
-	public String getValorPesquisaStr() {
-		return valorPesquisaStr;
-	}
-
-	public void setValorPesquisaStr(String valorPesquisaStr) {
-		this.valorPesquisaStr = valorPesquisaStr;
-	}
-	
 
 }

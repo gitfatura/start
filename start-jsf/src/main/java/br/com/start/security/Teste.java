@@ -1,0 +1,13 @@
+package br.com.start.security;
+
+public class Teste {
+
+	public static void main(String[] args) {
+		
+		String pagina = "pessoaman.xhtml";
+		
+		
+		
+		
+	}
+}

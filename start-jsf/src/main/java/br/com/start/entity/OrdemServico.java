@@ -1,7 +1,6 @@
 package br.com.start.entity;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.com.start.types.Finalizado;
@@ -30,33 +28,34 @@ public class OrdemServico extends AppBase implements Serializable {
 	private Long id;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "ORD_FINALIZADO", length=3)
+	@Column(name = "ORD_FINALIZADO", length = 3)
 	private Finalizado finalizado = Finalizado.NAO;
 
 	@ManyToOne(targetEntity = Veiculo.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "ORD_VEICULOID")
 	private Veiculo veiculo;
 
-	@OneToMany(targetEntity = Servico.class, fetch = FetchType.LAZY, mappedBy = "ordemServico")
-	private List<Servico> servicos;
+	@ManyToOne(targetEntity = Servico.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "ORD_SERVICOID")
+	private Servico servico;
 
 	@ManyToOne(targetEntity = Pessoa.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "ORD_PESID")
 	private Pessoa pessoa;
 
-	@Column(name = "ORD_OBSERVACAO", length=255)
+	@Column(name = "ORD_OBSERVACAO", length = 255)
 	private String observacao;
 
 	public OrdemServico() {
 	}
 
-	public OrdemServico(Long id, Finalizado finalizado, Veiculo veiculo, List<Servico> servicos, Pessoa pessoa,
+	public OrdemServico(Long id, Finalizado finalizado, Veiculo veiculo, Servico servico, Pessoa pessoa,
 			String observacao) {
 		super();
 		this.id = id;
 		this.finalizado = finalizado;
 		this.veiculo = veiculo;
-		this.servicos = servicos;
+		this.servico = servico;
 		this.pessoa = pessoa;
 		this.observacao = observacao;
 	}
@@ -86,12 +85,12 @@ public class OrdemServico extends AppBase implements Serializable {
 		this.veiculo = veiculo;
 	}
 
-	public List<Servico> getServicos() {
-		return servicos;
+	public Servico getServico() {
+		return servico;
 	}
 
-	public void setServicos(List<Servico> servicos) {
-		this.servicos = servicos;
+	public void setServico(Servico servico) {
+		this.servico = servico;
 	}
 
 	public String getObservacao() {

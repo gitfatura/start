@@ -1,9 +1,17 @@
 package br.com.start.comum;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.enterprise.context.ApplicationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
-public class FacesUtil {
-	
+@ApplicationScoped
+public class FacesUtil implements Serializable{
+	private static final long serialVersionUID = 1L;
+
 	public static boolean isPostback() {
 		return FacesContext.getCurrentInstance().isPostback();
 	}
@@ -57,5 +65,15 @@ public class FacesUtil {
 			FacesUtil.addErrorMessage("Erro "+e.getMessage());
 		}
 	}
+	
+	public static void redirecionarPagina(String pagina) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        String url = context.getExternalContext().getRequestContextPath();
+        try {
+            context.getExternalContext().redirect(url + "/" + pagina);
+        } catch (IOException ex) {
+            Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 	
 }

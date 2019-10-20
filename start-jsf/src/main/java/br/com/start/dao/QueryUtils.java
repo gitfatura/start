@@ -108,6 +108,33 @@ public class QueryUtils<T> {
 		return query.getResultList();
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Usuario> recuperaUsuarios(String valor) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("select usu from Usuario usu ");
+		sql.append(" inner join usu.pessoa pes ");
+		
+		if(StringUtils.isNotBlank(valor) && !StringUtils.isNumeric(valor)) {
+			sql.append(" where upper (usu.login) like :login ");
+		}
+		
+		if (StringUtils.isNotBlank(valor) && StringUtils.isNumeric(valor)) {
+			sql.append(" where usu.id = :id ");
+		}
+		
+		Query query = manager.createQuery(sql.toString());
+		
+		if (StringUtils.isNotBlank(valor) && !StringUtils.isNumeric(valor)) {
+			query.setParameter("login", "%" + valor.toUpperCase() + "%");
+		}
+		
+		if (StringUtils.isNotBlank(valor) && StringUtils.isNumeric(valor)) {
+			query.setParameter("id", Long.valueOf(valor));
+		}
+		
+		return query.getResultList();
+	}
+	
 	public boolean existeRegistro(Class<T> classe, String parametro, String valor) {
 		boolean encontrouRegistro = false;
 		try {

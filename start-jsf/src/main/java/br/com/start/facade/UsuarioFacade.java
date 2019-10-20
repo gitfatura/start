@@ -15,5 +15,9 @@ public interface UsuarioFacade {
 	
 	public void grava(Usuario usuario);
 	
+	public List<Usuario> recuperaUsuarios(String value);
+
+	public void remove(Usuario usuario);
+	
 
 }

@@ -27,9 +27,9 @@
 		                <p:menuitem id="sm_pessoas"  value="Lista de Clientes" global="false" outcome="pessoacon"/>
             		</p:submenu>
             		
-            		<p:submenu label="Funcionários" icon="icon-users-1">
-                		<p:menuitem id="sm_funcionario" rendered="#{usuarioManMB.usuario.admin}" value="Cadastrar Funcionários" global="false" outcome="funcionarioman"/>
-		                <p:menuitem id="sm_funcionarios"  value="Lista de Funcionários" global="false" outcome="funcionariocon"/>
+            		<p:submenu label="Funcionários" rendered="#{usuarioMB.admin}" icon="icon-users-1">
+                		<p:menuitem id="sm_funcionario"  value="Cadastrar Funcionários" global="false" outcome="funcionarioman"/>
+		                <p:menuitem id="sm_funcionarios" value="Lista de Funcionários" global="false" outcome="funcionariocon"/>
             		</p:submenu>
             		
                 	<p:submenu label="Veículos" icon=" icon-th">
@@ -52,8 +52,9 @@
                 		<p:menuitem id="sm_entradaproduto"  value="Manutenção de produto" global="false" outcome="entradaprodutoman"/>
             		</p:submenu>
             		
-            		<p:submenu label="Administrador" icon="icon-user-2">
-                		<p:menuitem id="sm_admin"  value="Controle de permissões" outcome="usuarioman" global="false"/>
+            		<p:submenu label="Administrador" rendered="#{usuarioMB.admin}" icon="icon-user-2">
+                		<p:menuitem id="sm_admin" value="Controle de permissões" outcome="usuarioman" global="false"/>
+                		<p:menuitem id="sm_lista" value="Lista de usuários" outcome="usuariocon" global="false"/>
             		</p:submenu>
             		
                	

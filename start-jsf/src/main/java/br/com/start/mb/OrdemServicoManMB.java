@@ -63,8 +63,7 @@ public class OrdemServicoManMB implements Serializable {
 	
 	public void grava() {
 		ordemServico.setVeiculo(veiculo);
-		ordemServicoFacade.gravaServicos(servicosFiltrados);
-		ordemServicoFacade.grava(ordemServico);
+		ordemServicoFacade.grava(ordemServico, servicosFiltrados);
 		novaInstancia();
 		FacesUtil.addInfoMessage("Registro gravado com sucesso!");
 	}
@@ -85,7 +84,7 @@ public class OrdemServicoManMB implements Serializable {
 			if(servicosFiltrados ==null) {
 				servicosFiltrados = new ArrayList<Servico>();
 			}
-			servico.setOrdemServico(ordemServico);
+			//servico.setOrdemServico(ordemServico);
 			servicosFiltrados.add(servico);
 		}
 		
