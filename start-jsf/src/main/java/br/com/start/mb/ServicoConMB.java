@@ -1,16 +1,11 @@
 package br.com.start.mb;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import org.apache.commons.lang3.StringUtils;
-
 import br.com.start.comum.FacesUtil;
 import br.com.start.entity.Servico;
 import br.com.start.facade.ServicoFacade;

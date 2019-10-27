@@ -1,0 +1,80 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+    template="/WEB-INF/template.xhtml">
+	<ui:define name="content">
+		<div class="ContainerIndent">
+			<p:fieldset legend="Lista de ordem de serviços">
+				<p:panel>
+					<div class="ContainerIndent">
+						<h:form id="frm">
+							<p:dataTable id="ordemservico" var="ordemservico" value="#{ordemServicoConMB.ordemServicos}"
+	                                     rows="10" paginator="true" paginatorTemplate="{CurrentPageReport}  
+	                                     {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                                     rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"  emptyMessage="Nenhuma ordem de serviço" 
+	                                     paginatorAlwaysVisible="true" reflow="true">
+								
+								<p:column headerText="Código" style="width: 120px">
+									<h:outputText value="#{ordemservico.id}" />
+								</p:column>
+								
+								<p:column headerText="Código" style="width: 120px">
+									<h:outputText value="#{ordemservico.veiculo.modelo}" />
+								</p:column>
+								
+								<p:column headerText="Código" style="width: 120px">
+									<h:outputText value="#{ordemservico.veiculo.pessoa.nome}" />
+								</p:column>
+								
+								<p:column headerText="Código" style="width: 120px">
+									<h:outputText value="#{ordemservico.data}" />
+								</p:column>
+								
+								<p:column headerText="Código" style="width: 120px">
+									<h:outputText value="#{ordemservico.valorTotal}" />
+								</p:column>
+								
+								<p:column style="width:32px;text-align: center">
+						            <p:commandButton update="frm" oncomplete="PF('servicoDialogo').show()" icon="pi pi-search" title="View"
+						            action="#{ordemServicoConMB.servicoSelected(ordemservico)}" process="@this">
+						            </p:commandButton>
+        						</p:column>
+											
+							</p:dataTable>
+							
+							<p:dialog header="Serviços" id="servicoDialog" widgetVar="servicoDialogo" width="800" height="200">
+								
+								<p:dataTable id="servicos" var="servico" value="#{ordemServicoConMB.servicosSelecionado}"
+	                                     rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"  emptyMessage="Nenhuma ordem de serviço" 
+	                                     paginatorAlwaysVisible="true" reflow="true">
+								
+								<p:column headerText="Código" style="width: 60px">
+									<h:outputText value="#{servico.id}" />
+								</p:column>
+								
+								<p:column headerText="Serviço" style="width: 120px">
+									<h:outputText value="#{servico.servico.descricao}" />
+								</p:column>
+								
+								<p:column headerText="Valor" style="width: 60px">
+									<h:outputText value="#{servico.valor}" />
+								</p:column>
+								
+								<p:column headerText="Status" style="width: 100px">
+									<h:outputText value="#{servico.status.label}" />
+								</p:column>
+											
+							</p:dataTable>
+							</p:dialog>
+							
+						</h:form>
+					</div>
+				</p:panel>
+			</p:fieldset>
+		</div>
+	</ui:define>
+</ui:composition>

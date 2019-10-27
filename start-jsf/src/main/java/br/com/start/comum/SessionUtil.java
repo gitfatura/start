@@ -58,5 +58,4 @@ public class SessionUtil implements Serializable {
 		getSession().invalidate();
 	}
 	
-	
 }

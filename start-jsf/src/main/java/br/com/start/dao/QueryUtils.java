@@ -9,8 +9,10 @@ import javax.persistence.Query;
 
 import org.apache.commons.lang3.StringUtils;
 
+import br.com.start.dto.ServicoDTO;
 import br.com.start.entity.Pessoa;
 import br.com.start.entity.Servico;
+import br.com.start.entity.ServicoOrdemServico;
 import br.com.start.entity.Usuario;
 import br.com.start.entity.Veiculo;
 
@@ -303,6 +305,48 @@ public class QueryUtils<T> {
 		return manager.createQuery(sql.toString()).setParameter("desc", "%" + value + "%").getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<ServicoDTO> recuperaServico(String valor) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("select p from Servico p ");
+		
+		if(StringUtils.isNotBlank(valor)) {
+			sql.append(" where ");
+			
+			if (StringUtils.isNotBlank(valor) && StringUtils.isNumeric(valor)) {
+				sql.append(" p.id = :servicoId ");
+			}
+			
+			if (StringUtils.isNotBlank(valor) && !StringUtils.isNumeric(valor)) {
+				sql.append(" upper (p.descricao) like :descricao ");
+			}
+		}
+		
+		Query query = manager.createQuery(sql.toString());
+		
+		if(StringUtils.isNotBlank(valor)) {
+			if (StringUtils.isNotBlank(valor) && StringUtils.isNumeric(valor)) {
+				query.setParameter("servicoId", Long.valueOf(valor));
+			}
+			if (StringUtils.isNotBlank(valor) && !StringUtils.isNumeric(valor)) {
+				query.setParameter("descricao", "%" + valor.toUpperCase() + "%");
+			}
+		}
+		
+		return (List<ServicoDTO>) query.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<ServicoOrdemServico> recuperaServicoOrdemServicos(Long orderServicoId) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("select ser from ServicoOrdemServico ser ");
+		sql.append("inner join ser.ordemServico ord ");
+		sql.append("where ord.id = :orderServicoId ");
+		Query query = manager.createQuery(sql.toString());
+		query.setParameter("orderServicoId", orderServicoId);
+		return (List<ServicoOrdemServico>) query.getResultList();
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<T> recuperaPorData(Class<T> classe, Date inicio, Date fim, String nomeColuna) {
 		StringBuilder sql = new StringBuilder();

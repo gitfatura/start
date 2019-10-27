@@ -6,16 +6,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-
 import org.apache.commons.lang3.StringUtils;
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.SelectEvent;
-
 import br.com.start.comum.FacesUtil;
 import br.com.start.entity.OrdemServico;
 import br.com.start.entity.Servico;
@@ -58,7 +55,6 @@ public class OrdemServicoManMB implements Serializable {
 	
 	@PostConstruct
 	public void start() {
-		
 	}
 	
 	public void grava() {
@@ -68,7 +64,6 @@ public class OrdemServicoManMB implements Serializable {
 		FacesUtil.addInfoMessage("Registro gravado com sucesso!");
 	}
 	
-	
 	private void caculaServico() {
 		if(servicosFiltrados !=null && servicosFiltrados.size()>0) {
 			valorServicos = BigDecimal.ZERO;
@@ -77,9 +72,14 @@ public class OrdemServicoManMB implements Serializable {
 			}
 		}
 	}
-
 	
 	public void adicionaServico() {
+		
+		if (servico == null || StringUtils.isBlank(servico.getDescricao())) {
+			FacesUtil.addInfoMessageWarn("Serviço é obrigatório.");
+			return;
+		}
+				
 		if (servico !=null) {
 			if(servicosFiltrados ==null) {
 				servicosFiltrados = new ArrayList<Servico>();
@@ -173,6 +173,7 @@ public class OrdemServicoManMB implements Serializable {
 		ordemServico = new OrdemServico();
 		filtroPlaca = null;
 		status = null;
+		veiculo = new Veiculo();  
 		veiculos = new ArrayList<Veiculo>();
 		servicos = new ArrayList<Servico>();
 		servicosFiltrados = new ArrayList<Servico>();

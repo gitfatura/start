@@ -1,15 +1,8 @@
 package br.com.start.security;
 
-import javax.faces.application.Application;
-import javax.faces.application.NavigationHandler;
-import javax.faces.context.FacesContext;
-import javax.faces.event.PhaseEvent;
-import javax.faces.event.PhaseId;
-import javax.faces.event.PhaseListener;
 
 //PhaseListener
 public class Autorizador {
-	private static final long serialVersionUID = 1L;
 	
 	/*
 	String usuarioLogado ="dsadsa";

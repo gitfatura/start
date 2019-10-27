@@ -2,8 +2,10 @@ package br.com.start.impl;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+
 import br.com.start.bo.ServicoBO;
 import br.com.start.entity.Servico;
 import br.com.start.facade.ServicoFacade;

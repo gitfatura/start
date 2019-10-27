@@ -16,6 +16,7 @@
 		<class>br.com.start.entity.Usuario</class>
 		<class>br.com.start.entity.Veiculo</class>
 		<class>br.com.start.entity.Pessoa</class>
+		<class>br.com.start.entity.ServicoOrdemServico</class>
 
 		<!-- Aqui são listadas todas as entidades -->
 		

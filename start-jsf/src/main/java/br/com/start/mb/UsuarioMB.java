@@ -1,25 +1,15 @@
 package br.com.start.mb;
 
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringUtils;
-import org.primefaces.PrimeFaces;
-import org.primefaces.context.PrimeFacesContext;
-import org.primefaces.context.RequestContext;
-
 import br.com.start.comum.FacesUtil;
 import br.com.start.comum.SessionUtil;
-import br.com.start.comum.Util;
 import br.com.start.entity.Usuario;
 import br.com.start.facade.UsuarioFacade;
 
@@ -70,6 +60,11 @@ public class UsuarioMB implements Serializable {
 		return "/login.xhtml?faces-redirect=false";
 	}
 
+	public String sair() {
+		SessionUtil.invalidate();
+		return "/login.xhtml?faces-redirect=false";
+	}
+	
 	public boolean isAdmin() {
 		usuario = SessionUtil.getUsuario();
 		if (usuario !=null) {

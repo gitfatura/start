@@ -12,6 +12,7 @@ public enum Pagina {
 	SERVICOMAN("servicoman", true),
 	SERVICOCON("servicocon", true),
 	ORDEMSERVICOMAN("ordemservicoman", true),
+	ORDEMSERVICOCON("ordemservicocon", true),
 	PRODUTOMAN("produtoman", true),
 	PRODUTOCON("produtocon", true),
 	ENTRADAPRODUTOMAN("entradaprodutoman", true),

@@ -10,6 +10,7 @@ import br.com.start.as.OrdemServicoAS;
 import br.com.start.bo.OrdemServicoBO;
 import br.com.start.entity.OrdemServico;
 import br.com.start.entity.Servico;
+import br.com.start.entity.ServicoOrdemServico;
 import br.com.start.entity.Veiculo;
 import br.com.start.facade.OrdemServicoFacade;
 import br.com.start.jpa.Transactional;
@@ -55,6 +56,11 @@ public class OrdemServicoImpl implements Serializable, OrdemServicoFacade {
 	@Override
 	public void grava(OrdemServico ordemservico, List<Servico> servicos) {
 		ordemServicoAS.gravaOrdemServicos(ordemservico,servicos);
+	}
+
+	@Override
+	public List<ServicoOrdemServico> recuperaServicoOrdemServicos(Long orderServicoId) {
+		return ordemServicoBO.recuperaServicoOrdemServicos(orderServicoId);
 	}
 
 }

@@ -1,7 +1,12 @@
 package br.com.start.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,9 +17,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import br.com.start.types.Finalizado;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import br.com.start.types.Status;
 
 @Entity
 @Table(name = "TB_ORDEM_SERVICO")
@@ -28,36 +35,38 @@ public class OrdemServico extends AppBase implements Serializable {
 	private Long id;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "ORD_FINALIZADO", length = 3)
-	private Finalizado finalizado = Finalizado.NAO;
+	@Column(name = "ORD_STATUS", length = 20)
+	private Status status = Status.ABERTO;
 
 	@ManyToOne(targetEntity = Veiculo.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "ORD_VEICULOID")
 	private Veiculo veiculo;
 
-	@ManyToOne(targetEntity = Servico.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "ORD_SERVICOID")
-	private Servico servico;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "ORD_DATA")
+	private Date data = Calendar.getInstance().getTime();
 
-	@ManyToOne(targetEntity = Pessoa.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "ORD_PESID")
-	private Pessoa pessoa;
+	@Column(name = "ORD_VALORTOTAL")
+	private BigDecimal valorTotal;
 
 	@Column(name = "ORD_OBSERVACAO", length = 255)
 	private String observacao;
 
+	@OneToMany(targetEntity = ServicoOrdemServico.class, fetch = FetchType.LAZY, cascade=CascadeType.ALL, mappedBy = "ordemServico")
+	private List<ServicoOrdemServico> servicoOrdemServicos;
+
 	public OrdemServico() {
 	}
 
-	public OrdemServico(Long id, Finalizado finalizado, Veiculo veiculo, Servico servico, Pessoa pessoa,
-			String observacao) {
-		super();
+	public OrdemServico(Long id, Status status, Veiculo veiculo, Date data, BigDecimal valorTotal, String observacao,
+			List<ServicoOrdemServico> servicoOrdemServicos) {
 		this.id = id;
-		this.finalizado = finalizado;
+		this.status = status;
 		this.veiculo = veiculo;
-		this.servico = servico;
-		this.pessoa = pessoa;
+		this.data = data;
+		this.valorTotal = valorTotal;
 		this.observacao = observacao;
+		this.servicoOrdemServicos = servicoOrdemServicos;
 	}
 
 	@Override
@@ -69,12 +78,12 @@ public class OrdemServico extends AppBase implements Serializable {
 		this.id = id;
 	}
 
-	public Finalizado getFinalizado() {
-		return finalizado;
+	public Status getStatus() {
+		return status;
 	}
 
-	public void setFinalizado(Finalizado finalizado) {
-		this.finalizado = finalizado;
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	public Veiculo getVeiculo() {
@@ -85,12 +94,20 @@ public class OrdemServico extends AppBase implements Serializable {
 		this.veiculo = veiculo;
 	}
 
-	public Servico getServico() {
-		return servico;
+	public Date getData() {
+		return data;
 	}
 
-	public void setServico(Servico servico) {
-		this.servico = servico;
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	public BigDecimal getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(BigDecimal valorTotal) {
+		this.valorTotal = valorTotal;
 	}
 
 	public String getObservacao() {
@@ -101,12 +118,12 @@ public class OrdemServico extends AppBase implements Serializable {
 		this.observacao = observacao;
 	}
 
-	public Pessoa getPessoa() {
-		return pessoa;
+	public List<ServicoOrdemServico> getServicoOrdemServicos() {
+		return servicoOrdemServicos;
 	}
 
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
+	public void setServicoOrdemServicos(List<ServicoOrdemServico> servicoOrdemServicos) {
+		this.servicoOrdemServicos = servicoOrdemServicos;
 	}
 
 	@Override

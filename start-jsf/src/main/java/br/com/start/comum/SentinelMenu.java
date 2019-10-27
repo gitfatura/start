@@ -4,7 +4,6 @@ package br.com.start.comum;
 import org.primefaces.component.menu.AbstractMenu;
 import org.primefaces.context.PrimeFacesContext;
 
-import javax.faces.context.FacesContext;
 import javax.faces.component.UINamingContainer;
 import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;

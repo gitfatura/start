@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import br.com.start.dao.PersistenceUtils;
 import br.com.start.dao.QueryUtils;
 import br.com.start.entity.OrdemServico;
+import br.com.start.entity.ServicoOrdemServico;
 import br.com.start.entity.Veiculo;
 import br.com.start.facade.AppBO;
 
@@ -50,6 +51,10 @@ public class OrdemServicoBO implements Serializable, AppBO<OrdemServico> {
 
 	public Veiculo recuperaVeiculoPelaPlaca(String placa) {
 		return query.recuperaVeiculosPelaPlaca(placa);
+	}
+
+	public List<ServicoOrdemServico> recuperaServicoOrdemServicos(Long orderServicoId) {
+		return query.recuperaServicoOrdemServicos(orderServicoId);
 	}
 
 }

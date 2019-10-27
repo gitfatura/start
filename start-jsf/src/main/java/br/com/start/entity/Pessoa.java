@@ -2,7 +2,6 @@ package br.com.start.entity;
 
 import java.io.Serializable;
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import br.com.start.types.TipoPessoa;
 
 @Entity
@@ -52,14 +50,11 @@ public class Pessoa extends AppBase implements Serializable {
 	@OneToMany(targetEntity = Veiculo.class, fetch = FetchType.LAZY, mappedBy = "pessoa")
 	private List<Veiculo> veiculos;
 
-	@OneToMany(targetEntity = OrdemServico.class, fetch = FetchType.LAZY, mappedBy = "pessoa")
-	private List<OrdemServico> ordemServicos;
-
 	public Pessoa() {
 	}
 
 	public Pessoa(Long id, String nome, String cpf, String cnpj, String telefone, String celular, String email,
-			TipoPessoa tipoPessoa, List<Veiculo> veiculos, List<OrdemServico> ordemServicos) {
+			TipoPessoa tipoPessoa, List<Veiculo> veiculos) {
 		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
@@ -69,7 +64,6 @@ public class Pessoa extends AppBase implements Serializable {
 		this.email = email;
 		this.tipoPessoa = tipoPessoa;
 		this.veiculos = veiculos;
-		this.ordemServicos = ordemServicos;
 	}
 
 	@Override
@@ -138,7 +132,7 @@ public class Pessoa extends AppBase implements Serializable {
 	}
 
 	public TipoPessoa getTipoPessoa() {
-		if (tipoPessoa ==null) {
+		if (tipoPessoa == null) {
 			return TipoPessoa.PESSOAFISICA;
 		}
 		return tipoPessoa;
@@ -146,14 +140,6 @@ public class Pessoa extends AppBase implements Serializable {
 
 	public void setTipoPessoa(TipoPessoa tipoPessoa) {
 		this.tipoPessoa = tipoPessoa;
-	}
-
-	public List<OrdemServico> getOrdemServicos() {
-		return ordemServicos;
-	}
-
-	public void setOrdemServicos(List<OrdemServico> ordemServicos) {
-		this.ordemServicos = ordemServicos;
 	}
 
 	@Override

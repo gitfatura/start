@@ -38,7 +38,7 @@ public class Usuario implements Serializable {
 	@ManyToOne(targetEntity = Pessoa.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "USU_PESID")
 	private Pessoa pessoa;
-
+	
 	public boolean isAdmin() {
 		return Role.ADMIN.equals(role);
 	}

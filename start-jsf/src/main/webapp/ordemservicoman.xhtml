@@ -55,17 +55,13 @@
 										</div>
 									</div>
 								</div>
-								
-								
-								 
+																							 
 								<div class="Container30 Responsive50">
 									<div class="ContainerIndent">
 										<div class="Container100">
 											<p:outputLabel for="servico" value="Serviço"/>
-											
 											<div class="ui-inputgroup">	
-											<p:autoComplete id="servico" value="#{ordemServicoManMB.servico}" required="true" 
-											requiredMessage="Serviço é obrigatório."
+											<p:autoComplete id="servico" value="#{ordemServicoManMB.servico}"
 												 placeholder="Pesquise pela descrição ou código do serviço" completeMethod="#{ordemServicoManMB.completarServicos}"
 												var="c" itemLabel="#{c.descricao}" itemValue="#{c}" forceSelection="true">
 											</p:autoComplete>
@@ -97,7 +93,7 @@
 								<div class="Container10 Responsive50" style="margin-top: 16px">
 									<div class="ContainerIndent">
 										<div class="Container100">
-											<p:commandButton title="Registrar" value="+" id="botaoSalvar" update="frm,frmservicos" action="#{ordemServicoManMB.adicionaServico}" />
+											<p:commandButton title="Registrar" value="+" id="botaoSalvar" update="frm" action="#{ordemServicoManMB.adicionaServico}" />
 										</div>
 									</div>
 								</div>
@@ -105,11 +101,7 @@
 							</div>
 						</p:tab>
 					</p:accordionPanel>
-					</h:form>
-					
-					<h:form id="frmservicos">
-					 
-					
+					 					
 					<p:fieldset legend="Serviços" id="servicosfild" style="margin-top: 10px">
 						<div class="Container">
 							<p:dataTable id="servicosel" var="servicosel" value="#{ordemServicoManMB.servicosFiltrados}"
@@ -120,19 +112,29 @@
 		                                     paginatorAlwaysVisible="true" reflow="true">
 		                                     
 		                                     
-								<p:column headerText="Código">
+								<p:column headerText="Código" style="width: 100px">
 									<h:outputText value="#{servicosel.codigo}" />
 								</p:column>
 								<p:column headerText="Descrição">
 									<h:outputText value="#{servicosel.descricao}" />
 								</p:column>
-								<p:column headerText="Valor">
+								<p:column headerText="Valor" style="width: 150px">
 									<h:outputText value="#{servicosel.valor}">
 										<f:convertNumber  type="currency" currencySymbol="R$"/>
 									</h:outputText>
 								</p:column>
+								
+								<p:column headerText="Status" style="width: 200px">
+									<p:selectOneMenu id="status" value="#{servicosel.status}" styleClass="FontBold Fs18 hardblue">
+										<f:selectItem itemValue="ABERTO" itemLabel="Em aberto" />
+										<f:selectItem itemValue="FINALIZADO" itemLabel="Finalizado" />
+										<f:selectItem itemValue="CANCELADO" itemLabel="Cancelado" />
+									</p:selectOneMenu>
+								</p:column>
+								
+								
 								<p:column style="width: 50px">
-									<p:commandButton title="Excluir" oncomplete="PF('removerservico').show()" process="@this" update="frmservicos" icon="ui-icon-trash">
+									<p:commandButton title="Excluir" oncomplete="PF('removerservico').show()" process="@this" update="frm" icon="ui-icon-trash">
 										<f:setPropertyActionListener value="#{servicosel}" target="#{ordemServicoManMB.servico}"/>
 									</p:commandButton>
 								</p:column>
@@ -154,7 +156,7 @@
 								<div class="Container40 Responsive50">
 									<div class="ContainerIndent">
 										<div class="Container100">
-											<p:commandButton value="Sim" action="#{ordemServicoManMB.removeServico}" update="frmservicos,servicosel"  
+											<p:commandButton value="Sim" action="#{ordemServicoManMB.removeServico}" update="frm,servicosel"  
 											onclick="PF('removerservico').hide()"/>
 										</div>
 									</div>
@@ -175,7 +177,7 @@
 						<div class="Container20 Responsive50">
 							<div class="ContainerIndent">
 								<div class="Container100">
-									<p:commandButton title="Registrar" value="Registrar" id="botaoRegistrar" update="frm,frmservicos" action="#{ordemServicoManMB.grava}" />
+									<p:commandButton title="Registrar" value="Registrar" id="botaoRegistrar" update="frm" action="#{ordemServicoManMB.grava}" />
 								</div>
 							</div>
 						</div>
