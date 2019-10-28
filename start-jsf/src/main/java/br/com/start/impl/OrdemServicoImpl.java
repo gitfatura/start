@@ -1,6 +1,7 @@
 package br.com.start.impl;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -9,6 +10,7 @@ import javax.inject.Inject;
 import br.com.start.as.OrdemServicoAS;
 import br.com.start.bo.OrdemServicoBO;
 import br.com.start.entity.OrdemServico;
+import br.com.start.entity.Pessoa;
 import br.com.start.entity.Servico;
 import br.com.start.entity.ServicoOrdemServico;
 import br.com.start.entity.Veiculo;
@@ -61,6 +63,16 @@ public class OrdemServicoImpl implements Serializable, OrdemServicoFacade {
 	@Override
 	public List<ServicoOrdemServico> recuperaServicoOrdemServicos(Long orderServicoId) {
 		return ordemServicoBO.recuperaServicoOrdemServicos(orderServicoId);
+	}
+
+	@Override
+	public List<Pessoa> recuperaPessoaComServicoOrdemServicos(String value) {
+		return ordemServicoBO.recuperaPessoaComServicoOrdemServicos(value);
+	}
+
+	@Override
+	public List<OrdemServico> recuperaOrdemServicos(Long pessoaId, Date dataInicio, Date dataFim) {
+		return ordemServicoBO.recuperaOrdemServicos(pessoaId, dataInicio, dataFim);
 	}
 
 }

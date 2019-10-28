@@ -10,6 +10,7 @@ import javax.persistence.Query;
 import org.apache.commons.lang3.StringUtils;
 
 import br.com.start.dto.ServicoDTO;
+import br.com.start.entity.OrdemServico;
 import br.com.start.entity.Pessoa;
 import br.com.start.entity.Servico;
 import br.com.start.entity.ServicoOrdemServico;
@@ -94,18 +95,23 @@ public class QueryUtils<T> {
 	@SuppressWarnings("unchecked")
 	public List<T> recuperaValores(Class<T> classe, String valor, String parametro) {
 		StringBuilder sql = new StringBuilder();
-		sql.append("from ");
-		sql.append(classe.getName());
-		sql.append(" p where upper (p.");
-		sql.append(parametro);
-		sql.append(") like :param");
-
+		sql.append("select p from ");
+		sql.append(classe.getName()).append(" p ");
+		if (StringUtils.isNotBlank(valor)) {
+			sql.append(" where ");
+			if (StringUtils.isNumeric(valor)) {
+				sql.append(" p.").append(parametro).append(" = :param");
+			}else {
+				sql.append(" upper (p.").append(parametro).append(") like :param");
+			}
+		}
 		Query query = manager.createQuery(sql.toString());
-
-		if (StringUtils.isNotBlank(valor) && StringUtils.isNumeric(valor)) {
-			query.setParameter("param", Long.valueOf(valor));
-		} else {
-			query.setParameter("param", "%" + valor.toUpperCase() + "%");
+		if (StringUtils.isNotBlank(valor)) {
+			if (StringUtils.isNumeric(valor)) {
+				query.setParameter("param", Long.valueOf(valor));
+			}else {
+				query.setParameter("param", "%" + valor.toUpperCase() + "%");
+			}
 		}
 		return query.getResultList();
 	}
@@ -348,6 +354,77 @@ public class QueryUtils<T> {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<Pessoa> recuperaPessoaComServicoOrdemServicos(String obj) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("select pes.id, pes.nome from ServicoOrdemServico ser ");
+		sql.append("inner join ser.ordemServico ord ");
+		sql.append("inner join ord.veiculo vei ");
+		sql.append("inner join vei.pessoa pes ");
+		if(StringUtils.isNotBlank(obj)) {
+			sql.append("where ");
+			if (StringUtils.isNumeric(obj)) {
+				sql.append("pes.id = :pessoaId ");
+			}else {
+				sql.append("upper (pes.nome) like :pessoaNome ");
+			}
+		}
+		Query query = manager.createQuery(sql.toString());
+		if(StringUtils.isNotBlank(obj)) {
+			sql.append("where ");
+			if (StringUtils.isNumeric(obj)) {
+				query.setParameter("pessoaId", Long.valueOf(obj));
+			}else {
+				query.setParameter("pessoaNome", "%" + obj.toUpperCase() + "%");
+			}
+		}
+		return (List<Pessoa>) query.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<OrdemServico> recuperaOrdemServicos(Long pessoaId, Date dataInicio, Date dataFim) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("select ord from OrdemServico ord ");
+		sql.append(" inner join ord.veiculo vei ");
+		sql.append(" inner join vei.pessoa pes ");
+		
+		if(pessoaId !=null || dataInicio !=null || dataFim !=null) {
+			sql.append("where ");
+			
+			if(pessoaId !=null) {
+				sql.append("pes.id = :pessoaId ");	
+			}
+			if(dataInicio !=null && dataFim !=null) {
+				if(pessoaId !=null) {
+					sql.append(" and ");
+				}
+				sql.append("ord.data between :dataInicio and :dataFim ");	
+			}else if(dataInicio !=null) {
+				sql.append("ord.data = :dataInicio ");	
+			}else if(dataFim !=null) {
+				sql.append("ord.data = :dataFim ");	
+			}
+		}
+		
+		Query query = manager.createQuery(sql.toString());
+		 
+		if(pessoaId !=null || dataInicio !=null || dataFim !=null) {
+			if(pessoaId !=null) {
+				query.setParameter("pessoaId", pessoaId);
+			}
+			if(dataInicio !=null && dataFim !=null) {
+				query.setParameter("dataInicio", dataInicio);
+				query.setParameter("dataFim", dataFim);
+			}else if(dataInicio !=null) {
+				query.setParameter("dataInicio", dataInicio);
+			}else if(dataFim !=null) {
+				query.setParameter("dataFim", dataFim);
+			}
+		}
+		return (List<OrdemServico>) query.getResultList();
+	}
+
+	
+	@SuppressWarnings("unchecked")
 	public List<T> recuperaPorData(Class<T> classe, Date inicio, Date fim, String nomeColuna) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select p from ");
@@ -360,4 +437,5 @@ public class QueryUtils<T> {
 		return query.getResultList();
 	}
 
+	
 }
