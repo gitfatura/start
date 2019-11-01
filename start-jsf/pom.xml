@@ -104,7 +104,13 @@
 		    <artifactId>spring-security-core</artifactId>
 		    <version>5.2.0.RELEASE</version>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-c3p0</artifactId>
+			<version>5.4.3.Final</version>
+		</dependency>
+			
 
 	</dependencies>
 
