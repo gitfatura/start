@@ -55,26 +55,56 @@ public class ClienteManMB implements Serializable {
 	private boolean validaCliente(Pessoa cliente) {
 		TipoPessoa tipoclienteAux = TipoPessoa.valueOf(tipoCliente);
 		boolean existePessoa = false;
-
+		
 		if (TipoPessoa.PESSOAFISICA.equals(tipoclienteAux)) {
 			cliente.setTipoPessoa(tipoclienteAux);
 			cliente.setCnpj(null);
-			existePessoa = clienteFacade
-					.existePessoa(StringUtils.isNotBlank(cliente.getCpf()) ? cliente.getCpf() : null);
+			
+			if(cliente.getId() !=null) {
+				Pessoa pessoa = clienteFacade.get(cliente.getId());
+				if(StringUtils.isNotBlank(pessoa.getCpf()) && StringUtils.isNotBlank(cliente.getCpf())) {
+					boolean cpfIgual = !pessoa.getCpf().equals(cliente.getCpf());
+					if(cpfIgual) {
+						existePessoa = clienteFacade.existePessoa(cliente.getCpf(),null);
+					}
+				}else {
+					if(StringUtils.isBlank(pessoa.getCpf())) {
+						existePessoa = clienteFacade.existePessoa(cliente.getCpf(),null);
+					}
+				}
+			}else {
+				if(cliente.getId() ==null && StringUtils.isNotBlank(cliente.getCpf())) {
+					existePessoa = clienteFacade.existePessoa(cliente.getCpf(),null);
+				}
+			}
+			
 			if (existePessoa) {
 				FacesUtil.addErrorMessageFatal("Cpf: " + cliente.getCpf() + " já cadastrado.");
 			}
-		} else {
+		}else{
 			cliente.setTipoPessoa(tipoclienteAux);
 			cliente.setCpf(null);
-			existePessoa = clienteFacade
-					.existePessoa(StringUtils.isNotBlank(cliente.getCnpj()) ? cliente.getCnpj() : null);
+			if(cliente.getId() !=null) {
+				Pessoa pessoa = clienteFacade.get(cliente.getId());
+				if(StringUtils.isNotBlank(pessoa.getCnpj()) && StringUtils.isNotBlank(cliente.getCnpj())) {
+					boolean cnpjIgual = !pessoa.getCnpj().equals(cliente.getCnpj());
+					if(cnpjIgual) {
+						existePessoa = clienteFacade.existePessoa(null,cliente.getCnpj());
+					}
+				}else {
+					if(StringUtils.isBlank(pessoa.getCnpj())) {
+						existePessoa = clienteFacade.existePessoa(null,cliente.getCnpj());
+					}
+				}
+			}else {
+				if(cliente.getId() ==null && StringUtils.isNotBlank(cliente.getCnpj())) {
+					existePessoa = clienteFacade.existePessoa(null,cliente.getCnpj());
+				}
+			}
 			if (existePessoa) {
 				FacesUtil.addErrorMessageFatal("Cnpj: " + cliente.getCnpj() + " já cadastrado.");
 			}
-
 		}
-
 		return existePessoa;
 	}
 

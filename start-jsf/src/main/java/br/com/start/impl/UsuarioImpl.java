@@ -54,4 +54,5 @@ public class UsuarioImpl implements Serializable, UsuarioFacade {
 		usuarioBO.remove(usuario);
 	}
 
+
 }

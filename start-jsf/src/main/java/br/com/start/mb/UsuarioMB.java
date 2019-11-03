@@ -59,7 +59,7 @@ public class UsuarioMB implements Serializable {
 		}
 		return "/login.xhtml?faces-redirect=false";
 	}
-
+	
 	public String sair() {
 		SessionUtil.invalidate();
 		return "/login.xhtml?faces-redirect=false";

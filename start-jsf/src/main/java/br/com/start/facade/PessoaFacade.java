@@ -9,7 +9,9 @@ public interface PessoaFacade {
 	public List<Pessoa> all();
 	public void remove(Pessoa pessoa);
 	public List<Pessoa> selected(String value);
-	public List<Pessoa> recuperaPeloTipoPessoa(String valor, boolean ehFuncionario, boolean ehPessoaFisica, boolean ehPessoaJuridica);
+	public List<Pessoa> recuperaCliente(String valor);
 	public Pessoa get(Long id);
-	public boolean existePessoa(String cpfOuCnpj);
+	public boolean existePessoa(String cpf, String cnpj);
+	public List<Pessoa> recuperaFuncionarios(String valor);
+	
 }

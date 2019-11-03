@@ -43,8 +43,6 @@ public class FuncionarioManMB implements Serializable {
 				pessoaFacade.grava(funcionario);
 				novaInstacia();
 				FacesUtil.addInfoMessage("Registro gravado com sucesso!");
-			}else {
-				FacesUtil.addErrorMessageFatal("Cpf: " + funcionario.getCpf() + " já cadastrado.");
 			}
 		} catch (Exception e) {
 			FacesUtil.addErrorMessageFatal("Ocorreu erro interno: "+e.getMessage());
@@ -54,7 +52,32 @@ public class FuncionarioManMB implements Serializable {
 	private boolean validaFuncionario(Pessoa funcionario) {
 		funcionario.setTipoPessoa(TipoPessoa.FUNCIONARIO);
 		funcionario.setCnpj(null);
-		return pessoaFacade.existePessoa(funcionario.getCpf());
+		boolean existePessoa = false;
+		
+		if(funcionario.getId() !=null) {
+			Pessoa funcionarioAux = pessoaFacade.get(funcionario.getId());
+			
+			if(StringUtils.isNotBlank(funcionarioAux.getCpf()) && StringUtils.isNotBlank(funcionario.getCpf())) {
+				boolean cpfIgual = !funcionarioAux.getCpf().equals(funcionario.getCpf());
+				if(cpfIgual) {
+					existePessoa = pessoaFacade.existePessoa(funcionario.getCpf(),null);
+				}
+			}else {
+				if(StringUtils.isNotBlank(funcionario.getCpf())) {
+					existePessoa = pessoaFacade.existePessoa(funcionario.getCpf(),null);
+				}
+			}
+		}else {
+			if(funcionario.getId() ==null && StringUtils.isNotBlank(funcionario.getCpf())) {
+				existePessoa = pessoaFacade.existePessoa(funcionario.getCpf(),null);
+			}
+		}
+		
+		if (existePessoa) {
+			FacesUtil.addErrorMessageFatal("Cpf: " + funcionario.getCpf() + " já cadastrado.");
+		}
+		
+		return existePessoa;
 	}
 	
 	private void recuperaFuncionario() {

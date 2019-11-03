@@ -93,14 +93,14 @@
 									</h:outputText>
 								</p:column>
 								
-								<p:column headerText="Código" style="width: 100px">
+								<p:column headerText="Data" style="width: 100px">
 									<h:outputText value="#{ordemservico.data}">
 										<f:convertDateTime pattern="dd/MM/yyyy"/>
 									</h:outputText>
 								</p:column>
 								
 								<p:column headerText="Serviços" style="width:80px;">
-						            <p:commandButton update="frm" style="margin-left: 30px" oncomplete="PF('servicoDialogo').show()" icon="pi pi-search" title="View"
+						            <p:commandButton update="frm" style="margin-left: 40px" oncomplete="PF('servicoDialogo').show()" icon="ui-icon-search" title="Serviços"
 						            action="#{ordemServicoConMB.servicoSelected(ordemservico)}" process="@this">
 						            </p:commandButton>
         						</p:column>

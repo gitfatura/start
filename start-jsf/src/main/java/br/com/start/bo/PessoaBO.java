@@ -52,18 +52,12 @@ public class PessoaBO implements Serializable, AppBO<Pessoa> {
 		return query.get(Pessoa.class, id);
 	}
 
-	public List<Pessoa> recuperaPeloTipoPessoa(String valor, boolean ehFuncionario, boolean ehPessoaFisica, boolean ehPessoaJuridica) {
-		return query.recuperaPessoa(valor, ehFuncionario, ehPessoaFisica, ehPessoaJuridica);
+	public List<Pessoa> recuperaCliente(String valor) {
+		return query.recuperaCliente(valor);
 	}
 
-	public boolean existeRegistro(String valor) {
-		String parametro ="";
-		if (StringUtils.isNotBlank(valor) && valor.length() <=14) {
-			parametro = "cpf";
-		}else {
-			parametro = "cnpj";
-		}
-		return query.existeRegistro(Pessoa.class, parametro, valor);
+	public boolean existePessoa(String cpf, String cnpj) {
+		return query.existePessoa(cpf, cnpj);
 	}
 	
 	public List<Pessoa> recuperaFuncionarios(String valorPesquisa){

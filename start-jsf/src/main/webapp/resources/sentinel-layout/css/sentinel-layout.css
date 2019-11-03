@@ -98,7 +98,7 @@ body{background-color: #F6F8F8; margin:0px;}
 
 
 	/* HEADER BAR */
-	#layout-header{width:100%; display:block; position:fixed; z-index:1000; box-sizing:content-box;
+	#layout-header{width:100%; display:block; position:fixed; z-index:1000; box-sizing:content-box; background-color: #aebd66;
 					border-bottom:solid 1px #0b4170; border-top:solid 1px #0b4170;
 					background: #153568;
 					background: -moz-linear-gradient(top, #1578c9 0%, #0b66b1 100%);
@@ -127,7 +127,7 @@ body{background-color: #F6F8F8; margin:0px;}
 						.layout-header-widgets-submenu li a{padding:10px; display:block; text-align:left; overflow:hidden;}
 	
 	/* MENU BAR */
-	#layout-menubar{float:left; padding-top:55px; background-color: #7a8299; position:relative; z-index: 998;}
+	#layout-menubar{float:left; padding-top:55px; background-color: #60754a; position:relative; z-index: 998;}
 	.bigmenu{width:260px; border-right: solid 1px #272727;}
 		.layout-menubarinner-box{width:230px; display:table; padding:10px 15px; overflow: hidden;}
 			#layout-menubar-resize{display:inline-block; padding:5px; background-color:#2B2B2B; color:#FFD100; float:right;}

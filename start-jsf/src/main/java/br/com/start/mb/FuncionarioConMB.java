@@ -32,7 +32,7 @@ public class FuncionarioConMB implements Serializable {
 	}
 
 	public void carregaFunarios() {
-		funcionarios = pessoaFacade.recuperaPeloTipoPessoa(pesquisa, true, false, false);
+		funcionarios = pessoaFacade.recuperaFuncionarios(pesquisa);
 	}
 
 	public void remove() {

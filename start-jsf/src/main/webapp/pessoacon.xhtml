@@ -9,22 +9,16 @@
 	<ui:define name="content">
 		<div class="ContainerIndent">
 			<p:fieldset legend="Lista de Clientes">
-				<p:panel>
 					<div class="ContainerIndent">
 						
 						<h:form id="frmpesquisa">
 							<p:toolbar>
 								<p:toolbarGroup>
 									<p:button value="Novo cliente" outcome="pessoaman"/>
-									<p:selectOneMenu  style="margin-left: 10px" id="tipoPessoa" value="#{clienteConMB.tipoPessoaStr}" styleClass="FontBold Fs18 hardblue">
-			    						<f:selectItem itemValue="" itemLabel="Selecione o tipo de pessoa" />
-			    						<f:selectItem itemValue="PESSOAFISICA" itemLabel="Pessoa física" />
-			    						<f:selectItem itemValue="PESSOAJURIDICA" itemLabel="Pessoa jurídica" />
-			    					</p:selectOneMenu>
-								</p:toolbarGroup>
+  								</p:toolbarGroup>
 								
 								<p:toolbarGroup align="right">
-									<p:inputText title="Entre com nome" placeholder="Entre com nome" value="#{clienteConMB.pesquisa}" size="40"/>
+									<p:inputText title="Entre com nome ou código" placeholder="Entre com nome ou código" value="#{clienteConMB.pesquisa}" size="40"/>
 									<p:commandButton value="Pesquisar" action="#{clienteConMB.carregaClientes}" update="frmpesquisa,frm"/>
 								</p:toolbarGroup>
 							</p:toolbar>
@@ -36,6 +30,10 @@
 	                                     {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 	                                     rowsPerPageTemplate="5,10,15" paginatorPosition="bottom"  emptyMessage="Nenhum cliente encontrado" 
 	                                     paginatorAlwaysVisible="true" reflow="true">
+	                             
+	                            <p:column headerText="Código" sortBy="#{cliente.id}" style="width: 100px">
+									<h:outputText value="#{cliente.id}" />
+								</p:column>
 	                                     
 								<p:column headerText="Nome" sortBy="#{cliente.nome}">
 									<h:outputText value="#{cliente.nome}" />
@@ -79,7 +77,6 @@
 							</p:dialog>
 						</h:form>
 					</div>
-				</p:panel>
 			</p:fieldset>
 		</div>
 	</ui:define>
