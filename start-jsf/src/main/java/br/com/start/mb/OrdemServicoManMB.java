@@ -2,9 +2,12 @@ package br.com.start.mb;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -52,6 +55,7 @@ public class OrdemServicoManMB implements Serializable {
 	private List<Servico> servicos;
 	private List<Servico> servicosFiltrados;
 	private BigDecimal valorServicos;
+	private String valorTotalServicosStr;
 	
 	@PostConstruct
 	public void start() {
@@ -252,6 +256,12 @@ public class OrdemServicoManMB implements Serializable {
 
 	public void setValorServicos(BigDecimal valorServicos) {
 		this.valorServicos = valorServicos;
+	}
+	
+	public String getValorTotalServicosStr() {
+		Locale local = new Locale("pt","BR");  
+		DecimalFormat df = new DecimalFormat("#,##0.00", new DecimalFormatSymbols(local));  
+		return valorServicos !=null ? df.format(valorServicos) :"";
 	}
 	
 }

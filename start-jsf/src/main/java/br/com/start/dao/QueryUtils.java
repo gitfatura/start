@@ -422,6 +422,30 @@ public class QueryUtils<T> {
 		return (List<OrdemServico>) query.getResultList();
 	}
 
+	public boolean existeRegistro(Class<T> classe, String parametro, String valor) {
+		boolean encontrouRegistro = false;
+		try {
+			if (StringUtils.isNotBlank(parametro) && StringUtils.isNotBlank(valor)) {
+				StringBuilder sql = new StringBuilder();
+				sql.append("select count(p.id) from ");
+				sql.append(classe.getName());
+				sql.append(" as p ");
+				sql.append(" where p.");
+				sql.append(parametro);
+				sql.append(" = :parametro ");
+				Query query = manager.createQuery(sql.toString());
+				query.setParameter("parametro", valor);
+				Long retorno = (Long) query.getSingleResult();
+				if (retorno != null && retorno > 0) {
+					encontrouRegistro = true;
+				}
+			}
+		} catch (Exception e) {
+			encontrouRegistro = false;
+		}
+		return encontrouRegistro;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<T> recuperaPorData(Class<T> classe, Date inicio, Date fim, String nomeColuna) {
 		StringBuilder sql = new StringBuilder();

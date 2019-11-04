@@ -1,23 +1,23 @@
 package br.com.start.mb;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
-
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.SelectEvent;
-
 import br.com.start.entity.OrdemServico;
 import br.com.start.entity.Pessoa;
 import br.com.start.entity.ServicoOrdemServico;
-import br.com.start.entity.Veiculo;
 import br.com.start.facade.OrdemServicoFacade;
 import br.com.start.facade.PessoaFacade;
 
@@ -26,7 +26,7 @@ import br.com.start.facade.PessoaFacade;
 public class OrdemServicoConMB implements Serializable {
 
 	private static final long serialVersionUID = 3819230534860340809L;
-
+	
 	@Inject
 	private OrdemServicoFacade ordemServicoFacade;
 
@@ -51,10 +51,15 @@ public class OrdemServicoConMB implements Serializable {
 	
 	private Date dataFim;
 	
+	private BigDecimal valorTotalServicos;
+	
+	private String valorTotalServicosStr;
+	
 	@PostConstruct
 	public void start() {
 		recuperaOrdemServico();
 		pessoasSelecionadas();
+		caculaServico();
 	}
 	
 	public void pesquisarOrdemServicos() {
@@ -116,6 +121,15 @@ public class OrdemServicoConMB implements Serializable {
 	public void setServicoSelecionado(ServicoOrdemServico servicoSelecionado) {
 		this.servicoSelecionado = servicoSelecionado;
 	}
+	
+	private void caculaServico() {
+		if(ordemServicos !=null && ordemServicos.size()>0) {
+			valorTotalServicos = BigDecimal.ZERO;
+			for(OrdemServico umaOrdemServico : ordemServicos) {
+				valorTotalServicos = valorTotalServicos.add(umaOrdemServico.getValorTotal());
+			}
+		}
+	}
 
 	public Pessoa getPessoa() {
 		return pessoa;
@@ -155,6 +169,20 @@ public class OrdemServicoConMB implements Serializable {
 
 	public void setDataFim(Date dataFim) {
 		this.dataFim = dataFim;
+	}
+
+	public BigDecimal getValorTotalServicos() {
+		return valorTotalServicos;
+	}
+
+	public void setValorTotalServicos(BigDecimal valorTotalServicos) {
+		this.valorTotalServicos = valorTotalServicos;
+	}
+
+	public String getValorTotalServicosStr() {
+		Locale local = new Locale("pt","BR");  
+		DecimalFormat df = new DecimalFormat("#,##0.00", new DecimalFormatSymbols(local));  
+		return df.format(valorTotalServicos);
 	}
 
 }

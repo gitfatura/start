@@ -7,7 +7,7 @@
 	xmlns:o="http://omnifaces.org/ui"
     template="/WEB-INF/template.xhtml">
 	<ui:define name="content">
-			<p:fieldset legend="Lista de ordem de serviços">
+			<p:fieldset legend="Lista de ordem de serviços" style="margin-top: 10px">
 						<h:form id="frm">
 						<div class="ContainerIndent ui-fluid">
 						<div class="Container100">
@@ -131,6 +131,11 @@
 											
 							</p:dataTable>
 							</p:dialog>
+							
+							<p:fieldset style="margin-top: 5px">
+								<p:outputLabel styleClass="money" id="valorServico" value="Valor total: R$#{ordemServicoConMB.valorTotalServicosStr}"/>
+							</p:fieldset>
+							
 							</div>
 						</h:form>
 			</p:fieldset>
